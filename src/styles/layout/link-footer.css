@@ -1,0 +1,38 @@
+.link-footer {
+    background-color: #333; /* Dark background */
+    color: white;
+    padding: 60px 20px;
+  }
+  
+  .link-footer-sec {
+    display: grid; /* Using Grid Layout */
+    grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
+    gap: 40px; /* Add some space between the columns */
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-link-button-link h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .footer-link-button-link ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-link-button-link ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-link-button-link ul li a {
+    color: #bbb;
+    text-decoration: none;
+  }
+  
+  .footer-link-button-link ul li a:hover {
+    text-decoration: underline;
+  }
+  
