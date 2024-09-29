@@ -4,7 +4,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-
+import "../../styles/pages/hero.css"
 const Hero: React.FC = () => {
   return (
     <Box 
@@ -41,11 +41,11 @@ const Hero: React.FC = () => {
             height: '100%',
             color: 'white', // Adjust text color as needed
         }}>
-            <Typography variant="h2" component="h1" gutterBottom className="text-4xl sm:text-6xl font-bold">
-                Welcome to My Website
+            <Typography variant="h2" component="h1" gutterBottom className="text-4xl sm:text-6xl font-bold hero-heading">           
+                Wedding planning starts here
             </Typography>
             <Typography variant="h5" component="h2" className="text-xl sm:text-2xl">
-                Your captivating tagline goes here
+            From venues and save the dates to a free wedding website, a registry and even your cake — Tie The Knot is here for all the days along the way
             </Typography>
         </Container>
     </Box>
