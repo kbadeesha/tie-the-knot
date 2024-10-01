@@ -16,12 +16,19 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { useContext, useState } from "react";
-
+import "../../styles/components/button.css"
 import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
+import CustomButton from "./Button/CustomButton";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const handleOnClickRegister = ()=>{
+console.log("register clicked")
+}
+const handleOnClickLogin = ()=>{
+console.log("login clicked")
+}
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -191,6 +198,9 @@ const Header = () => {
                 ))}
               </Menu>
             </Box>
+            {/* Login Register Buttons  */}
+            <CustomButton label={"Login"} onClick={handleOnClickLogin} className="login-button"></CustomButton>
+            <CustomButton label={"Register"} onClick={handleOnClickRegister}></CustomButton>
           </Box>
         </Toolbar>
       </Container>
