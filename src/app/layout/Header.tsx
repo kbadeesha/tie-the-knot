@@ -19,8 +19,8 @@ import { useContext, useState } from "react";
 import "../../styles/components/button.css"
 import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
-import CustomButton from "../components/inputs/TTKCustomButton";
-import TTKCustomButton from "../components/inputs/TTKCustomButton";
+import CustomButton from "../components/TTKCustomButton";
+import TTKCustomButton from "../components/TTKCustomButton";
 
 
 

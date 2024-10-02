@@ -2,7 +2,7 @@
 "use client";
 import Footer from "./layout/Footer";
 import Hero from "./components/Hero";
-import LinkFooter from "./components/LinkFooter";
+import LinkFooter from "./layout/LinkFooter";
 import Header from "./layout/Header";
 
 // Assuming you're using the '@/ alias for src directory
