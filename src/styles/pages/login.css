@@ -1,0 +1,34 @@
+/* ./src/app/login/LoginPage.module.css */
+
+.login-container {
+    height: 100vh;
+    padding: 0;
+  }
+  
+  .login-imageContainer {
+    position: relative;
+    height: 100%;
+    width: 100%; /* Ensure full width */
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  .login-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .login-formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+  }
+  
+  .login-form {
+    width: 80%;
+  }
+
+
+  

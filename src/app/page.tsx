@@ -1,9 +1,9 @@
 // src/app/page.tsx
 "use client";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "./layout/Footer";
 import Hero from "./components/Hero";
 import LinkFooter from "./components/LinkFooter";
+import Header from "./layout/Header";
 
 // Assuming you're using the '@/ alias for src directory
 

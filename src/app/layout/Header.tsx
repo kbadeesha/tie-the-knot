@@ -19,23 +19,29 @@ import { useContext, useState } from "react";
 import "../../styles/components/button.css"
 import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
-import CustomButton from "./Button/CustomButton";
+import CustomButton from "../components/inputs/TTKCustomButton";
+import TTKCustomButton from "../components/inputs/TTKCustomButton";
+
+
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-const handleOnClickRegister = ()=>{
-console.log("register clicked")
-}
-const handleOnClickLogin = ()=>{
-console.log("login clicked")
-}
+
 
 const Header = () => {
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { i18n } = useTranslation();
+  const handleOnClickRegister = ()=>{
+    console.log("register clicked")
 
+    }
+    const handleOnClickLogin = ()=>{
+    console.log("login clicked")
+
+    }
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -199,8 +205,22 @@ const Header = () => {
               </Menu>
             </Box>
             {/* Login Register Buttons  */}
-            <CustomButton label={"Login"} onClick={handleOnClickLogin} className="login-button"></CustomButton>
-            <CustomButton label={"Register"} onClick={handleOnClickRegister}></CustomButton>
+            <TTKCustomButton
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={handleOnClickRegister}
+          >
+            Register
+          </TTKCustomButton>
+            <TTKCustomButton
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={handleOnClickLogin}
+          >
+            Login
+          </TTKCustomButton>
           </Box>
         </Toolbar>
       </Container>
