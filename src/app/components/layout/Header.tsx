@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu"; 
+import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Image from "next/image";
@@ -16,32 +16,26 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { useContext, useState } from "react";
-import "../../styles/components/button.css"
+import "../../styles/components/button.css";
 import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
-import CustomButton from "../components/TTKCustomButton";
-import TTKCustomButton from "../components/TTKCustomButton";
-
-
+import CustomButton from "../TTKCustomButton";
+import TTKCustomButton from "../TTKCustomButton";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-
 const Header = () => {
-
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { i18n } = useTranslation();
-  const handleOnClickRegister = ()=>{
-    console.log("register clicked")
-
-    }
-    const handleOnClickLogin = ()=>{
-    console.log("login clicked")
-
-    }
+  const handleOnClickRegister = () => {
+    console.log("register clicked");
+  };
+  const handleOnClickLogin = () => {
+    console.log("login clicked");
+  };
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -95,7 +89,9 @@ const Header = () => {
             >
               <Image
                 src={
-                  theme === "dark" ? "/assets/logo_lite.svg" : "/assets/logo.svg"
+                  theme === "dark"
+                    ? "/assets/logo_lite.svg"
+                    : "/assets/logo.svg"
                 }
                 alt="TieTheKnot"
                 width={120}
@@ -110,7 +106,7 @@ const Header = () => {
               flexGrow: 1,
               display: "flex",
               justifyContent: "flex-end", // Align to the right
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <IconButton
@@ -206,21 +202,21 @@ const Header = () => {
             </Box>
             {/* Login Register Buttons  */}
             <TTKCustomButton
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={handleOnClickRegister}
-          >
-            Register
-          </TTKCustomButton>
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleOnClickRegister}
+            >
+              Register
+            </TTKCustomButton>
             <TTKCustomButton
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={handleOnClickLogin}
-          >
-            Login
-          </TTKCustomButton>
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleOnClickLogin}
+            >
+              Login
+            </TTKCustomButton>
           </Box>
         </Toolbar>
       </Container>
