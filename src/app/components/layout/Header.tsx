@@ -16,7 +16,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { useContext, useState } from "react";
-import "../../styles/components/button.css";
+import "../../../styles/components/button.css";
 import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
 import CustomButton from "../TTKCustomButton";
