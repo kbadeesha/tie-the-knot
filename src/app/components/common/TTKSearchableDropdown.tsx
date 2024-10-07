@@ -103,6 +103,21 @@ const TTKSearchableDropdown: React.FC<SearchableDropdownProps> = ({
         <Paper
           {...props}
           elevation={3} // Adds a shadow to the options box
+          sx={{  
+            // Target the listbox element within the Paper
+            '& .MuiAutocomplete-listbox': { 
+              '&::-webkit-scrollbar': { 
+                width: 0, // Completely hide the scrollbar for WebKit browsers
+                height: 0
+              },
+              '&::-webkit-scrollbar-track': {
+                background: 'transparent'
+              },
+              msOverflowStyle: 'none' /* IE and Edge */,
+              scrollbarWidth: 'none' /* Firefox */,
+            },
+            // ... other Paper styles ...
+          }}
           style={{
             border: '1px solid #ccc', // Adds a border
             borderRadius: '8px', // Rounded corners for the dropdown list

@@ -16,9 +16,9 @@ const VendorInfo: React.FC<VendorInfoProps> = ({ vendor }) => (
     <Typography variant="body2" color="text.secondary">
       {vendor.tagline} 
     </Typography>
-    <Typography variant="body2" color="text.secondary">
+    {/* <Typography variant="body2" color="text.secondary">
       {vendor.location}
-    </Typography>
+    </Typography> */}
   </Stack>
 );
 
