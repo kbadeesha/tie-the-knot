@@ -10,6 +10,7 @@ import VendorProfile from "@/app/components/features/Vendors/VendorProfile";
 import TTKGallery from "@/app/components/common/TTKGallery";
 import TTKVideoPlayer from "@/app/components/common/TTKVideoPlayer";
 import VendorRating from "@/app/components/features/Vendors/VendorRating";
+import { FaLocationDot } from "react-icons/fa6";
 
 const VendorPage: React.FC = () => {
   const { vendorId } = useParams();
@@ -78,18 +79,18 @@ const VendorPage: React.FC = () => {
   }
 
   return (
-    <Container maxWidth="xl" sx={{ marginTop: 4 }}>
+    <Container maxWidth="xl" sx={{ marginTop: 4, marginLeft: 2 }}>
       <TTKGallery images={vendor.images} />
 
       <Typography variant="h4" gutterBottom>
         {vendor.name}
       </Typography>
-      <Typography variant="body1" gutterBottom>
-        {vendor.type} based on {vendor.location}
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        Location: {vendor.location}
-      </Typography>
+      <div className="flex items-center space-x-2 mt-2 mb-4">
+        <FaLocationDot className="text-gray-600" />
+        <Typography variant="body1" gutterBottom className="pt-2">
+          {vendor.type} based on {vendor.location}
+        </Typography>
+      </div>
       <VendorRating rating={vendor.rating} />
       {/* Add more vendor details here */}
       <hr className="mt-8 mb-4" />
