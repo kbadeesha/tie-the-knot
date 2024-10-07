@@ -19,8 +19,9 @@ import { useContext, useState } from "react";
 import "../../../styles/components/button.css";
 import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
-import CustomButton from "../TTKCustomButton";
+
 import TTKCustomButton from "../TTKCustomButton";
+import Link from "next/link";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -30,9 +31,12 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { i18n } = useTranslation();
+
   const handleOnClickRegister = () => {
     console.log("register clicked");
   };
+
+
   const handleOnClickLogin = () => {
     console.log("login clicked");
   };
@@ -142,9 +146,9 @@ const Header = () => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-              <MenuItem onClick={() => handleLanguageChange("en")}>
+              {/* <MenuItem onClick={() => handleLanguageChange("en")}>
                 <Typography textAlign="center">English</Typography>
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem onClick={() => handleLanguageChange("es")}>
                 <Typography textAlign="center">Spanish</Typography>
               </MenuItem>{" "}
@@ -201,14 +205,15 @@ const Header = () => {
               </Menu>
             </Box>
             {/* Login Register Buttons  */}
-            <TTKCustomButton
-              type="submit"
-              variant="contained"
-              color="primary"
-              onClick={handleOnClickRegister}
-            >
-              Register
-            </TTKCustomButton>
+       <Link href="/pages/register" passHref> {/* Use Link component */}
+              <TTKCustomButton
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Register
+              </TTKCustomButton>
+            </Link>
             <TTKCustomButton
               type="submit"
               variant="contained"
@@ -219,6 +224,7 @@ const Header = () => {
             </TTKCustomButton>
           </Box>
         </Toolbar>
+        
       </Container>
     </AppBar>
   );
