@@ -12,7 +12,11 @@ const VendorProfile: React.FC<VendorProfileProps> = ({ vendorData }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Column - Profile Picture and Basic Info */}
         <div className="flex flex-col items-center">
-          <img src={vendorData.logo} alt="Shutter & Sound" />
+          <img
+            src={vendorData.logo}
+            alt="Shutter & Sound"
+            className="rounded-full object-cover"
+          />
           <Typography variant="h5" className="font-bold">
             {vendorData.name}
           </Typography>
