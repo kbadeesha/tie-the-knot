@@ -9,6 +9,7 @@ export interface Vendor {
   tagline: string;
   quickResponder: boolean;
   images: string[];
+  logo: string;
   address: string;
   startingPrice: number;
   description: string;
