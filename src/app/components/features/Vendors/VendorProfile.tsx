@@ -3,6 +3,7 @@ import { Container, Typography } from "@mui/material";
 import React from "react";
 import TTKCustomButton from "../../TTKCustomButton";
 import { FaFacebook, FaGlobe, FaInstagram, FaTiktok } from "react-icons/fa";
+import VendorSocials from "./VendorSocials";
 interface VendorProfileProps {
   vendorData: Vendor; // Define vendorData type as Vendor
 }
@@ -29,47 +30,7 @@ const VendorProfile: React.FC<VendorProfileProps> = ({ vendorData }) => {
             {vendorData.name}
           </Typography>
           {/* Social Icons */}
-          <div className="flex space-x-4 mt-2 mb-4">
-            {vendorData.socials.facebook && (
-              <a
-                href={vendorData.socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebook className="text-gray-600 cursor-pointer hover:text-gray-800" />
-              </a>
-            )}
-
-            {vendorData.socials.instagram && (
-              <a
-                href={vendorData.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram className="text-gray-600 cursor-pointer hover:text-gray-800" />
-              </a>
-            )}
-
-            {vendorData.socials.website && (
-              <a
-                href={vendorData.socials.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaGlobe className="text-gray-600 cursor-pointer hover:text-gray-800" />
-              </a>
-            )}
-
-            {vendorData.socials.tiktok && (
-              <a
-                href={vendorData.socials.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTiktok className="text-gray-600 cursor-pointer hover:text-gray-800" />
-              </a>
-            )}
-          </div>
+          <VendorSocials socials={vendorData.socials} />
 
           {/* Get a Quote Button */}
           <TTKCustomButton

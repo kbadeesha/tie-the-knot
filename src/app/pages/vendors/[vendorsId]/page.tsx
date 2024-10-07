@@ -9,6 +9,7 @@ import { Vendor } from "../../../types/vendor";
 import VendorProfile from "@/app/components/features/Vendors/VendorProfile";
 import TTKGallery from "@/app/components/common/TTKGallery";
 import TTKVideoPlayer from "@/app/components/common/TTKVideoPlayer";
+import VendorRating from "@/app/components/features/Vendors/VendorRating";
 
 const VendorPage: React.FC = () => {
   const { vendorId } = useParams();
@@ -36,7 +37,7 @@ const VendorPage: React.FC = () => {
     const mockVendor = {
       id: vendorId as string,
       name: "Shutter & Sound",
-      type: "photographer",
+      type: "Photographer",
       location: "Colombo",
       rating: 4.5,
       tagline: "Your dream wedding starts here",
@@ -84,11 +85,12 @@ const VendorPage: React.FC = () => {
         {vendor.name}
       </Typography>
       <Typography variant="body1" gutterBottom>
-        Type: {vendor.type}
+        {vendor.type} based on {vendor.location}
       </Typography>
       <Typography variant="body1" gutterBottom>
         Location: {vendor.location}
       </Typography>
+      <VendorRating rating={vendor.rating} />
       {/* Add more vendor details here */}
       <hr className="mt-8 mb-4" />
       <VendorProfile vendorData={vendor} />
