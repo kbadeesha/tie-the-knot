@@ -22,14 +22,24 @@ import WineBarIcon from "@mui/icons-material/WineBar";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import ChairIcon from "@mui/icons-material/Chair";
 import vendorsData from '../../data/vendors.json';
+import { FilterCategory, FilterValues } from "@/app/types/filter";
+import VendorFilterSection from "@/app/components/features/Vendors/VendorFilterSection";
+import { filterCategories } from "@/app/data/filterCategories";
 
 const VendorsPage: React.FC = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [filteredVendors, setFilteredVendors] = useState<Vendor[]>([]);
+  const [leftFilterCategories, setLeftFilterCategories] = useState<FilterCategory[]>(
+    filterCategories['venue'] // Initialize with venue filters
+  );
   const [filterValues, setFilterValues] = useState({
     // Make sure this is defined
     type: "",
     location: "",
+    price: "",
+    capacity:"",
+    minPrice: null,
+    maxPrice: null
   });
 
   // Fetch vendor data (replace with your actual data fetching logic)
@@ -52,6 +62,9 @@ const VendorsPage: React.FC = () => {
     const mockVendors: Vendor[] = vendorsData; // Use the imported data
     setVendors(mockVendors);
     setFilteredVendors(mockVendors);
+     // Initialize left filter options
+     const initialLeftFilters = filterCategories["venue"];
+     setLeftFilterCategories(initialLeftFilters);
   }, []);
 
   // Define vendor types and locations for the filters
@@ -80,33 +93,49 @@ const VendorsPage: React.FC = () => {
     { value: "Jaffna", label: "Jaffna" },
   ];
 
-  const handleFilterChange = (
-    field: keyof typeof filterValues,
-    value: string | null
-  ) => {
-    const newFilterValues = {
-      ...filterValues,
+  const handleFilterChange = (field: keyof FilterValues, value: string | null) => {
+    // 1. Update filterValues state
+    setFilterValues((prevValues) => ({
+      ...prevValues,
       [field]: value,
-    };
-    console.log("VendorsPage - handleFilterChange:", field, value);
-    setFilterValues(newFilterValues);
+    }));
 
+    // 2. Update left filter categories when type filter changes
+    if (field === 'type') {
+      const newLeftFilters = value ? filterCategories[value] : [];
+      setLeftFilterCategories(newLeftFilters);
+    }
+
+    // 3. Apply filtering logic
     const filteredVendors = vendors.filter((vendor) => {
       let match = true;
 
-      if (newFilterValues.type) {
-        match = match && vendor.type === newFilterValues.type;
+      if (filterValues.type) {
+        match = match && vendor.type === filterValues.type;
       }
 
-      if (newFilterValues.location) {
-        match = match && vendor.location === newFilterValues.location;
+      if (filterValues.location) {
+        match = match && vendor.location === filterValues.location;
       }
+
+      // Add other filtering conditions here based on newFilterValues
+      // Example for price filter:
+      if (filterValues.price) {
+        const [minPrice, maxPrice] = filterValues.price.split("-").map(Number);
+        match =
+          match &&
+          vendor.startingPrice >= minPrice &&
+          vendor.startingPrice <= maxPrice;
+      }
+
+      // ... add filtering for other dynamic filters (availability, photographyStyle, etc.)
 
       return match;
     });
 
     setFilteredVendors(filteredVendors);
   };
+
 
   return (
     <Box sx={{ 
@@ -143,10 +172,10 @@ const VendorsPage: React.FC = () => {
             borderRadius: 2, 
             p: 2
           }}>
-            {/* <VendorFilterSection
+            <VendorFilterSection
               onFilterChange={handleFilterChange}
               filterCategories={leftFilterCategories}
-            /> */}
+            />
           </Box>
 
           {/* Vendor list section */}

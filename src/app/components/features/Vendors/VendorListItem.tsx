@@ -7,6 +7,7 @@ import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import VendorInfo from "./VendorInfo"; // Import VendorInfo component
 import VendorDetails from "./VendorDetails"; // Import VendorDetails component
 import TTKCarouselComponent from "../../common/TTKCarouselComponent";
+import VendorFeedback from "./VendorFeedback";
 
 interface VendorListItemProps {
   vendor: Vendor;
@@ -45,7 +46,13 @@ const VendorListItem: React.FC<VendorListItemProps> = ({ vendor }) => {
       </ListItemIcon>
       <ListItemText
         primary={<VendorInfo vendor={vendor} />}
-        secondary={<VendorDetails vendor={vendor} />}
+        secondary={
+          <VendorDetails vendor={vendor}> {/* Pass children to VendorDetails */}
+            {vendor.feedbacks.length > 0 && ( // Conditionally render feedback
+              <VendorFeedback feedback={vendor.feedbacks[0]} /> // Pass the first feedback
+            )}
+          </VendorDetails>
+        }
         sx={{ ml: 2 }}
       />
     </ListItemButton>

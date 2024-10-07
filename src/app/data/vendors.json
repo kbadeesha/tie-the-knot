@@ -10,10 +10,10 @@
     "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
     "address": "123 Main Street, Colombo",
     "startingPrice": 5000,
-    "description": "A spacious and elegant venue for your dream wedding.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor libero id scelerisque posuere. Praesent nec placerat ex. Cras nisi mauris, sollicitudin ut nulla et, pretium sagittis neque. Curabitur vel arcu ante. Aliquam nec varius mi. Pellentesque volutpat scelerisque magna, sodales congue ligula laoreet a. Mauris efficitur, mi vitae facilisis tincidunt, quam ante volutpat sapien, eu imperdiet lorem enim at nibh. Nam commodo lorem ut lectus mattis, quis lacinia massa eleifend. Nullam non arcu ipsum. Maecenas id magna urna. Morbi id leo in ipsum fringilla accumsan in sed ipsum. Etiam sit amet imperdiet eros, nec bibendum nunc. Suspendisse eget felis lectus. Sed quis eleifend dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id consectetur nisi. Vivamus gravida nulla vel elementum commodo. Curabitur gravida congue enim a rhoncus. Ut tempus turpis neque, et tempor risus semper ut. Vivamus et porta erat. Phasellus auctor neque ut pellentesque faucibus. Vivamus id.",
     "feedbacks": [
       {
-        "comment": "Amazing venue! We had our reception here and it was perfect.",
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor libero id scelerisque posuere. Praesent nec placerat ex. Cras nisi mauris, sollicitudin ut nulla et, pretium sagittis neque. Curabitur vel arcu ante. Aliquam nec varius mi. Pellentesque volutpat scelerisque magna, sodales congue ligula laoreet a. Mauris efficitur, mi vitae facilisis tincidunt, quam ante volutpat sapien, eu imperdiet lorem enim at nibh. Nam commodo lorem ut lectus mattis, quis lacinia massa eleifend. Nullam non arcu ipsum. Maecenas id magna urna. Morbi id leo in ipsum fringilla accumsan in sed ipsum. Etiam sit amet imperdiet eros, nec bibendum nunc. Suspendisse eget felis lectus. Sed quis eleifend dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id consectetur nisi. Vivamus gravida nulla vel elementum commodo. Curabitur gravida congue enim a rhoncus. Ut tempus turpis neque, et tempor risus semper ut. Vivamus et porta erat. Phasellus auctor neque ut pellentesque faucibus. Vivamus id.",
         "clientName": "John Doe",
         "daysAgo": 14
       },
