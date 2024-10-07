@@ -48,6 +48,8 @@ const TTKCustomButton: React.FC<TTKCustomButtonProps> = ({
       backgroundColor: variant === "contained" ? "gray" : "black",
       color: variant === "contained" ? "white" : "white",
     },
+    borderRadius: "30px", // Make the button have a pill shape
+    padding: "10px 20px", // Adjust padding for a better pill look
   };
 
   return (
