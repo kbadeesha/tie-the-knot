@@ -13,7 +13,7 @@ interface TTKCustomButtonProps {
     | "success"
     | "error"
     | "info"
-    | "warning"; // Removed custom colors
+    | "warning";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   size?: "small" | "medium" | "large";
   disabled?: boolean;
@@ -28,7 +28,6 @@ interface TTKCustomButtonProps {
 const TTKCustomButton: React.FC<TTKCustomButtonProps> = ({
   children,
   variant = "contained",
-  color = "primary",
   onClick,
   size = "medium",
   disabled,
@@ -41,10 +40,19 @@ const TTKCustomButton: React.FC<TTKCustomButtonProps> = ({
   sx = {},
   ...otherProps
 }) => {
+  const blackAndWhiteStyles: SxProps = {
+    backgroundColor: variant === "contained" ? "black" : "transparent",
+    color: variant === "contained" ? "white" : "black",
+    borderColor: "black",
+    "&:hover": {
+      backgroundColor: variant === "contained" ? "gray" : "black",
+      color: variant === "contained" ? "white" : "white",
+    },
+  };
+
   return (
     <Button
       variant={variant}
-      color={color}
       onClick={onClick}
       href={href}
       size={size}
@@ -53,8 +61,8 @@ const TTKCustomButton: React.FC<TTKCustomButtonProps> = ({
       endIcon={iconPosition === "end" ? icon : undefined}
       className={`${className} m-1`}
       type={type}
-      sx={sx}
       fullWidth={fullWidth}
+      sx={{ ...sx, ...blackAndWhiteStyles }}
       {...otherProps}
     >
       {children}

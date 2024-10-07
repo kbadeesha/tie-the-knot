@@ -10,8 +10,6 @@ import VendorProfile from "@/app/components/features/Vendors/VendorProfile";
 import TTKGallery from "@/app/components/common/TTKGallery";
 import TTKVideoPlayer from "@/app/components/common/TTKVideoPlayer";
 
-
-
 const VendorPage: React.FC = () => {
   const { vendorId } = useParams();
   const [vendor, setVendor] = useState<Vendor | null>(null);
@@ -65,6 +63,11 @@ const VendorPage: React.FC = () => {
           daysAgo: 14,
         },
       ],
+      socials: {
+        facebook: "/facebook",
+        instagram: "/instagram",
+        website: "/web",
+      },
     };
     setVendor(mockVendor);
   }, [vendorId]);
@@ -76,7 +79,7 @@ const VendorPage: React.FC = () => {
   return (
     <Container maxWidth="xl" sx={{ marginTop: 4 }}>
       <TTKGallery images={vendor.images} />
-   
+
       <Typography variant="h4" gutterBottom>
         {vendor.name}
       </Typography>
@@ -87,9 +90,10 @@ const VendorPage: React.FC = () => {
         Location: {vendor.location}
       </Typography>
       {/* Add more vendor details here */}
+      <hr className="mt-8 mb-4" />
       <VendorProfile vendorData={vendor} />
-      <TTKVideoPlayer videoUrl="/assets/video/hero.mp4" /> 
-
+      <hr className="mb-8 mt-4" />
+      <TTKVideoPlayer videoUrl="/assets/video/hero.mp4" />
     </Container>
   );
 };
