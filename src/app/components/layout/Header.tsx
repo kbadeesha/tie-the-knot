@@ -36,7 +36,6 @@ const Header = () => {
     console.log("register clicked");
   };
 
-
   const handleOnClickLogin = () => {
     console.log("login clicked");
   };
@@ -205,15 +204,16 @@ const Header = () => {
               </Menu>
             </Box>
             {/* Login Register Buttons  */}
-       <Link href="/pages/register" passHref> {/* Use Link component */}
-              <TTKCustomButton
-                type="submit"
-                variant="contained"
-                color="primary"
-              >
-                Register
-              </TTKCustomButton>
-            </Link>
+            <Link href="/pages/register" passHref>
+              {/* Use Link component */}
+              <TTKCustomButton
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Register
+              </TTKCustomButton>
+            </Link>
             <TTKCustomButton
               type="submit"
               variant="contained"
@@ -224,7 +224,6 @@ const Header = () => {
             </TTKCustomButton>
           </Box>
         </Toolbar>
-        
       </Container>
     </AppBar>
   );

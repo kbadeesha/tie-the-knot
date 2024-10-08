@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import {
   Stepper,
   Step,
@@ -16,14 +16,11 @@ import {
   Radio,
   FormControl,
   FormLabel,
-} from '@mui/material';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';   
-
-import { Visibility, VisibilityOff } from '@mui/icons-material';   
-
-
-const steps = ['Status', 'Basic Information', 'Account Details'];
+} from "@mui/material";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+const steps = ["User Type", "Status", "Basic Information", "Account Details"];
 
 interface FormData {
   status?: string;
@@ -44,8 +41,7 @@ function WizardForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const   
- handleNext = () => {
+  const handleNext = () => {
     // You might want to add validation here before proceeding to the next step
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -61,8 +57,7 @@ function WizardForm() {
     });
   };
 
-  const handleDateChange   
- = (date: string | null) => {
+  const handleDateChange = (date: string | null) => {
     setFormData({
       ...formData,
       weddingDate: date,
@@ -84,12 +79,10 @@ function WizardForm() {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleMouseDownPassword   
- = (
+  const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    event.preventDefault();   
-
+    event.preventDefault();
   };
 
   const getStepContent = (step: number) => {
@@ -98,12 +91,20 @@ function WizardForm() {
         return (
           <FormControl sx={{ mt: 2 }}>
             <FormLabel id="status-radio-buttons-group-label">
+              Choose your role
+            </FormLabel>
+          </FormControl>
+        );
+      case 1:
+        return (
+          <FormControl sx={{ mt: 2 }}>
+            <FormLabel id="status-radio-buttons-group-label">
               Welcome! Where are you in the planning process?
             </FormLabel>
             <RadioGroup
               aria-labelledby="status-radio-buttons-group-label"
               name="status"
-              value={formData.status || ''}
+              value={formData.status || ""}
               onChange={handleChange}
             >
               <FormControlLabel
@@ -125,14 +126,14 @@ function WizardForm() {
             </RadioGroup>
           </FormControl>
         );
-      case 1:
+      case 2:
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ mt: 2 }}>
               <TextField
                 label="First name"
                 name="firstName"
-                value={formData.firstName || ''}
+                value={formData.firstName || ""}
                 onChange={handleChange}
                 fullWidth
                 required
@@ -140,7 +141,7 @@ function WizardForm() {
               <TextField
                 label="Last name"
                 name="lastName"
-                value={formData.lastName || ''}
+                value={formData.lastName || ""}
                 onChange={handleChange}
                 fullWidth
                 sx={{ mt: 2 }}
@@ -149,7 +150,7 @@ function WizardForm() {
               <TextField
                 label="Partner's first name"
                 name="partnerFirstName"
-                value={formData.partnerFirstName || ''}
+                value={formData.partnerFirstName || ""}
                 onChange={handleChange}
                 fullWidth
                 sx={{ mt: 2 }}
@@ -158,13 +159,13 @@ function WizardForm() {
               <TextField
                 label="Partner's last name"
                 name="partnerLastName"
-                value={formData.partnerLastName || ''}
+                value={formData.partnerLastName || ""}
                 onChange={handleChange}
                 fullWidth
                 sx={{ mt: 2 }}
                 required
               />
-           {/* <DatePicker
+              {/* <DatePicker
                 label="Wedding date (Don't worry! You can change this later)"
                 value={formData.weddingDate ? dayjs(formData.weddingDate) : null} // Convert to Dayjs
                 onChange={(newValue) => handleDateChange(newValue?.format('YYYY-MM-DD'))} // Format the date
@@ -186,27 +187,25 @@ function WizardForm() {
             </Box>
           </LocalizationProvider>
         );
-      case 2:
+      case 3:
         return (
           <Box sx={{ mt: 2 }}>
             <TextField
               label="Email"
               type="email"
               name="email"
-              value={formData.email || ''}
+              value={formData.email || ""}
               onChange={handleChange}
               fullWidth
               required
             />
             <TextField
               label="Password"
-              type={showPassword   
- ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               name="password"
-              value={formData.password || ''}
+              value={formData.password || ""}
               onChange={handleChange}
-              fullWidth   
-
+              fullWidth
               sx={{ mt: 2 }}
               required
               InputProps={{
@@ -214,26 +213,23 @@ function WizardForm() {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}   
-
+                      onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
-                  </InputAdornment>   
-
+                  </InputAdornment>
                 ),
               }}
             />
             <TextField
               label="Confirm Password"
-              type={showConfirmPassword ? 'text' : 'password'}
+              type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
-              value={formData.confirmPassword || ''}
+              value={formData.confirmPassword || ""}
               onChange={handleChange}
-              fullWidth   
-
+              fullWidth
               sx={{ mt: 2 }}
               required
               InputProps={{
@@ -245,22 +241,16 @@ function WizardForm() {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {showConfirmPassword ? (
-                        <VisibilityOff   
- />
-                      ) : (
-                        <Visibility />
-                      )}
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
-          </Box>   
-
+          </Box>
         );
       default:
-        throw new Error('Unknown step');
+        throw new Error("Unknown step");
     }
   };
 
@@ -279,8 +269,8 @@ function WizardForm() {
           p: 4,
           mt: 4,
           borderRadius: 2,
-          boxShadow: 'md',
-          bgcolor: 'background.paper',
+          boxShadow: "md",
+          bgcolor: "background.paper",
         }}
         className="border border-gray-200 dark:border-gray-700"
       >
@@ -295,7 +285,7 @@ function WizardForm() {
             Back
           </Button>
           <Button variant="contained" color="primary" onClick={handleNext}>
-            {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+            {activeStep === steps.length - 1 ? "Submit" : "Next"}
           </Button>
         </div>
       </Box>
