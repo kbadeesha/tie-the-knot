@@ -7,19 +7,18 @@ import {
   FormGroup,
   SxProps,
 } from "@mui/material";
-
 interface Option {
   label: string;
   value: string;
 }
 
 interface TTKCustomRadioGroupProps {
-  options: Option[];                // Array of options with label and value
-  selectedValue: string;            // Currently selected value
+  options: Option[]; // Array of options with label and value
+  selectedValue: string; // Currently selected value
   onChange: (value: string) => void; // Callback for when the selection changes
-  disabled?: boolean;               // Optional prop to disable the entire group
-  className?: string;               // Optional className for styling
-  sx?: SxProps;                     // Optional sx prop for MUI styles
+  disabled?: boolean; // Optional prop to disable the entire group
+  className?: string; // Optional className for styling
+  sx?: SxProps; // Optional sx prop for MUI styles
 }
 
 const TTKCustomRadioGroup: React.FC<TTKCustomRadioGroupProps> = ({
@@ -31,7 +30,7 @@ const TTKCustomRadioGroup: React.FC<TTKCustomRadioGroupProps> = ({
   sx = {},
 }) => {
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);  // Notify parent of the selected value
+    onChange(event.target.value); // Notify parent of the selected value
   };
 
   return (
@@ -46,8 +45,16 @@ const TTKCustomRadioGroup: React.FC<TTKCustomRadioGroupProps> = ({
                 <Radio
                   checked={selectedValue === option.value}
                   onChange={handleRadioChange}
+                  color="default"
                   disabled={disabled}
-                  className="text-blue-500 hover:text-blue-600"
+                  sx={{
+                    color: "#000000",
+                    opacity: 0.4,
+                    "&.Mui-checked": {
+                      color: "#000000",
+                      opacity: 0.6,
+                    },
+                  }}
                 />
               }
               label={option.label}

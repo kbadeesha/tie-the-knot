@@ -20,6 +20,7 @@ import {
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import TTKCustomRadioGroup from "../../TTKCustomRadioGroup";
 const steps = ["User Type", "Status", "Basic Information", "Account Details"];
 
 interface FormData {
@@ -84,15 +85,45 @@ function WizardForm() {
   ) => {
     event.preventDefault();
   };
+  const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
+  const [selectedOptionUserType, setSelectedOptionUserType] =
+    useState<string>("");
+  const handleRadioGroupChangeUserType = (value: string) => {
+    setSelectedOptionUserType(value);
+  };
+  const handleRadioGroupChangeStatus = (value: string) => {
+    setSelectedOptionStatus(value);
+  };
 
+  const userType = [
+    { label: "Bride/Groom", value: "bride_groom" },
+    { label: "Vendor", value: "vendor" },
+    { label: "Event Planner", value: "planner" },
+  ];
+  const status = [
+    { label: "Not yet engaged", value: "not_engaged" },
+    { label: "Newly engaged and exploring", value: "newly_engaged" },
+    {
+      label: "Planning mode but haven't booked a venue yet",
+      value: "planning_no_venue",
+    },
+  ];
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
         return (
           <FormControl sx={{ mt: 2 }}>
             <FormLabel id="status-radio-buttons-group-label">
-              Choose your role
+              Who are you?
             </FormLabel>
+            <div>
+              <TTKCustomRadioGroup
+                options={userType}
+                selectedValue={selectedOptionUserType}
+                onChange={handleRadioGroupChangeUserType}
+              />
+              {/* <p>Selected Option: {selectedOption}</p> */}
+            </div>
           </FormControl>
         );
       case 1:
@@ -101,29 +132,14 @@ function WizardForm() {
             <FormLabel id="status-radio-buttons-group-label">
               Welcome! Where are you in the planning process?
             </FormLabel>
-            <RadioGroup
-              aria-labelledby="status-radio-buttons-group-label"
-              name="status"
-              value={formData.status || ""}
-              onChange={handleChange}
-            >
-              <FormControlLabel
-                value="not_engaged"
-                control={<Radio />}
-                label="Not yet engaged"
+            <div>
+              <TTKCustomRadioGroup
+                options={status}
+                selectedValue={selectedOptionStatus}
+                onChange={handleRadioGroupChangeStatus}
               />
-              <FormControlLabel
-                value="newly_engaged"
-                control={<Radio />}
-                label="Newly engaged and exploring"
-              />
-              <FormControlLabel
-                value="planning_no_venue"
-                control={<Radio />}
-                label="Planning mode but haven't booked a venue yet"
-              />
-              {/* Add more options as needed */}
-            </RadioGroup>
+              {/* <p>Selected Option: {selectedOption}</p> */}
+            </div>
           </FormControl>
         );
       case 2:
