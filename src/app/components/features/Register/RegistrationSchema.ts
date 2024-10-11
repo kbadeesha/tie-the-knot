@@ -16,20 +16,20 @@ const RegistrationSchema = yup.object({
     .required('Password is required'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf([yup.ref('password')], 'Passwords must match')
     .required('Confirm password is required'),
-  isDateDecided: yup.boolean().required('This field is required'), // Add validation for isDateDecided
+  // isDateDecided: yup.boolean().required('This field is required'), // Add validation for isDateDecided
   // Conditional validation for weddingDate
-  weddingDate: yup.string().when('isDateDecided', {
-    is: (isDateDecided) => !isDateDecided,
-    then: yup.string().required('Wedding date is required'),
-    otherwise: yup
-      .string()
-      .nullable()
-      .transform((value, originalValue) =>
-        originalValue === '' ? null : value
-      ),
-  }),
+  // weddingDate: yup.string().when('isDateDecided', {
+  //   is: (isDateDecided) => !isDateDecided,
+  //   then: yup.string().required('Wedding date is required'),
+  //   otherwise: yup
+  //     .string()
+  //     .nullable()
+  //     .transform((value, originalValue) =>
+  //       originalValue === '' ? null : value
+  //     ),
+  // }),
 });
 
 export default RegistrationSchema;
