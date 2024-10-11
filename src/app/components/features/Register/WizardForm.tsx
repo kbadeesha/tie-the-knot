@@ -12,7 +12,7 @@ import {
   IconButton,
   Grid,
 } from "@mui/material";
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import TTKCustomSelectionList from "../../TTKCustomSelectionList";
@@ -51,7 +51,12 @@ function WizardForm() {
     useState<string>("");
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === steps.length - 1) {
+      // Log all form data to the console upon submission
+      console.log("Form submitted with data:", formData);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -63,7 +68,6 @@ function WizardForm() {
       ...formData,
       [event.target.name]: event.target.value,
     });
-    console.log("handle change function called", formData);
   };
 
   const handleClickShowPassword = () => {
@@ -140,7 +144,6 @@ function WizardForm() {
                 className="w-full"
               />
             </Grid>
-            {/* {selectedOptionUserType} */}
           </Grid>
         );
       case 1:
@@ -171,7 +174,6 @@ function WizardForm() {
                 className="w-full"
               />
             </Grid>
-            {/* {selectedOptionStatus} */}
           </Grid>
         );
       case 2:
@@ -179,10 +181,29 @@ function WizardForm() {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
+                <Typography
+                  variant="h4"
+                  align="center"
+                  className="font-bold mb-4"
+                >
+                  Tell Us About You and Your Partner
+                </Typography>
+                <Typography
+                  variant="body1"
+                  align="center"
+                  className="text-gray-500 mb-4"
+                >
+                  Please provide your personal details so we can create a
+                  personalized experience tailored to your wedding planning
+                  journey. This information helps us understand your unique
+                  story.
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
                 <TTKCustomTextField
                   name="firstName"
                   label="First Name"
-                  value={formData.firstName}
+                  value={formData.firstName || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -192,7 +213,7 @@ function WizardForm() {
                 <TTKCustomTextField
                   name="lastName"
                   label="Last Name"
-                  value={formData.lastName}
+                  value={formData.lastName || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -202,7 +223,7 @@ function WizardForm() {
                 <TTKCustomTextField
                   name="partnerFirstName"
                   label="Partner's First Name"
-                  value={formData.partnerFirstName}
+                  value={formData.partnerFirstName || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -212,7 +233,7 @@ function WizardForm() {
                 <TTKCustomTextField
                   name="partnerLastName"
                   label="Partner's Last Name"
-                  value={formData.partnerLastName}
+                  value={formData.partnerLastName || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -224,12 +245,30 @@ function WizardForm() {
       case 3:
         return (
           <Grid container spacing={2}>
-            {formData.firstName}
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Create Your Account
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                className="text-gray-500 mb-4"
+              >
+                Set up your account to stay connected with us throughout your
+                planning process. Your email and password will ensure you can
+                access your information anytime. We value your privacy and will
+                keep your details safe.
+              </Typography>
+            </Grid>
             <Grid item xs={12}>
               <TTKCustomTextField
                 name="email"
                 label="Email"
-                value={formData.email}
+                value={formData.email || ""}
                 onChange={handleChange}
                 fullWidth
                 required
@@ -239,7 +278,7 @@ function WizardForm() {
               <TTKCustomTextField
                 name="password"
                 label="Password"
-                value={formData.password}
+                value={formData.password || ""}
                 onChange={handleChange}
                 fullWidth
                 required
