@@ -10,17 +10,24 @@ import {
   TextField,
   InputAdornment,
   IconButton,
-  FormControlLabel,
-  Checkbox,
-  RadioGroup,
-  Radio,
-  FormControl,
-  FormLabel,
+  Grid,
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import TTKCustomRadioGroup from "../../TTKCustomRadioGroup";
+import TTKCustomSelectionList from "../../TTKCustomSelectionList";
+import {
+  FaCalendarAlt,
+  FaCheckCircle,
+  FaClipboardList,
+  FaHeart,
+  FaHome,
+  FaRing,
+  FaSearchLocation,
+  FaShoppingCart,
+} from "react-icons/fa";
+import TTKCustomTextField from "../../TTKCustomTextField";
+
 const steps = ["User Type", "Status", "Basic Information", "Account Details"];
 
 interface FormData {
@@ -29,8 +36,6 @@ interface FormData {
   lastName?: string;
   partnerFirstName?: string;
   partnerLastName?: string;
-  weddingDate?: string | null;
-  isDateDecided?: boolean;
   email?: string;
   password?: string;
   confirmPassword?: string;
@@ -41,9 +46,11 @@ function WizardForm() {
   const [formData, setFormData] = useState<FormData>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
+  const [selectedOptionUserType, setSelectedOptionUserType] =
+    useState<string>("");
 
   const handleNext = () => {
-    // You might want to add validation here before proceeding to the next step
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -56,20 +63,7 @@ function WizardForm() {
       ...formData,
       [event.target.name]: event.target.value,
     });
-  };
-
-  const handleDateChange = (date: string | null) => {
-    setFormData({
-      ...formData,
-      weddingDate: date,
-    });
-  };
-
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      isDateDecided: event.target.checked,
-    });
+    console.log("handle change function called", formData);
   };
 
   const handleClickShowPassword = () => {
@@ -85,185 +79,217 @@ function WizardForm() {
   ) => {
     event.preventDefault();
   };
-  const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
-  const [selectedOptionUserType, setSelectedOptionUserType] =
-    useState<string>("");
-  const handleRadioGroupChangeUserType = (value: string) => {
-    setSelectedOptionUserType(value);
-  };
-  const handleRadioGroupChangeStatus = (value: string) => {
-    setSelectedOptionStatus(value);
-  };
 
   const userType = [
-    { label: "Bride/Groom", value: "bride_groom" },
-    { label: "Vendor", value: "vendor" },
-    { label: "Event Planner", value: "planner" },
+    { label: "Bride/Groom", value: "bride_groom", icon: <FaHeart /> },
+    { label: "Vendor", value: "vendor", icon: <FaShoppingCart /> },
+    { label: "Event Planner", value: "planner", icon: <FaCalendarAlt /> },
   ];
+
   const status = [
-    { label: "Not yet engaged", value: "not_engaged" },
-    { label: "Newly engaged and exploring", value: "newly_engaged" },
+    { label: "Not yet engaged", value: "not_engaged", icon: <FaRing /> },
+    {
+      label: "Newly engaged and exploring",
+      value: "newly_engaged",
+      icon: <FaSearchLocation />,
+    },
     {
       label: "Planning mode but haven't booked a venue yet",
-      value: "planning_no_venue",
+      value: "no_venue",
+      icon: <FaClipboardList />,
+    },
+    {
+      label: "Planning mode and already booked a venue",
+      value: "venue_booked",
+      icon: <FaHome />,
+    },
+    {
+      label: "Almost done, just the details left",
+      value: "almost_done",
+      icon: <FaCheckCircle />,
     },
   ];
+
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
         return (
-          <FormControl sx={{ mt: 2 }}>
-            <FormLabel id="status-radio-buttons-group-label">
-              Who are you?
-            </FormLabel>
-            <div>
-              <TTKCustomRadioGroup
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Welcome! Who Are You in the Wedding Planning Journey?
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                className="text-gray-500 mb-4"
+              >
+                Select your role in the wedding planning process to help us
+                personalize your experience.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomSelectionList
                 options={userType}
                 selectedValue={selectedOptionUserType}
-                onChange={handleRadioGroupChangeUserType}
+                onChange={setSelectedOptionUserType}
+                className="w-full"
               />
-              {/* <p>Selected Option: {selectedOption}</p> */}
-            </div>
-          </FormControl>
+            </Grid>
+            {/* {selectedOptionUserType} */}
+          </Grid>
         );
       case 1:
         return (
-          <FormControl sx={{ mt: 2 }}>
-            <FormLabel id="status-radio-buttons-group-label">
-              Welcome! Where are you in the planning process?
-            </FormLabel>
-            <div>
-              <TTKCustomRadioGroup
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Where are you in the planning process?
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                className="text-gray-500 mb-4"
+              >
+                Whether you're just starting to look around or in the final
+                countdown, we've got you.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomSelectionList
                 options={status}
                 selectedValue={selectedOptionStatus}
-                onChange={handleRadioGroupChangeStatus}
+                onChange={setSelectedOptionStatus}
+                className="w-full"
               />
-              {/* <p>Selected Option: {selectedOption}</p> */}
-            </div>
-          </FormControl>
+            </Grid>
+            {/* {selectedOptionStatus} */}
+          </Grid>
         );
       case 2:
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Box sx={{ mt: 2 }}>
-              <TextField
-                label="First name"
-                name="firstName"
-                value={formData.firstName || ""}
-                onChange={handleChange}
-                fullWidth
-                required
-              />
-              <TextField
-                label="Last name"
-                name="lastName"
-                value={formData.lastName || ""}
-                onChange={handleChange}
-                fullWidth
-                sx={{ mt: 2 }}
-                required
-              />
-              <TextField
-                label="Partner's first name"
-                name="partnerFirstName"
-                value={formData.partnerFirstName || ""}
-                onChange={handleChange}
-                fullWidth
-                sx={{ mt: 2 }}
-                required
-              />
-              <TextField
-                label="Partner's last name"
-                name="partnerLastName"
-                value={formData.partnerLastName || ""}
-                onChange={handleChange}
-                fullWidth
-                sx={{ mt: 2 }}
-                required
-              />
-              {/* <DatePicker
-                label="Wedding date (Don't worry! You can change this later)"
-                value={formData.weddingDate ? dayjs(formData.weddingDate) : null} // Convert to Dayjs
-                onChange={(newValue) => handleDateChange(newValue?.format('YYYY-MM-DD'))} // Format the date
-                renderInput={(params) => (
-                  <TextField {...params} sx={{ mt: 2 }} />
-                )}
-              /> */}
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.isDateDecided || false}
-                    onChange={handleCheckboxChange}
-                    name="isDateDecided"
-                  />
-                }
-                label="We're still deciding"
-                sx={{ mt: 2 }}
-              />
-            </Box>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TTKCustomTextField
+                  name="firstName"
+                  label="First Name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TTKCustomTextField
+                  name="lastName"
+                  label="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TTKCustomTextField
+                  name="partnerFirstName"
+                  label="Partner's First Name"
+                  value={formData.partnerFirstName}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TTKCustomTextField
+                  name="partnerLastName"
+                  label="Partner's Last Name"
+                  value={formData.partnerLastName}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
+            </Grid>
           </LocalizationProvider>
         );
       case 3:
         return (
-          <Box sx={{ mt: 2 }}>
-            <TextField
-              label="Email"
-              type="email"
-              name="email"
-              value={formData.email || ""}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
-            <TextField
-              label="Password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={formData.password || ""}
-              onChange={handleChange}
-              fullWidth
-              sx={{ mt: 2 }}
-              required
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              label="Confirm Password"
-              type={showConfirmPassword ? "text" : "password"}
-              name="confirmPassword"
-              value={formData.confirmPassword || ""}
-              onChange={handleChange}
-              fullWidth
-              sx={{ mt: 2 }}
-              required
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle confirm password visibility"
-                      onClick={handleClickShowConfirmPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Box>
+          <Grid container spacing={2}>
+            {formData.firstName}
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="email"
+                label="Email"
+                value={formData.email}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="password"
+                label="Password"
+                value={formData.password}
+                onChange={handleChange}
+                fullWidth
+                required
+                type={showPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                label="Confirm Password"
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={formData.confirmPassword || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle confirm password visibility"
+                        onClick={handleClickShowConfirmPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showConfirmPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          </Grid>
         );
       default:
         throw new Error("Unknown step");
@@ -296,11 +322,16 @@ function WizardForm() {
           <Button
             disabled={activeStep === 0}
             onClick={handleBack}
-            className="mr-2"
+            className="mt-6 py-3"
           >
             Back
           </Button>
-          <Button variant="contained" color="primary" onClick={handleNext}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+            className="bg-black text-white mt-6 py-3"
+          >
             {activeStep === steps.length - 1 ? "Submit" : "Next"}
           </Button>
         </div>
