@@ -1,5 +1,5 @@
 "use client";
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 import TTKCustomSelectionList from "../../TTKCustomSelectionList";
 import { FaHeart, FaShoppingCart, FaCalendarAlt } from "react-icons/fa";
@@ -50,30 +50,44 @@ const RolePick = () => {
     useState<string>("");
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant="h4" align="center" className="font-bold mb-4">
-          Welcome! Who Are You in the Wedding Planning Journey?
-        </Typography>
-        <Typography
-          variant="body1"
-          align="center"
-          className="text-gray-500 mb-4"
-        >
-          Select your role in the wedding planning process to help us
-          personalize your experience.
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <TTKCustomSelectionList
-          type="gif_icon"
-          options={userType}
-          selectedValue={selectedOptionUserType}
-          onChange={handleOnChange}
-          className="w-full"
-        />
-      </Grid>
-    </Grid>
+    <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
+      <Box
+        sx={{
+          p: 4,
+          mt: 4,
+          height: "100%",
+          borderRadius: 2,
+          boxShadow: "md",
+          bgcolor: "background.paper",
+        }}
+        className="border border-gray-200 dark:border-gray-700"
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h4" align="center" className="font-bold mb-4">
+              Welcome! Who Are You in the Wedding Planning Journey?
+            </Typography>
+            <Typography
+              variant="body1"
+              align="center"
+              className="text-gray-500 mb-4"
+            >
+              Select your role in the wedding planning process to help us
+              personalize your experience.
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <TTKCustomSelectionList
+              type="gif_icon"
+              options={userType}
+              selectedValue={selectedOptionUserType}
+              onChange={handleOnChange}
+              className="w-full"
+            />
+          </Grid>
+        </Grid>
+      </Box>
+    </div>
   );
 };
 

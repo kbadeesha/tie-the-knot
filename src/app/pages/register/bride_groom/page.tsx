@@ -2,7 +2,7 @@ import WizardForm from "@/app/components/features/Register/WizardForm";
 import { Grid } from "@mui/material";
 import Image from "next/image"; // Import the Image component from Next.js
 import React from "react";
-import loginImage from "../../../../../public/assets/images/cover.jpg"; // Ensure this is correct
+import loginImage from "../../../../../public/assets/images/cover2.jpg"; // Ensure this is correct
 import "../../../../styles/pages/register.css";
 const page = () => {
   return (
