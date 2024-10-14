@@ -28,7 +28,7 @@ import {
 } from "react-icons/fa";
 import TTKCustomTextField from "../../TTKCustomTextField";
 
-const steps = ["User Type", "Status", "Basic Information", "Account Details"];
+const steps = ["Status", "Basic Information", "Account Details"];
 
 interface FormData {
   status?: string;
@@ -125,36 +125,6 @@ function WizardForm() {
                 align="center"
                 className="font-bold mb-4"
               >
-                Welcome! Who Are You in the Wedding Planning Journey?
-              </Typography>
-              <Typography
-                variant="body1"
-                align="center"
-                className="text-gray-500 mb-4"
-              >
-                Select your role in the wedding planning process to help us
-                personalize your experience.
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <TTKCustomSelectionList
-                options={userType}
-                selectedValue={selectedOptionUserType}
-                onChange={setSelectedOptionUserType}
-                className="w-full"
-              />
-            </Grid>
-          </Grid>
-        );
-      case 1:
-        return (
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography
-                variant="h4"
-                align="center"
-                className="font-bold mb-4"
-              >
                 Where are you in the planning process?
               </Typography>
               <Typography
@@ -176,7 +146,7 @@ function WizardForm() {
             </Grid>
           </Grid>
         );
-      case 2:
+      case 1:
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Grid container spacing={2}>
@@ -242,7 +212,7 @@ function WizardForm() {
             </Grid>
           </LocalizationProvider>
         );
-      case 3:
+      case 2:
         return (
           <Grid container spacing={2}>
             <Grid item xs={12}>
