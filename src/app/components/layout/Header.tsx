@@ -12,9 +12,6 @@ import Image from "next/image";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import TranslateIcon from "@mui/icons-material/Translate";
 import { useContext, useState } from "react";
 import "../../../styles/components/button.css";
 import { useTranslation } from "next-i18next";
@@ -23,18 +20,14 @@ import ThemeContext from "@/context/ThemeContext";
 import TTKCustomButton from "../TTKCustomButton";
 import Link from "next/link";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Vendors", "Plan Your Wedding", "Blog"];
+const settings = ["Profile", "Logout"];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const { i18n } = useTranslation();
-
-  const handleOnClickRegister = () => {
-    console.log("register clicked");
-  };
 
   const handleOnClickLogin = () => {
     console.log("login clicked");
@@ -52,10 +45,6 @@ const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  const handleLanguageChange = (lng: string) => {
-    i18n.changeLanguage(lng);
   };
 
   return (
@@ -112,18 +101,6 @@ const Header = () => {
               alignItems: "center",
             }}
           >
-            <IconButton
-              className={`ml-1 ${
-                theme === "dark" ? "text-inherit" : "text-black"
-              }`}
-            >
-              <TranslateIcon />
-            </IconButton>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -145,15 +122,8 @@ const Header = () => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-              {/* <MenuItem onClick={() => handleLanguageChange("en")}>
-                <Typography textAlign="center">English</Typography>
-              </MenuItem> */}
-              <MenuItem onClick={() => handleLanguageChange("es")}>
-                <Typography textAlign="center">Spanish</Typography>
-              </MenuItem>{" "}
-              {/* Add more languages as needed */}
             </Menu>
-            <IconButton
+            {/* <IconButton
               className={`ml-1 ${
                 theme === "dark" ? "text-inherit" : "text-black"
               }`}
@@ -164,7 +134,7 @@ const Header = () => {
               ) : (
                 <DarkModeOutlinedIcon />
               )}
-            </IconButton>
+            </IconButton> */}
 
             {/* Responsive Menu Icon (Hamburger on mobile) */}
             <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
@@ -222,6 +192,11 @@ const Header = () => {
             >
               Login
             </TTKCustomButton>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </Container>

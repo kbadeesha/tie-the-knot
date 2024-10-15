@@ -82,9 +82,6 @@ const LinkFooter = () => {
               <li>
                 <a href="/support">Expert Advice</a>
               </li>
-              <li>
-                <a href="/support">FAQs</a>
-              </li>
             </ul>
           </div>
         </section>
