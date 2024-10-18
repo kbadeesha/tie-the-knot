@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import "../../../../styles/pages/hero.css";
 import TTKWeddingCategories from "./WeddingCategory";
+
 const Hero: React.FC = () => {
   return (
     <>
@@ -33,6 +34,18 @@ const Hero: React.FC = () => {
           Your browser does not support the video tag.
         </video>
 
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)", // Vide opacity
+            zIndex: 0,
+          }}
+        />
+
         <Container
           maxWidth="md"
           sx={{
@@ -52,12 +65,9 @@ const Hero: React.FC = () => {
             gutterBottom
             className="text-4xl sm:text-6xl font-bold hero-heading"
             sx={{
-              textShadow: `
-                -0.5px -0.5px 0 black,  
-                0.5px -0.5px 0 black, 
-                -0.5px 0.5px 0 black, 
-                0.5px 0.5px 0 black
-              `,
+              marginTop: "5rem",
+              marginBottom: "1rem",
+              textAlign: "center",
             }}
           >
             Wedding planning starts here
@@ -67,12 +77,9 @@ const Hero: React.FC = () => {
             component="h2"
             className="text-xl sm:text-2xl justify-center hero-subheading"
             sx={{
-              textShadow: `
-                -0.5px -0.5px 0 black,  
-                0.5px -0.5px 0 black, 
-                -0.5px 0.5px 0 black, 
-                0.5px 0.5px 0 black
-              `,
+              marginTop: "1rem",
+              marginBottom: "1rem",
+              textAlign: "center",
             }}
           >
             From venues and save the dates to a free wedding website, a registry
