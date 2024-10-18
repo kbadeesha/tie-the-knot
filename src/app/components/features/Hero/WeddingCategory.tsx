@@ -1,64 +1,39 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { categories } from "../../../data/ListItems"; // Ensure this path is correct
+import TTKCustomSelectionList from "../../TTKCustomSelectionList";
 
 const TTKWeddingCategories: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [scrollInterval, setScrollInterval] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>(""); // For tracking selected category
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = direction === "left" ? -20 : 20;
+      const scrollAmount = direction === "left" ? -200 : 200;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
-
-  const scrollToStart = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      checkScrollPosition(); // Update arrow visibility after scrolling
-    }
-  };
-
-  const scrollToEnd = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        left: scrollRef.current.scrollWidth,
-        behavior: "smooth",
-      });
-      setTimeout(checkScrollPosition, 100); // Update arrow visibility after scrolling
-    }
-  };
-
-  const startAutoScroll = (direction: "left" | "right") => {
-    const intervalId = window.setInterval(() => scroll(direction), 50);
-    setScrollInterval(intervalId);
-  };
-
-  const stopAutoScroll = () => {
-    if (scrollInterval) {
-      clearInterval(scrollInterval);
-      setScrollInterval(null);
     }
   };
 
   const checkScrollPosition = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+
+      // Detect if we need to show/hide the left and right arrows
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 1); // Fix for the right arrow
     }
   };
 
   useEffect(() => {
     const currentRef = scrollRef.current;
     if (currentRef) {
+      checkScrollPosition(); // Check on load
       currentRef.addEventListener("scroll", checkScrollPosition);
     }
     return () => {
@@ -76,7 +51,7 @@ const TTKWeddingCategories: React.FC = () => {
 
       {showLeftArrow && (
         <IconButton
-          onClick={scrollToStart} // Jump to start
+          onClick={() => scroll("left")}
           sx={{
             position: "absolute",
             left: 0,
@@ -87,13 +62,14 @@ const TTKWeddingCategories: React.FC = () => {
             color: "white",
             width: 50,
             height: 50,
-            borderRadius: "50%",
+            borderRadius: "50%", // Make the button round
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
             "&:hover": {
               backgroundColor: "rgba(0,0,0,0.6)",
+              color: "black",
             },
           }}
         >
@@ -104,48 +80,27 @@ const TTKWeddingCategories: React.FC = () => {
       <Box
         ref={scrollRef}
         sx={{
+          padding: "20px",
           display: "flex",
-          overflowX: "auto",
-          justifyContent: "center", // Center the items
-          whiteSpace: "nowrap",
-          scrollBehavior: "smooth",
-          "scrollbar-width": "none", // Hide scrollbar for Firefox
-          "&::-webkit-scrollbar": { display: "none" }, // Hide scrollbar for Chrome/Safari
+          overflowX: "auto", // Allow horizontal scrolling
+          whiteSpace: "nowrap", // Prevent wrapping
+          scrollbarWidth: "none", // Hide scrollbar (Firefox)
+          "&::-webkit-scrollbar": {
+            display: "none", // Hide scrollbar (Chrome, Safari)
+          },
         }}
       >
-        {categories.map((category, index) => (
-          <Box
-            key={index}
-            sx={{
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              mx: 2,
-              minWidth: "80px", // Optional: set a minimum width to prevent squishing
-            }}
-          >
-            <IconButton
-              sx={{
-                backgroundColor: "#000000",
-                color: "white",
-                width: "50px",
-                height: "50px",
-                borderRadius: "50%",
-              }}
-            >
-              {category.icon}
-            </IconButton>
-            <Typography sx={{ marginTop: "10px", color: "black" }}>
-              {category.name}
-            </Typography>
-          </Box>
-        ))}
+        <TTKCustomSelectionList
+          options={categories}
+          selectedValue={selectedCategory}
+          onChange={setSelectedCategory} // Handle selection
+          type="gif_icon"
+        />
       </Box>
 
       {showRightArrow && (
         <IconButton
-          onClick={scrollToEnd} // Jump to end
+          onClick={() => scroll("right")}
           sx={{
             position: "absolute",
             right: 0,
@@ -156,7 +111,7 @@ const TTKWeddingCategories: React.FC = () => {
             color: "white",
             width: 50,
             height: 50,
-            borderRadius: "50%",
+            borderRadius: "50%", // Make the button round
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

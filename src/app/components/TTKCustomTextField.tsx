@@ -69,7 +69,7 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
           },
         }}
         InputProps={{
-          endAdornment: (
+          endAdornment: otherProps.type === "password" && (
             <InputAdornment position="end">
               <IconButton onClick={togglePasswordVisibility} edge="end">
                 {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -89,8 +89,7 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
             fontSize: "12px",
           }}
         >
-          {otherProps.value != "" &&
-            passwordValidation.strength + " Password"}
+          {otherProps.value != "" && passwordValidation.strength + " Password"}
         </span>
       )}
     </>
