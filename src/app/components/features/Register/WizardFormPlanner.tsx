@@ -41,7 +41,7 @@ interface FormData {
   confirmPassword?: string;
 }
 
-function WizardForm() {
+function WizardFormPlanner() {
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({});
   const [showPassword, setShowPassword] = useState(false);
@@ -349,4 +349,4 @@ function WizardForm() {
   );
 }
 
-export default WizardForm;
+export default WizardFormPlanner;

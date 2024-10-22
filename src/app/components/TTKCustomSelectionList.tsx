@@ -74,7 +74,6 @@ const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
                       selectedValue === option.value ? "#ffffff" : "#ffffff", // Black for selected
                     color:
                       selectedValue === option.value ? "#ffffff" : "#ffffff", // White text for selected
-                    // border: "1px solid #ccc",
                     borderRadius: "10px",
                     padding: "5px",
                     cursor: disabled ? "not-allowed" : "pointer",

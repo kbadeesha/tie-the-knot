@@ -1,11 +1,10 @@
 import { Grid } from "@mui/material";
-import React from "react";
 import Image from "next/image"; // Import the Image component from Next.js
-import loginImage from "../../../../public/assets/images/cover6.jpg"; // Ensure this is correct
-import WizardForm from "@/app/components/features/Register/WizardFormCouple";
-import "../../../styles/pages/register.css";
-import RolePick from "@/app/components/features/Register/RolePick";
-const RegisterPage = () => {
+import React from "react";
+import loginImage from "../../../../../public/assets/images/cover2.jpg"; // Ensure this is correct
+import "../../../../styles/pages/register.css";
+import WizardFormVendor from "@/app/components/features/Register/WizardFormVendor";
+const page = () => {
   return (
     <div className="register-container" style={{ height: "100vh" }}>
       <Grid container style={{ height: "100%" }}>
@@ -19,12 +18,12 @@ const RegisterPage = () => {
           />
         </Grid>
         <Grid item xs={7} className="register-formContainer">
-          <RolePick />
-          {/* <WizardForm /> */}
+          {/* <RolePick /> */}
+          <WizardFormVendor />
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default RegisterPage;
+export default page;

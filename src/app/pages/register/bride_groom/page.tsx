@@ -1,4 +1,4 @@
-import WizardForm from "@/app/components/features/Register/WizardForm";
+import WizardFormCouple from "@/app/components/features/Register/WizardFormCouple";
 import { Grid } from "@mui/material";
 import Image from "next/image"; // Import the Image component from Next.js
 import React from "react";
@@ -19,7 +19,7 @@ const page = () => {
         </Grid>
         <Grid item xs={7} className="register-formContainer">
           {/* <RolePick /> */}
-          <WizardForm />
+          <WizardFormCouple />
         </Grid>
       </Grid>
     </div>
