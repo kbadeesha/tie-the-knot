@@ -15,8 +15,8 @@ import {
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import TTKCustomTextField from "../../TTKCustomTextField";
-import TTKCustomSelect from "../../TTKCustomSelect";
+import TTKCustomTextField from "../../common/TTKCustomTextField";
+import TTKCustomSelect from "../../common/TTKCustomSelect";
 
 const steps = ["Basic Information", "Account Details"];
 

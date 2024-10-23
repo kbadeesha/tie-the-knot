@@ -8,8 +8,8 @@ import Image from "next/image";
 import loginImage from "../../../../public/assets/images/cover14.jpg"; // Replace with your image path
 
 import "../../../styles/pages/register.css"; // Import the CSS module
-import TTKCustomTextField from "../../components/TTKCustomTextField";
-import TTKCustomButton from "../../components/TTKCustomButton";
+import TTKCustomTextField from "../../components/common/TTKCustomTextField";
+import TTKCustomButton from "../../components/common/TTKCustomButton";
 
 const page = () => {
   const [formData, setFormData] = useState({

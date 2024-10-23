@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { categories } from "../../../data/ListItems"; // Ensure this path is correct
-import TTKCustomSelectionList from "../../TTKCustomSelectionList";
+import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
 
 const TTKWeddingCategories: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);

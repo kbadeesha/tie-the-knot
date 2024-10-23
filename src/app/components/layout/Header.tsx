@@ -17,7 +17,7 @@ import "../../../styles/components/button.css";
 import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
 
-import TTKCustomButton from "../TTKCustomButton";
+import TTKCustomButton from "../common/TTKCustomButton";
 import Link from "next/link";
 
 const pages = ["Vendors", "Plan Your Wedding", "Blog"];

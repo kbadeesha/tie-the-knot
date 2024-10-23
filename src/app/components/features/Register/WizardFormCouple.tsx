@@ -14,7 +14,7 @@ import {
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import TTKCustomSelectionList from "../../TTKCustomSelectionList";
+import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
 import {
   FaCalendarAlt,
   FaCheckCircle,
@@ -25,7 +25,7 @@ import {
   FaSearchLocation,
   FaShoppingCart,
 } from "react-icons/fa";
-import TTKCustomTextField from "../../TTKCustomTextField";
+import TTKCustomTextField from "../../common/TTKCustomTextField";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 

@@ -1,7 +1,7 @@
 import { Vendor } from "@/app/types/vendor";
 import { Container, Typography } from "@mui/material";
 import React from "react";
-import TTKCustomButton from "../../TTKCustomButton";
+import TTKCustomButton from "../../common/TTKCustomButton";
 import VendorSocials from "./VendorSocials";
 
 interface VendorProfileProps {

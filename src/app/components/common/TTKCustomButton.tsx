@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { SxProps } from "@mui/material";
 
-interface CustomButtonProps {
+interface TTKCustomButtonProps {
   children: React.ReactNode;
   href?: string;
   variant?: "contained" | "outlined" | "text";
@@ -13,7 +13,7 @@ interface CustomButtonProps {
     | "success"
     | "error"
     | "info"
-    | "warning"; // Removed custom colors
+    | "warning";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   size?: "small" | "medium" | "large";
   disabled?: boolean;
@@ -25,10 +25,9 @@ interface CustomButtonProps {
   sx?: SxProps;
 }
 
-const TTKCustomButton: React.FC<CustomButtonProps> = ({
+const TTKCustomButton: React.FC<TTKCustomButtonProps> = ({
   children,
   variant = "contained",
-  color = "primary",
   onClick,
   size = "medium",
   disabled,
@@ -41,20 +40,31 @@ const TTKCustomButton: React.FC<CustomButtonProps> = ({
   sx = {},
   ...otherProps
 }) => {
+  const blackAndWhiteStyles: SxProps = {
+    backgroundColor: variant === "contained" ? "black" : "transparent",
+    color: variant === "contained" ? "white" : "black",
+    borderColor: "black",
+    "&:hover": {
+      backgroundColor: variant === "contained" ? "gray" : "black",
+      color: variant === "contained" ? "white" : "white",
+    },
+    borderRadius: "30px", // Make the button have a pill shape
+    padding: "10px 20px", // Adjust padding for a better pill look
+  };
+
   return (
     <Button
       variant={variant}
-      color={color}
       onClick={onClick}
       href={href}
       size={size}
       disabled={disabled}
       startIcon={iconPosition === "start" ? icon : undefined}
       endIcon={iconPosition === "end" ? icon : undefined}
-      className={className}
+      className={`${className} m-1`}
       type={type}
-      sx={sx}
       fullWidth={fullWidth}
+      sx={{ ...sx, ...blackAndWhiteStyles }}
       {...otherProps}
     >
       {children}

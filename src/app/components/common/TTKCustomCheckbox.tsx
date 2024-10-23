@@ -1,53 +1,40 @@
-// app/components/common/TTKCustomCheckbox.tsx
-import * as React from "react";
-import Checkbox from "@mui/material/Checkbox";
-import { SxProps, FormControlLabel } from "@mui/material";
+import React from "react";
+import { Checkbox, FormControlLabel, FormControl, FormGroup } from "@mui/material";
+import { SxProps } from "@mui/material";
 
 interface TTKCustomCheckboxProps {
-  checked?: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  label?: string;
+  label: string;
+  checked: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
-  color?:
-    | "primary"
-    | "secondary"
-    | "error"
-    | "info"
-    | "success"
-    | "warning"
-    | "default";
-  size?: "small" | "medium" | "large";
+  className?: string;
   sx?: SxProps;
-  value?: string
 }
 
 const TTKCustomCheckbox: React.FC<TTKCustomCheckboxProps> = ({
+  label,
   checked,
   onChange,
-  label,
-  disabled,
-  color = "primary",
-  size = "medium",
+  disabled = false,
+  className,
   sx = {},
-  value,
-  ...otherProps
 }) => {
   return (
-    <FormControlLabel
-      control={
-        <Checkbox
-          checked={checked}
-          onChange={onChange}
-          disabled={disabled}
-          color={color}
-          size={size}
-          value={value} 
-          sx={sx}
-          {...otherProps}
+    <FormControl className={className} sx={sx}>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checked}
+              onChange={onChange}
+              disabled={disabled}
+              className="text-blue-500 hover:text-blue-600"
+            />
+          }
+          label={label}
         />
-      }
-      label={label}
-    />
+      </FormGroup>
+    </FormControl>
   );
 };
 
