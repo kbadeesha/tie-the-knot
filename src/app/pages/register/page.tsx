@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import Image from "next/image"; // Import the Image component from Next.js
-import loginImage from "../../../../public/assets/images/cover6.jpg"; // Ensure this is correct
+import loginImage from "../../../../public/assets/images/cover11.jpg"; // Ensure this is correct
 import WizardForm from "@/app/components/features/Register/WizardFormCouple";
 import "../../../styles/pages/register.css";
 import RolePick from "@/app/components/features/Register/RolePick";

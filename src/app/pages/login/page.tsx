@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { Grid, Typography, Box } from "@mui/material";
 import Image from "next/image";
-import loginImage from "../../../../public/assets/images/cover8.jpg"; // Replace with your image path
+import loginImage from "../../../../public/assets/images/cover14.jpg"; // Replace with your image path
 
 import "../../../styles/pages/register.css"; // Import the CSS module
 import TTKCustomTextField from "../../components/TTKCustomTextField";

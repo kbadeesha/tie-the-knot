@@ -19,7 +19,13 @@ const TTKWeddingCategories: React.FC = () => {
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
-
+  const handleOnChange = (value: string) => {
+    setSelectedCategory(value);
+    console.log(value);
+    if (value) {
+      window.location.href = `/pages/vendor/${value}`;
+    }
+  };
   const checkScrollPosition = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
@@ -76,7 +82,6 @@ const TTKWeddingCategories: React.FC = () => {
           <ArrowBackIosIcon />
         </IconButton>
       )}
-
       <Box
         ref={scrollRef}
         sx={{
@@ -93,7 +98,7 @@ const TTKWeddingCategories: React.FC = () => {
         <TTKCustomSelectionList
           options={categories}
           selectedValue={selectedCategory}
-          onChange={setSelectedCategory} // Handle selection
+          onChange={handleOnChange} // Handle selection
           type="gif_icon"
         />
       </Box>

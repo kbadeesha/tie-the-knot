@@ -184,14 +184,16 @@ const Header = () => {
                 Register
               </TTKCustomButton>
             </Link>
-            <TTKCustomButton
-              type="submit"
-              variant="contained"
-              color="primary"
-              onClick={handleOnClickLogin}
-            >
-              Login
-            </TTKCustomButton>
+            <Link href="/pages/login" passHref>
+              <TTKCustomButton
+                type="submit"
+                variant="contained"
+                color="primary"
+                onClick={handleOnClickLogin}
+              >
+                Login
+              </TTKCustomButton>
+            </Link>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
