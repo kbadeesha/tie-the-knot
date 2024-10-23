@@ -13,7 +13,7 @@ interface TTKCustomSelectProps {
   className?: string;
   fullWidth?: boolean;
   sx?: SxProps;
-
+  required?: boolean;
 }
 
 const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
@@ -34,7 +34,6 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
       fullWidth={fullWidth}
       sx={sx}
       variant="outlined"
-      required={otherProps.required} // Optional: Include this for FormControl
     >
       <InputLabel>{label}</InputLabel>
       <Select

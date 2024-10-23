@@ -52,7 +52,7 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
       <TextField
         label={label}
         variant="outlined"
-        type={showPassword ? "text" : "password"} // Toggle password visibility
+        // type={showPassword ? "text" : "password"} // password visibility
         className={`border-gray-300 focus:outline-none ${className}`}
         sx={{
           ...sx,
