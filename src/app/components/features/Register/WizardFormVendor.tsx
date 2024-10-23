@@ -7,67 +7,75 @@ import {
   Button,
   Typography,
   Box,
-  TextField,
   InputAdornment,
   IconButton,
   Grid,
+  SelectChangeEvent,
 } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import TTKCustomSelectionList from "../../TTKCustomSelectionList";
-import {
-  FaCalendarAlt,
-  FaCheckCircle,
-  FaClipboardList,
-  FaHeart,
-  FaHome,
-  FaRing,
-  FaSearchLocation,
-  FaShoppingCart,
-} from "react-icons/fa";
 import TTKCustomTextField from "../../TTKCustomTextField";
+import TTKCustomSelect from "../../TTKCustomSelect";
 
-const steps = ["Status", "Basic Information", "Account Details"];
+const steps = ["Basic Information", "Account Details"];
 
-interface FormData {
-  status?: string;
-  firstName?: string;
-  lastName?: string;
-  partnerFirstName?: string;
-  partnerLastName?: string;
+interface VendorFormData {
+  name?: string;
+  companyName?: string;
+  designation?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;
+  phoneNumber?: string;
+  vendorType?: string;
 }
+
+const vendorOptions = [
+  { label: "Venue", value: "venue" },
+  { label: "Photographers", value: "photographers" },
+  { label: "Videographer", value: "videographer" },
+  { label: "Florists", value: "florists" },
+  { label: "Catering", value: "catering" },
+  { label: "Cakes", value: "cakes" },
+  { label: "Bands/DJs", value: "bands_djs" },
+  { label: "Beauty", value: "beauty" },
+  { label: "Planners", value: "planners" },
+  { label: "Religious", value: "religious" },
+  { label: "Furniture/Rentals", value: "furniture_rentals" },
+  { label: "Luxury Cars", value: "luxury_cars" },
+  { label: "Other", value: "other" },
+];
 
 function WizardFormVendor() {
   const [activeStep, setActiveStep] = useState(0);
-  const [formData, setFormData] = useState<FormData>({});
+  const [formData, setFormData] = useState<VendorFormData>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
-  const [selectedOptionUserType, setSelectedOptionUserType] =
-    useState<string>("");
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      // Log all form data to the console upon submission
-      console.log("Form submitted with data:", formData);
+      console.log("Vendor form submitted with data:", formData);
     } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setActiveStep((prev) => prev + 1);
     }
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  const handleBack = () => setActiveStep((prev) => prev - 1);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleChangeSelect = (event: SelectChangeEvent<string>) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleClickShowPassword = () => {
@@ -84,63 +92,9 @@ function WizardFormVendor() {
     event.preventDefault();
   };
 
-  const status = [
-    { label: "Not yet engaged", value: "not_engaged", icon: <FaRing /> },
-    {
-      label: "Newly engaged and exploring",
-      value: "newly_engaged",
-      icon: <FaSearchLocation />,
-    },
-    {
-      label: "Planning mode but haven't booked a venue yet",
-      value: "no_venue",
-      icon: <FaClipboardList />,
-    },
-    {
-      label: "Planning mode and already booked a venue",
-      value: "venue_booked",
-      icon: <FaHome />,
-    },
-    {
-      label: "Almost done, just the details left",
-      value: "almost_done",
-      icon: <FaCheckCircle />,
-    },
-  ];
-
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return (
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography
-                variant="h4"
-                align="center"
-                className="font-bold mb-4"
-              >
-                Where are you in the planning process?
-              </Typography>
-              <Typography
-                variant="body1"
-                align="center"
-                className="text-gray-500 mb-4"
-              >
-                Whether you're just starting to look around or in the final
-                countdown, we've got you.
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <TTKCustomSelectionList
-                options={status}
-                selectedValue={selectedOptionStatus}
-                onChange={setSelectedOptionStatus}
-                className="w-full"
-              />
-            </Grid>
-          </Grid>
-        );
-      case 1:
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Grid container spacing={2}>
@@ -150,7 +104,7 @@ function WizardFormVendor() {
                   align="center"
                   className="font-bold mb-4"
                 >
-                  Tell Us About You and Your Partner
+                  Tell Us About Yourself
                 </Typography>
                 <Typography
                   variant="body1"
@@ -158,16 +112,26 @@ function WizardFormVendor() {
                   className="text-gray-500 mb-4"
                 >
                   Please provide your personal details so we can create a
-                  personalized experience tailored to your wedding planning
-                  journey. This information helps us understand your unique
-                  story.
+                  personalized experience tailored to your wedding vendor.
+                  journey. Your insights will help us understand your unique
+                  offerings and how we can best support your business.
                 </Typography>
               </Grid>
               <Grid item xs={12}>
+                <TTKCustomSelect
+                  name="vendorType"
+                  label="Vendor Type"
+                  value={formData.vendorType || ""} // Fallback to empty string
+                  onChange={handleChangeSelect}
+                  options={vendorOptions}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <TTKCustomTextField
-                  name="firstName"
-                  label="First Name"
-                  value={formData.firstName || ""}
+                  name="companyName"
+                  label="Company Name"
+                  value={formData.companyName || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -175,9 +139,9 @@ function WizardFormVendor() {
               </Grid>
               <Grid item xs={12}>
                 <TTKCustomTextField
-                  name="lastName"
-                  label="Last Name"
-                  value={formData.lastName || ""}
+                  name="name"
+                  label="Full Name"
+                  value={formData.name || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -185,19 +149,9 @@ function WizardFormVendor() {
               </Grid>
               <Grid item xs={12}>
                 <TTKCustomTextField
-                  name="partnerFirstName"
-                  label="Partner's First Name"
-                  value={formData.partnerFirstName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="partnerLastName"
-                  label="Partner's Last Name"
-                  value={formData.partnerLastName || ""}
+                  name="designation"
+                  label="Designation"
+                  value={formData.designation || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -206,7 +160,7 @@ function WizardFormVendor() {
             </Grid>
           </LocalizationProvider>
         );
-      case 2:
+      case 1:
         return (
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -292,13 +246,22 @@ function WizardFormVendor() {
                 }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="phoneNumber"
+                label="Phone Number"
+                value={formData.phoneNumber || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
           </Grid>
         );
       default:
         throw new Error("Unknown step");
     }
   };
-
   return (
     <div className="container mx-auto p-4">
       <Stepper activeStep={activeStep} alternativeLabel>
