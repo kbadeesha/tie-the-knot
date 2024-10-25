@@ -82,9 +82,7 @@ const Hero: React.FC = () => {
               textAlign: "center",
             }}
           >
-            From venues and save the dates to a free wedding website, a registry
-            and even your cake — Tie The Knot is here for all the days along the
-            way
+         Tie The Knot connects you with top wedding vendors, from venues to florists and photographers, making your planning journey seamless and stress-free!
           </Typography>
         </Container>
       </Box>

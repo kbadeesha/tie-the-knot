@@ -9,9 +9,9 @@ import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
 
 const TTKWeddingCategories: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>(""); // For tracking selected category
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [showRightArrow, setShowRightArrow] = useState(false);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -19,6 +19,7 @@ const TTKWeddingCategories: React.FC = () => {
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
+
   const handleOnChange = (value: string) => {
     setSelectedCategory(value);
     console.log(value);
@@ -26,13 +27,16 @@ const TTKWeddingCategories: React.FC = () => {
       window.location.href = `/pages/vendor/${value}`;
     }
   };
+
   const checkScrollPosition = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
 
-      // Detect if we need to show/hide the left and right arrows
+      // Show left arrow if scrolled right
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 1); // Fix for the right arrow
+      
+      // Show right arrow if scrolled left and there are more items to scroll
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 1);
     }
   };
 
@@ -48,6 +52,14 @@ const TTKWeddingCategories: React.FC = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    // Check if right arrow should be shown based on categories
+    if (scrollRef.current) {
+      const { clientWidth, scrollWidth } = scrollRef.current;
+      setShowRightArrow(scrollWidth > clientWidth); // Show right arrow if there's more content
+    }
+  }, [categories]); // Run when categories change
 
   return (
     <Box sx={{ textAlign: "center", mt: 4, position: "relative" }}>
@@ -68,7 +80,7 @@ const TTKWeddingCategories: React.FC = () => {
             color: "white",
             width: 50,
             height: 50,
-            borderRadius: "50%", // Make the button round
+            borderRadius: "50%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -82,23 +94,24 @@ const TTKWeddingCategories: React.FC = () => {
           <ArrowBackIosIcon />
         </IconButton>
       )}
+      
       <Box
         ref={scrollRef}
         sx={{
           padding: "20px",
           display: "flex",
-          overflowX: "auto", // Allow horizontal scrolling
-          whiteSpace: "nowrap", // Prevent wrapping
-          scrollbarWidth: "none", // Hide scrollbar (Firefox)
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+          scrollbarWidth: "none",
           "&::-webkit-scrollbar": {
-            display: "none", // Hide scrollbar (Chrome, Safari)
+            display: "none",
           },
         }}
       >
         <TTKCustomSelectionList
           options={categories}
           selectedValue={selectedCategory}
-          onChange={handleOnChange} // Handle selection
+          onChange={handleOnChange}
           type="gif_icon"
         />
       </Box>
@@ -116,7 +129,7 @@ const TTKWeddingCategories: React.FC = () => {
             color: "white",
             width: 50,
             height: 50,
-            borderRadius: "50%", // Make the button round
+            borderRadius: "50%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

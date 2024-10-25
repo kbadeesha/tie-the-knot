@@ -174,16 +174,7 @@ const Header = () => {
               </Menu>
             </Box>
             {/* Login Register Buttons  */}
-            <Link href="/pages/register" passHref>
-              {/* Use Link component */}
-              <TTKCustomButton
-                type="submit"
-                variant="contained"
-                color="primary"
-              >
-                Register
-              </TTKCustomButton>
-            </Link>
+
             <Link href="/pages/login" passHref>
               <TTKCustomButton
                 type="submit"
@@ -192,6 +183,16 @@ const Header = () => {
                 onClick={handleOnClickLogin}
               >
                 Login
+              </TTKCustomButton>
+            </Link>
+            <Link href="/pages/register" passHref>
+              {/* Use Link component */}
+              <TTKCustomButton
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Get Started
               </TTKCustomButton>
             </Link>
             <Tooltip title="Open settings">

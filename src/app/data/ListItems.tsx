@@ -45,14 +45,14 @@ export const categories = [
       "https://img.icons8.com/?size=100&id=zE9uwXycbCLv&format=png&color=000000",
     animatedIcon: flowerGif.src,
   },
-  {
-    name: "Catering",
-    label: "Catering",
-    value: "catering",
-    staticIcon:
-      "https://img.icons8.com/?size=100&id=01fLHPk4i70R&format=png&color=000000",
-    animatedIcon: foodGif.src,
-  },
+  // {
+  //   name: "Catering",
+  //   label: "Catering",
+  //   value: "catering",
+  //   staticIcon:
+  //     "https://img.icons8.com/?size=100&id=01fLHPk4i70R&format=png&color=000000",
+  //   animatedIcon: foodGif.src,
+  // },
   {
     name: "Cakes",
     label: "Cakes",

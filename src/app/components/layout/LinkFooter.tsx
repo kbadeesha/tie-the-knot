@@ -1,90 +1,78 @@
 import React from "react";
 import "../../../styles/layout/link-footer.css";
-const LinkFooter = () => {
+
+interface Link {
+  text: string;
+  href: string;
+  comingSoon?: boolean; // Optional property for "Coming Soon" status
+}
+
+interface LinkListProps {
+  title: string;
+  links: Link[];
+}
+
+const linksData = [
+  {
+    title: "Plan Your Wedding",
+    links: [
+      { text: "Venues and vendors", href: "/link" },
+      { text: "Guest list", href: "/link", comingSoon: true },
+      { text: "Wedding websites", href: "/link", comingSoon: true },
+      { text: "Registry", href: "/link", comingSoon: true },
+      // { text: "Budget", href: "/link", comingSoon: true },
+      { text: "Seating chart", href: "/link", comingSoon: true },
+      { text: "Mobile app", href: "/link", comingSoon: true },
+    ],
+  },
+  {
+    title: "About",
+    links: [
+      { text: "Our Story", href: "/about-us" },
+      { text: "Become a Tie The Knot Vendor", href: "/press" },
+      { text: "Reviews", href: "/reviews" },
+      { text: "Careers", href: "/careers" },
+      // { text: "Press", href: "/press" },
+    ],
+  },
+  {
+    title: "Advice and Support",
+    links: [
+      { text: "FAQs", href: "/faq" },
+      { text: "Contact Us", href: "/contact" },
+      { text: "Support Center", href: "/support" },
+      { text: "Expert Advice", href: "/support" },
+    ],
+  },
+];
+
+const LinkList: React.FC<LinkListProps> = ({ title, links }) => (
+  <section className="footer-column">
+    <div className="footer-link-button-link">
+      <h5>{title}</h5>
+      <ul>
+        {links.map((link, index) => (
+          <li key={index}>
+            <a href={link.href} aria-label={link.text}>
+              {link.text}
+              {link.comingSoon && (
+                <span className="coming-soon"> Coming Soon</span>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
+
+const LinkFooter: React.FC = () => {
   return (
     <div className="link-footer">
       <div className="link-footer-sec">
-        <section className="footer-column">
-          <div className="footer-link-button-link">
-            <h5>Plan Your Wedding</h5>
-            <ul>
-              <li>
-                <a href="/link">Venues and vendors</a>
-              </li>
-              <li>
-                <a href="/link">Guest list</a>
-              </li>
-              <li>
-                <a href="/link">Wedding websites</a>
-              </li>
-              <li>
-                <a href="/link">Registry</a>
-              </li>
-              <li>
-                <a href="/link">Invites and paper</a>
-              </li>
-              <li>
-                <a href="/link">Budget</a>
-              </li>
-              <li>
-                <a href="/link">Boutique</a>
-              </li>
-              <li>
-                <a href="/link">Albums</a>
-              </li>
-              <li>
-                <a href="/link">Seating chart</a>
-              </li>
-              <li>
-                <a href="/link">Mobile app</a>
-              </li>
-            </ul>
-          </div>
-        </section>
-        <section className="footer-column">
-          <div className="footer-link-button-link">
-            <h5>About</h5>
-            <ul>
-              <li>
-                <a href="/about-us">Our Story</a>
-              </li>
-              <li>
-                <a href="/press">Become a Tie The Knot Vendor</a>
-              </li>
-              <li>
-                <a href="/press">Refer a friend</a>
-              </li>
-              <li>
-                <a href="/press">Reviews</a>
-              </li>
-              <li>
-                <a href="/careers">Careers</a>
-              </li>
-              <li>
-                <a href="/press">Press</a>
-              </li>
-            </ul>
-          </div>
-        </section>
-        <section className="footer-column">
-          <div className="footer-link-button-link">
-            <h5>Advice and Support</h5>
-            <ul>
-              <li>
-                <a href="/faq">FAQs</a>
-              </li>
-              <li>
-                <a href="/contact">Contact Us</a>
-              </li>
-              <li>
-                <a href="/support">Support Center</a>
-              </li>
-              <li>
-                <a href="/support">Expert Advice</a>
-              </li>
-            </ul>
-          </div>
-        </section>
+        {linksData.map((section, index) => (
+          <LinkList key={index} title={section.title} links={section.links} />
+        ))}
       </div>
     </div>
   );
