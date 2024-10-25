@@ -10,7 +10,9 @@ import { lime } from "@mui/material/colors";
 
 const darkTheme = createTheme({
   palette: {
-    primary: lime,
+    primary: {
+      main: "#000000",
+    },
   },
   colorSchemes: {
     dark: true,
