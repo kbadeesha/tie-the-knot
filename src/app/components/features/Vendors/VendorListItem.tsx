@@ -18,7 +18,7 @@ const VendorListItem: React.FC<VendorListItemProps> = ({ vendor }) => {
 
   const handleClick = () => {
     // Remove the leading slash from the URL
-    router.push(`vendors/${vendor.id}`); 
+    router.push(`${vendor.type}/${vendor.id}`);
   };
   return (
     <ListItemButton
@@ -47,7 +47,9 @@ const VendorListItem: React.FC<VendorListItemProps> = ({ vendor }) => {
       <ListItemText
         primary={<VendorInfo vendor={vendor} />}
         secondary={
-          <VendorDetails vendor={vendor}> {/* Pass children to VendorDetails */}
+          <VendorDetails vendor={vendor}>
+            {" "}
+            {/* Pass children to VendorDetails */}
             {vendor.feedbacks.length > 0 && ( // Conditionally render feedback
               <VendorFeedback feedback={vendor.feedbacks[0]} /> // Pass the first feedback
             )}
