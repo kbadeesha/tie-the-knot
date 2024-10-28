@@ -7,8 +7,8 @@ interface TTKCustomSelectProps {
   name: string;
   label: string;
   value: string;
-  onChange: (event: SelectChangeEvent<string>) => void; // Keep this for your custom handling
-  options: { label: string; value: string }[];
+  onChange: (event: SelectChangeEvent<string>) => void;
+  options: { label: string; value: string; icon: string }[];
   disabled?: boolean;
   className?: string;
   fullWidth?: boolean;
@@ -40,13 +40,37 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
         {...otherProps}
         name={name}
         value={value}
-        onChange={(event) => onChange(event as SelectChangeEvent<string>)} // Cast to SelectChangeEvent
+        onChange={(event) => onChange(event as SelectChangeEvent<string>)}
         disabled={disabled}
         label={label}
-        className="border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="border-gray-300 focus:outline-none focus:ring-2 focus:ring-black-500"
+        renderValue={(selectedValue) => {
+          const selectedOption = options.find(
+            (option) => option.value === selectedValue
+          );
+          return selectedOption ? (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img
+                src={selectedOption.icon}
+                alt={`${selectedOption.label} icon`}
+                style={{ width: 20, height: 20, marginRight: 8 }}
+              />
+              {selectedOption.label}
+            </div>
+          ) : null;
+        }}
       >
         {options.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem
+            key={option.value}
+            value={option.value}
+            className="flex items-center"
+          >
+            <img
+              src={option.icon}
+              alt={`${option.label} icon`}
+              style={{ width: 20, height: 20, marginRight: 8 }}
+            />
             {option.label}
           </MenuItem>
         ))}

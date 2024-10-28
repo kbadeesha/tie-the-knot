@@ -35,19 +35,71 @@ interface VendorFormData {
 }
 
 const vendorOptions = [
-  { label: "Venue", value: "venue" },
-  { label: "Photographers", value: "photographers" },
-  { label: "Videographer", value: "videographer" },
-  { label: "Florists", value: "florists" },
-  { label: "Cakes", value: "cakes" },
-  { label: "Bands/DJs", value: "bands_djs" },
-  { label: "Makeup Artist", value: "makeup_artist" },
-  { label: "Designer", value: "designer" },
-  { label: "Planners", value: "planners" },
-  { label: "Religious", value: "religious" },
-  { label: "Furniture/Rentals", value: "furniture_rentals" },
-  { label: "Luxury Cars", value: "luxury_cars" },
-  { label: "Other", value: "other" },
+  {
+    label: "Venue",
+    value: "venue",
+    icon: "https://img.icons8.com/?size=100&id=eIFSPeynRDyl&format=png&color=000000",
+  },
+  {
+    label: "Photographers",
+    value: "photographers",
+    icon: "https://img.icons8.com/?size=100&id=zA8CKq2IOOWF&format=png&color=000000",
+  },
+  {
+    label: "Videographer",
+    value: "videographer",
+    icon: "https://img.icons8.com/?size=100&id=o7Ls0zwvTkO3&format=png&color=000000",
+  },
+  {
+    label: "Florists",
+    value: "florists",
+    icon: "https://img.icons8.com/?size=100&id=zE9uwXycbCLv&format=png&color=000000",
+  },
+  {
+    label: "Cakes",
+    value: "cakes",
+    icon: "https://img.icons8.com/?size=100&id=wDw9A4PRw9SG&format=png&color=000000",
+  },
+  {
+    label: "Bands/DJs",
+    value: "bands-djs",
+    icon: "https://img.icons8.com/?size=100&id=hcVamhP3QzTD&format=png&color=000000",
+  },
+  {
+    label: "Makeup Artist",
+    value: "makeup_artist",
+    icon: "https://img.icons8.com/?size=100&id=vmqv135kp5Ty&format=png&color=000000",
+  },
+  {
+    label: "Designer",
+    value: "designer",
+    icon: "https://img.icons8.com/?size=100&id=5pe7e3Q7l5XO&format=png&color=000000",
+  },
+  {
+    label: "Planners",
+    value: "planners",
+    icon: "https://img.icons8.com/?size=100&id=txE3iVQ7RBlC&format=png&color=000000",
+  },
+  {
+    label: "Religious",
+    value: "religious",
+    icon: "https://img.icons8.com/?size=100&id=zFMhE88YdSqt&format=png&color=000000",
+  },
+  {
+    label: "Furniture/Rentals",
+    value: "furniture-rentals",
+    icon: "https://img.icons8.com/?size=100&id=mkKY8gAastgc&format=png&color=000000",
+  },
+  {
+    label: "Luxury Cars",
+    value: "luxury-cars",
+    icon: "https://img.icons8.com/?size=100&id=qRo6mXkL8iFE&format=png&color=000000",
+  },
+  {
+    label: "Other",
+    value: "other",
+    icon: "https://img.icons8.com/?size=100&id=KnQ23R20ge4i&format=png&color=000000",
+  },
 ];
 
 const vendorVows = [

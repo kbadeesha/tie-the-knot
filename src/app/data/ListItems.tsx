@@ -83,7 +83,7 @@ export const categories = [
     label: "Designer",
     value: "designer",
     staticIcon:
-      "https://img.icons8.com/?size=100&id=5pe7e3Q7l5XO&format=png&color=ffffff",
+      "https://img.icons8.com/?size=100&id=5pe7e3Q7l5XO&format=png&color=000000",
     animatedIcon: hangerGif.src,
   },
   {
