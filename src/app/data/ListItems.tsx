@@ -70,9 +70,17 @@ export const categories = [
     animatedIcon: musicGif.src,
   },
   {
-    name: "Beauty",
-    label: "Beauty",
-    value: "beauty",
+    name: "Makeup Artist",
+    label: "Makeup Artist",
+    value: "makeup_artist",
+    staticIcon:
+      "https://img.icons8.com/?size=100&id=vmqv135kp5Ty&format=png&color=000000",
+    animatedIcon: eyeGif.src,
+  },
+  {
+    name: "Designer",
+    label: "Designer",
+    value: "designer",
     staticIcon:
       "https://img.icons8.com/?size=100&id=vmqv135kp5Ty&format=png&color=000000",
     animatedIcon: eyeGif.src,

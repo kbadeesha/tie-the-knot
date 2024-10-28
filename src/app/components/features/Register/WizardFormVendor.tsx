@@ -11,19 +11,22 @@ import {
   IconButton,
   Grid,
   SelectChangeEvent,
+  Tooltip,
 } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import TTKCustomTextField from "../../common/TTKCustomTextField";
 import TTKCustomSelect from "../../common/TTKCustomSelect";
+import { FaInfoCircle } from "react-icons/fa";
 
-const steps = ["Basic Information", "Account Details"];
+const steps = ["Vendor Vows", "Basic Information", "Account Details"];
 
 interface VendorFormData {
   name?: string;
+  address?: string;
+  city?: string;
   companyName?: string;
-  designation?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;
@@ -36,15 +39,42 @@ const vendorOptions = [
   { label: "Photographers", value: "photographers" },
   { label: "Videographer", value: "videographer" },
   { label: "Florists", value: "florists" },
-  { label: "Catering", value: "catering" },
   { label: "Cakes", value: "cakes" },
   { label: "Bands/DJs", value: "bands_djs" },
-  { label: "Beauty", value: "beauty" },
+  { label: "Makeup Artist", value: "makeup_artist" },
+  { label: "Designer", value: "designer" },
   { label: "Planners", value: "planners" },
   { label: "Religious", value: "religious" },
   { label: "Furniture/Rentals", value: "furniture_rentals" },
   { label: "Luxury Cars", value: "luxury_cars" },
   { label: "Other", value: "other" },
+];
+
+const vendorVows = [
+  {
+    heading: "Love and respect",
+    sub: "You support every couple's right to marry",
+  },
+  {
+    heading: "Quality and collaboration",
+    sub: "You'll partner with T.T.K couples to deliver the best possible experience",
+  },
+  {
+    heading: "Transparency and trust",
+    sub: "You'll talk honestly about your services and prices",
+  },
+  {
+    heading: "Tolerance and acceptance",
+    sub: "You'll treat every T.T.K couple and vendor equally, reguardless of sexual orientation, gender identity, race, religion, budget or any other characteristic.",
+  },
+  {
+    heading: "Inclusion and anti-discrimination",
+    sub: "You commit to creating a welcoming environment for all, celebrating diversity in every aspect of your work.",
+  },
+  {
+    heading: "Community and support",
+    sub: "You'll cheer on your fellow T.T.K vendors, united in the shared goal to make couples happy, Lets lift each other up!",
+  },
 ];
 
 function WizardFormVendor() {
@@ -95,6 +125,67 @@ function WizardFormVendor() {
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
+        return (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Before we start, meet our Vendor Vows
+              </Typography>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  className="text-gray-500 mb-4"
+                  style={{ marginRight: "8px", marginTop: "13px" }} // Space between text and icon
+                >
+                  As a T.T.K vendor, you pledge to uphold these values:
+                </Typography>
+                <Tooltip
+                  title="T.T.K is committed to celebrating love in all of its forms every day, and requires vendors to embrace our same core values of tolerance, acceptance, and respect. The best parties are those where everyone feels welcome!"
+                  arrow
+                >
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <FaInfoCircle />
+                  </span>
+                </Tooltip>
+              </div>
+            </Grid>
+            {vendorVows.map((vow, index) => (
+              <Grid item xs={12} key={index}>
+                <Typography
+                  variant="body1"
+                  align="left"
+                  className="font-bold mb-1"
+                >
+                  {vow.heading}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  align="left"
+                  className="text-gray-500 mb-2"
+                >
+                  {vow.sub}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        );
+      case 1:
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Grid container spacing={2}>
@@ -149,9 +240,19 @@ function WizardFormVendor() {
               </Grid>
               <Grid item xs={12}>
                 <TTKCustomTextField
-                  name="designation"
-                  label="Designation"
-                  value={formData.designation || ""}
+                  name="address"
+                  label="Address"
+                  value={formData.address || ""}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TTKCustomTextField
+                  name="city"
+                  label="City"
+                  value={formData.city || ""}
                   onChange={handleChange}
                   fullWidth
                   required
@@ -160,7 +261,7 @@ function WizardFormVendor() {
             </Grid>
           </LocalizationProvider>
         );
-      case 1:
+      case 2:
         return (
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -249,7 +350,7 @@ function WizardFormVendor() {
             <Grid item xs={12}>
               <TTKCustomTextField
                 name="phoneNumber"
-                label="Phone Number"
+                label="Business Phone Number"
                 value={formData.phoneNumber || ""}
                 onChange={handleChange}
                 fullWidth
@@ -298,7 +399,11 @@ function WizardFormVendor() {
             onClick={handleNext}
             className="bg-black text-white mt-6 py-3"
           >
-            {activeStep === steps.length - 1 ? "Submit" : "Next"}
+            {activeStep === 0
+              ? "I do"
+              : activeStep === steps.length - 1
+              ? "Submit"
+              : "Next"}
           </Button>
         </div>
       </Box>
