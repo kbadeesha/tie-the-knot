@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Stepper,
   Step,
@@ -19,6 +19,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import TTKCustomTextField from "../../common/TTKCustomTextField";
 import TTKCustomSelect from "../../common/TTKCustomSelect";
 import { FaInfoCircle } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 const steps = ["Vendor Vows", "Basic Information", "Account Details"];
 
@@ -33,7 +34,6 @@ interface VendorFormData {
   phoneNumber?: string;
   vendorType?: string;
 }
-
 const vendorOptions = [
   {
     label: "Venue",
@@ -134,6 +134,12 @@ function WizardFormVendor() {
   const [formData, setFormData] = useState<VendorFormData>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isPlannerPage, setIsPlannerPage] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsPlannerPage(pathname.includes("planner"));
+  }, [pathname]);
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
@@ -260,16 +266,18 @@ function WizardFormVendor() {
                   offerings and how we can best support your business.
                 </Typography>
               </Grid>
-              <Grid item xs={12}>
-                <TTKCustomSelect
-                  name="vendorType"
-                  label="Vendor Type"
-                  value={formData.vendorType || ""} // Fallback to empty string
-                  onChange={handleChangeSelect}
-                  options={vendorOptions}
-                  fullWidth
-                />
-              </Grid>
+              {!isPlannerPage && (
+                <Grid item xs={12}>
+                  <TTKCustomSelect
+                    name="vendorType"
+                    label="Vendor Type"
+                    value={formData.vendorType || ""} // Fallback to empty string
+                    onChange={handleChangeSelect}
+                    options={vendorOptions}
+                    fullWidth
+                  />
+                </Grid>
+              )}
               <Grid item xs={12}>
                 <TTKCustomTextField
                   name="companyName"
