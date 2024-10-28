@@ -21,7 +21,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import WineBarIcon from "@mui/icons-material/WineBar";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import ChairIcon from "@mui/icons-material/Chair";
-import vendorsData from '../../../data/vendors.json';
+import vendorsData from "../../../data/vendors.json";
 import { FilterCategory, FilterValues } from "@/app/types/filter";
 import VendorFilterSection from "@/app/components/features/Vendors/VendorFilterSection";
 import { filterCategories } from "@/app/data/filterCategories";
@@ -29,17 +29,19 @@ import { filterCategories } from "@/app/data/filterCategories";
 const VendorsPage: React.FC = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [filteredVendors, setFilteredVendors] = useState<Vendor[]>([]);
-  const [leftFilterCategories, setLeftFilterCategories] = useState<FilterCategory[]>(
-    filterCategories['venue'] // Initialize with venue filters
+  const [leftFilterCategories, setLeftFilterCategories] = useState<
+    FilterCategory[]
+  >(
+    filterCategories["venue"] // Initialize with venue filters
   );
   const [filterValues, setFilterValues] = useState({
     // Make sure this is defined
     type: "",
     location: "",
     price: "",
-    capacity:"",
+    capacity: "",
     minPrice: null,
-    maxPrice: null
+    maxPrice: null,
   });
 
   // Fetch vendor data (replace with your actual data fetching logic)
@@ -62,9 +64,9 @@ const VendorsPage: React.FC = () => {
     const mockVendors: Vendor[] = vendorsData; // Use the imported data
     setVendors(mockVendors);
     setFilteredVendors(mockVendors);
-     // Initialize left filter options
-     const initialLeftFilters = filterCategories["venue"];
-     setLeftFilterCategories(initialLeftFilters);
+    // Initialize left filter options
+    const initialLeftFilters = filterCategories["venue"];
+    setLeftFilterCategories(initialLeftFilters);
   }, []);
 
   // Define vendor types and locations for the filters
@@ -93,7 +95,10 @@ const VendorsPage: React.FC = () => {
     { value: "Jaffna", label: "Jaffna" },
   ];
 
-  const handleFilterChange = (field: keyof FilterValues, value: string | null) => {
+  const handleFilterChange = (
+    field: keyof FilterValues,
+    value: string | null
+  ) => {
     // 1. Update filterValues state
     setFilterValues((prevValues) => ({
       ...prevValues,
@@ -101,7 +106,7 @@ const VendorsPage: React.FC = () => {
     }));
 
     // 2. Update left filter categories when type filter changes
-    if (field === 'type') {
+    if (field === "type") {
       const newLeftFilters = value ? filterCategories[value] : [];
       setLeftFilterCategories(newLeftFilters);
     }
@@ -136,56 +141,74 @@ const VendorsPage: React.FC = () => {
     setFilteredVendors(filteredVendors);
   };
 
-
   return (
-    <Box sx={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      mt: 4, 
-      // bgcolor: '#f5f5f5', 
-      minHeight: '100vh',
-      width: '100%' 
-    }}>
-      <Container maxWidth="xl" sx={{ display: 'flex', flexDirection: 'column' }}> 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 2 }}> {/* Use Box with flexbox */}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        mt: 4,
+        // bgcolor: '#f5f5f5',
+        minHeight: "100vh",
+        width: "100%",
+      }}
+    >
+      <Container
+        maxWidth="xl"
+        sx={{ display: "flex", flexDirection: "column" }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          {" "}
+          {/* Use Box with flexbox */}
           <VendorFilter
-            onFilterChange={(value) => handleFilterChange('type', value)}
+            onFilterChange={(value) => handleFilterChange("type", value)}
             options={vendorTypes}
             placeholder="Select Vendor Type"
             startAdornment={<StoreIcon />}
           />
           <VendorFilter
-            onFilterChange={(value) => handleFilterChange('location', value)}
+            onFilterChange={(value) => handleFilterChange("location", value)}
             options={vendorLocations}
             placeholder="Select Vendor Location"
             startAdornment={<LocationOnIcon />}
           />
         </Box>
 
-        <Box sx={{ display: 'flex', mt: 2 }}> {/* Use Box with flexbox */}
+        <Box sx={{ display: "flex", mt: 2 }}>
+          {" "}
+          {/* Use Box with flexbox */}
           {/* Left filter section */}
-          <Box sx={{ 
-            width: '25%', // 1/4 width for left filters
-            mr: 4, 
-            bgcolor: 'white', 
-            boxShadow: 2, 
-            borderRadius: 2, 
-            p: 2
-          }}>
+          <Box
+            sx={{
+              width: "25%", // 1/4 width for left filters
+              mr: 4,
+              bgcolor: "white",
+              boxShadow: 2,
+              borderRadius: 2,
+              p: 2,
+            }}
+          >
             <VendorFilterSection
               onFilterChange={handleFilterChange}
               filterCategories={leftFilterCategories}
             />
           </Box>
-
           {/* Vendor list section */}
-          <Box sx={{ 
-            flex: 1, // Take remaining space
-            bgcolor: 'white', 
-            boxShadow: 2, 
-            borderRadius: 2, 
-            p: 2 
-          }}>
+          <Box
+            sx={{
+              flex: 1, // Take remaining space
+              bgcolor: "white",
+              boxShadow: 2,
+              borderRadius: 2,
+              p: 2,
+            }}
+          >
             <VendorList vendors={filteredVendors} />
           </Box>
         </Box>
@@ -193,5 +216,4 @@ const VendorsPage: React.FC = () => {
     </Box>
   );
 };
-
 export default VendorsPage;

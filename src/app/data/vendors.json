@@ -5,602 +5,172 @@
     "type": "venue",
     "location": "Colombo",
     "rating": 4.5,
+    "logo": "",
+    "socials": {
+      "facebook": "",
+      "instagram": null,
+      "website": null,
+      "tiktok": null
+    },
     "tagline": "Your dream wedding starts here",
     "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
+    "images": [
+      "/assets/images/vendor_1.jpg",
+      "/assets/images/vendor_2.jpg"
+    ],
     "address": "123 Main Street, Colombo",
     "startingPrice": 5000,
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor libero id scelerisque posuere. Praesent nec placerat ex. Cras nisi mauris, sollicitudin ut nulla et, pretium sagittis neque. Curabitur vel arcu ante. Aliquam nec varius mi. Pellentesque volutpat scelerisque magna, sodales congue ligula laoreet a. Mauris efficitur, mi vitae facilisis tincidunt, quam ante volutpat sapien, eu imperdiet lorem enim at nibh. Nam commodo lorem ut lectus mattis, quis lacinia massa eleifend. Nullam non arcu ipsum. Maecenas id magna urna. Morbi id leo in ipsum fringilla accumsan in sed ipsum. Etiam sit amet imperdiet eros, nec bibendum nunc. Suspendisse eget felis lectus. Sed quis eleifend dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id consectetur nisi. Vivamus gravida nulla vel elementum commodo. Curabitur gravida congue enim a rhoncus. Ut tempus turpis neque, et tempor risus semper ut. Vivamus et porta erat. Phasellus auctor neque ut pellentesque faucibus. Vivamus id.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "feedbacks": [
       {
-        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor libero id scelerisque posuere. Praesent nec placerat ex. Cras nisi mauris, sollicitudin ut nulla et, pretium sagittis neque. Curabitur vel arcu ante. Aliquam nec varius mi. Pellentesque volutpat scelerisque magna, sodales congue ligula laoreet a. Mauris efficitur, mi vitae facilisis tincidunt, quam ante volutpat sapien, eu imperdiet lorem enim at nibh. Nam commodo lorem ut lectus mattis, quis lacinia massa eleifend. Nullam non arcu ipsum. Maecenas id magna urna. Morbi id leo in ipsum fringilla accumsan in sed ipsum. Etiam sit amet imperdiet eros, nec bibendum nunc. Suspendisse eget felis lectus. Sed quis eleifend dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id consectetur nisi. Vivamus gravida nulla vel elementum commodo. Curabitur gravida congue enim a rhoncus. Ut tempus turpis neque, et tempor risus semper ut. Vivamus et porta erat. Phasellus auctor neque ut pellentesque faucibus. Vivamus id.",
-        "clientName": "John Doe",
-        "daysAgo": 14
+        "comment": "Beautiful venue with excellent service.",
+        "clientName": "Alice Johnson",
+        "daysAgo": 10
       },
       {
-        "comment": "Beautiful space with great service. Highly recommend!",
-        "clientName": "Jane Smith",
-        "daysAgo": 28
+        "comment": "Had a fantastic experience hosting our event here!",
+        "clientName": "Mark Lee",
+        "daysAgo": 20
       }
     ]
   },
   {
     "id": "2",
-    "name": "John Doe Photography",
+    "name": "Sunset Photography",
     "type": "photographer",
     "location": "Kandy",
     "rating": 4.8,
-    "tagline": "Capturing your special moments",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "456 Kandy Road, Kandy",
-    "startingPrice": 2000,
-    "description": "Professional photographer specializing in wedding photography.",
+    "logo": "",
+    "socials": {
+      "facebook": "https://facebook.com/sunsetphotography",
+      "instagram": "https://instagram.com/sunset_photography",
+      "website": "https://sunsetphotography.com",
+      "tiktok": null
+    },
+    "tagline": "Capturing moments, creating memories.",
+    "quickResponder": true,
+    "images": [
+      "/assets/images/vendor_1.jpg",
+      "/assets/images/vendor_2.jpg"
+    ],
+    "address": "456 Elm Street, Kandy",
+    "startingPrice": 3000,
+    "description": "We specialize in wedding and event photography.",
     "feedbacks": [
       {
-        "comment": "John is an amazing photographer! He captured our day perfectly.",
-        "clientName": "Peter Jones",
+        "comment": "The photos turned out amazing! Highly recommended.",
+        "clientName": "Sophia Turner",
         "daysAgo": 5
+      },
+      {
+        "comment": "Professional and talented photographers.",
+        "clientName": "David Brown",
+        "daysAgo": 15
       }
     ]
   },
   {
     "id": "3",
-    "name": "Glamour Beauty Salon",
-    "type": "beauty",
-    "location": "Galle",
-    "rating": 4.2,
-    "tagline": "Get ready to shine",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "789 Galle Road, Galle",
-    "startingPrice": 500,
-    "description": "Experienced beauticians providing hair and makeup services for weddings.",
-    "feedbacks": [
-      {
-        "comment": "The stylists did an amazing job with my hair and makeup!",
-        "clientName": "Sarah Lee",
-        "daysAgo": 10
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "name": "DJ Spark",
-    "type": "dj",
-    "location": "Colombo",
-    "rating": 4.9,
-    "tagline": "Setting the perfect mood",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "101 Colombo Street, Colombo",
-    "startingPrice": 1000,
-    "description": "Professional DJ with a wide range of music for your event.",
-    "feedbacks": [
-      {
-        "comment": "DJ Spark kept the party going all night! Everyone loved it.",
-        "clientName": "David Kim",
-        "daysAgo": 3
-      }
-    ]
-  },
-  {
-    "id": "5",
-    "name": "Floral Designs",
-    "type": "florist",
-    "location": "Negombo",
-    "rating": 4.6,
-    "tagline": "Blooms that inspire",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "222 Negombo Beach Road, Negombo",
-    "startingPrice": 1500,
-    "description": "Creating stunning floral arrangements for weddings and special events.",
-    "feedbacks": [
-      {
-        "comment": "The flowers were absolutely beautiful and added so much to our wedding.",
-        "clientName": "Emily Chen",
-        "daysAgo": 7
-      }
-    ]
-  },
-  {
-    "id": "6",
-    "name": "Royal Catering",
+    "name": "Ocean Breeze Catering",
     "type": "caterer",
-    "location": "Colombo",
-    "rating": 4.7,
-    "tagline": "Exquisite cuisine for your event",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "333 Colombo Fort, Colombo",
-    "startingPrice": 3000,
-    "description": "Providing delicious and elegant catering services for weddings.",
-    "feedbacks": [
-      {
-        "comment": "The food was amazing! Everyone raved about it.",
-        "clientName": "Michael Brown",
-        "daysAgo": 12
-      }
-    ]
-  },
-  {
-    "id": "7",
-    "name": "Wedding Planner Pro",
-    "type": "planner",
-    "location": "Kandy",
-    "rating": 4.3,
-    "tagline": "Planning your perfect day",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "555 Kandy Lake Road, Kandy",
-    "startingPrice": 1000,
-    "description": "Experienced wedding planners to help you with every detail.",
-    "feedbacks": [
-      {
-        "comment": "They made our wedding planning so much easier! Highly recommend.",
-        "clientName": "Jessica Davis",
-        "daysAgo": 9
-      }
-    ]
-  },
-  {
-    "id": "8",
-    "name": "Cake Creations",
-    "type": "cake",
     "location": "Galle",
-    "rating": 4.1,
-    "tagline": "Sweet treats for your celebration",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "888 Galle Fort Road, Galle",
-    "startingPrice": 800,
-    "description": "Creating beautiful and delicious wedding cakes.",
-    "feedbacks": [
-      {
-        "comment": "Our wedding cake was not only beautiful but also tasted amazing!",
-        "clientName": "Ashley Wilson",
-        "daysAgo": 6
-      }
-    ]
-  },
-  {
-    "id": "9",
-    "name": "Video Memories",
-    "type": "videographer",
-    "location": "Colombo",
-    "rating": 4.4,
-    "tagline": "Preserving your memories forever",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "202 Colombo Road, Colombo",
-    "startingPrice": 2500,
-    "description": "Capturing your wedding day in stunning cinematic videography.",
-    "feedbacks": [
-      {
-        "comment": "We love our wedding video! It's so beautifully done.",
-        "clientName": "Christopher Rodriguez",
-        "daysAgo": 11
-      }
-    ]
-  },
-  {
-    "id": "10",
-    "name": "The Bar Company",
-    "type": "bar",
-    "location": "Jaffna",
-    "rating": 4.0,
-    "tagline": "Cheers to your special day",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "999 Jaffna Main Street, Jaffna",
-    "startingPrice": 1200,
-    "description": "Providing professional bar services for weddings and events.",
-    "feedbacks": [
-      {
-        "comment": "The bartenders were friendly and efficient, and the cocktails were delicious!",
-        "clientName": "Brianna Williams",
-        "daysAgo": 4
-      }
-    ]
-  },
-  {
-    "id": "11",
-    "name": "Ocean View Hall",
-    "type": "venue",
-    "location": "Galle",
-    "rating": 4.7,
-    "tagline": "Celebrate by the sea",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "444 Galle Beach Road, Galle",
-    "startingPrice": 6000,
-    "description": "A stunning venue with breathtaking ocean views.",
-    "feedbacks": [
-      {
-        "comment": "The view was incredible! Our guests couldn't stop talking about it.",
-        "clientName": "Kevin Garcia",
-        "daysAgo": 18
-      }
-    ]
-  },
-  {
-    "id": "12",
-    "name": "Sarah Photography",
-    "type": "photographer",
-    "location": "Colombo",
-    "rating": 4.9,
-    "tagline": "Artistic wedding photography",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "777 Colombo City Center, Colombo",
-    "startingPrice": 3500,
-    "description": "Capturing your special day with an artistic touch.",
-    "feedbacks": [
-      {
-        "comment": "Sarah is a true artist! Our photos are absolutely stunning.",
-        "clientName": "Lisa Martinez",
-        "daysAgo": 25
-      }
-    ]
-  },
-  {
-    "id": "13",
-    "name": "Beauty Bliss",
-    "type": "beauty",
-    "location": "Kandy",
-    "rating": 4.3,
-    "tagline": "Pamper yourself for your big day",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "121 Kandy City Mall, Kandy",
-    "startingPrice": 700,
-    "description": "Relax and rejuvenate with our bridal beauty services.",
-    "feedbacks": [
-      {
-        "comment": "I felt like a princess on my wedding day thanks to Beauty Bliss!",
-        "clientName": "Angela Robinson",
-        "daysAgo": 12
-      }
-    ]
-  },
-  {
-    "id": "14",
-    "name": "Soundwave DJs",
-    "type": "dj",
-    "location": "Negombo",
     "rating": 4.6,
-    "tagline": "Get the party started",
+    "logo": "",
+    "socials": {
+      "facebook": "",
+      "instagram": null,
+      "website": "https://oceanbreezecatering.com",
+      "tiktok": null
+    },
+    "tagline": "Delicious food for every occasion.",
     "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "321 Negombo Main Road, Negombo",
-    "startingPrice": 1800,
-    "description": "Experienced DJs to create the perfect atmosphere for your wedding.",
+    "images": [
+      "/assets/images/vendor_1.jpg",
+      "/assets/images/vendor_2.jpg"
+    ],
+    "address": "789 Sea View Road, Galle",
+    "startingPrice": 1500,
+    "description": "Providing a variety of catering services for events.",
     "feedbacks": [
       {
-        "comment": "Soundwave DJs were amazing! They kept everyone dancing all night.",
-        "clientName": "Jason Clark",
+        "comment": "The food was exceptional and loved by all guests!",
+        "clientName": "Emma Wilson",
         "daysAgo": 8
-      }
-    ]
-  },
-  {
-    "id": "15",
-    "name": "Blooms & Petals",
-    "type": "florist",
-    "location": "Colombo",
-    "rating": 4.5,
-    "tagline": "Creating floral magic",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "888 Flower Road, Colombo",
-    "startingPrice": 2200,
-    "description": "Unique and elegant floral designs for your special day.",
-    "feedbacks": [
+      },
       {
-        "comment": "The flowers were so beautiful and fresh! They really made our wedding special.",
-        "clientName": "Michelle Lewis",
-        "daysAgo": 15
-      }
-    ]
-  },
-  {
-    "id": "16",
-    "name": "Spice Catering",
-    "type": "caterer",
-    "location": "Kandy",
-    "rating": 4.2,
-    "tagline": "Flavors that tantalize",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "234 Kandy Market Street, Kandy",
-    "startingPrice": 2800,
-    "description": "Delicious and diverse catering options for your wedding.",
-    "feedbacks": [
-      {
-        "comment": "The food was incredible! We had so many compliments from our guests.",
-        "clientName": "Timothy Walker",
-        "daysAgo": 21
-      }
-    ]
-  },
-  {
-    "id": "17",
-    "name": "Eventful Planners",
-    "type": "planner",
-    "location": "Galle",
-    "rating": 4.8,
-    "tagline": "Stress-free wedding planning",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "567 Galle Fort, Galle",
-    "startingPrice": 1500,
-    "description": "We handle all the details so you can enjoy your special day.",
-    "feedbacks": [
-      {
-        "comment": "Eventful Planners were amazing! They took care of everything and made our wedding day perfect.",
-        "clientName": "Amanda Hall",
-        "daysAgo": 30
-      }
-    ]
-  },
-  {
-    "id": "18",
-    "name": "Sweet Delights",
-    "type": "cake",
-    "location": "Colombo",
-    "rating": 4.4,
-    "tagline": "Delicious cakes for every occasion",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "901 Colombo Bakery Lane, Colombo",
-    "startingPrice": 1000,
-    "description": "Custom-designed wedding cakes that taste as good as they look.",
-    "feedbacks": [
-      {
-        "comment": "The cake was absolutely beautiful and tasted even better!",
-        "clientName": "Nicholas Young",
-        "daysAgo": 9
-      }
-    ]
-  },
-  {
-    "id": "19",
-    "name": "Capture the Moment",
-    "type": "videographer",
-    "location": "Jaffna",
-    "rating": 4.7,
-    "tagline": "Cinematic wedding videography",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "456 Jaffna Town Square, Jaffna",
-    "startingPrice": 3000,
-    "description": "Creating beautiful and memorable wedding films.",
-    "feedbacks": [
-      {
-        "comment": "We are so happy with our wedding video! Capture the Moment did an amazing job.",
-        "clientName": "Kimberly Allen",
-        "daysAgo": 17
-      }
-    ]
-  },
-  {
-    "id": "20",
-    "name": "The Cocktail Bar",
-    "type": "bar",
-    "location": "Negombo",
-    "rating": 4.1,
-    "tagline": "Signature cocktails for your event",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "789 Negombo Bar Street, Negombo",
-    "startingPrice": 1500,
-    "description": "Crafting delicious and unique cocktails for your wedding.",
-    "feedbacks": [
-      {
-        "comment": "The cocktails were a hit! Everyone loved them.",
-        "clientName": "Patrick Scott",
-        "daysAgo": 5
-      }
-    ]
-  },
-  {
-    "id": "21",
-    "name": "Hilltop Venue",
-    "type": "venue",
-    "location": "Kandy",
-    "rating": 4.6,
-    "tagline": "A scenic setting for your wedding",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "101 Hilltop Road, Kandy",
-    "startingPrice": 4500,
-    "description": "A beautiful venue with stunning views of the surrounding hills.",
-    "feedbacks": [
-      {
-        "comment": "The venue was absolutely breathtaking! We couldn't have asked for a more perfect setting.",
-        "clientName": "Amy Green",
-        "daysAgo": 12
-      }
-    ]
-  },
-  {
-    "id": "22",
-    "name": "Peter Photography",
-    "type": "photographer",
-    "location": "Galle",
-    "rating": 4.3,
-    "tagline": "Capturing your love story",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "210 Galle Road, Galle",
-    "startingPrice": 2800,
-    "description": "Experienced photographer capturing the emotions of your wedding day.",
-    "feedbacks": [
-      {
-        "comment": "Peter was great to work with! He made us feel comfortable and captured some amazing moments.",
-        "clientName": "Brandon Baker",
-        "daysAgo": 8
-      }
-    ]
-  },
-  {
-    "id": "23",
-    "name": "Hair & Makeup Studio",
-    "type": "beauty",
-    "location": "Colombo",
-    "rating": 4.9,
-    "tagline": "Flawless looks for your special day",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "315 Colombo Fashion Avenue, Colombo",
-    "startingPrice": 800,
-    "description": "Professional hair and makeup services for brides and bridesmaids.",
-    "feedbacks": [
-      {
-        "comment": "I felt so beautiful on my wedding day! Thank you to the amazing team at Hair & Makeup Studio.",
-        "clientName": "Nicole King",
-        "daysAgo": 16
-      }
-    ]
-  },
-  {
-    "id": "24",
-    "name": "Music Mania DJs",
-    "type": "dj",
-    "location": "Jaffna",
-    "rating": 4.5,
-    "tagline": "The ultimate party experience",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "654 Jaffna Music Lane, Jaffna",
-    "startingPrice": 1500,
-    "description": "Creating an unforgettable party atmosphere for your wedding.",
-    "feedbacks": [
-      {
-        "comment": "Music Mania DJs were fantastic! They had everyone dancing all night long.",
-        "clientName": "Anthony Adams",
-        "daysAgo": 10
-      }
-    ]
-  },
-  {
-    "id": "25",
-    "name": "Flower Power",
-    "type": "florist",
-    "location": "Kandy",
-    "rating": 4.2,
-    "tagline": "Fresh and vibrant floral arrangements",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "876 Kandy Flower Market, Kandy",
-    "startingPrice": 1200,
-    "description": "Beautiful and unique floral arrangements for your wedding.",
-    "feedbacks": [
-      {
-        "comment": "The flowers were so beautiful and vibrant! They really brightened up our wedding.",
-        "clientName": "Samantha Carter",
-        "daysAgo": 7
-      }
-    ]
-  },
-  {
-    "id": "26",
-    "name": "Delightful Catering",
-    "type": "caterer",
-    "location": "Galle",
-    "rating": 4.7,
-    "tagline": "Catering to your every need",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "987 Galle Food Street, Galle",
-    "startingPrice": 3500,
-    "description": "Providing delicious and personalized catering for your wedding.",
-    "feedbacks": [
-      {
-        "comment": "The food was absolutely delicious! Everyone was impressed.",
-        "clientName": "Joshua Evans",
-        "daysAgo": 14
-      }
-    ]
-  },
-  {
-    "id": "27",
-    "name": "Perfect Planners",
-    "type": "planner",
-    "location": "Colombo",
-    "rating": 4.8,
-    "tagline": "Making your dream wedding a reality",
-    "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "111 Colombo Planning Center, Colombo",
-    "startingPrice": 1800,
-    "description": "Expert wedding planners to help you create your perfect day.",
-    "feedbacks": [
-      {
-        "comment": "Perfect Planners were amazing! They made our wedding planning so stress-free.",
-        "clientName": "Taylor Roberts",
+        "comment": "Great service and tasty dishes.",
+        "clientName": "Lucas Scott",
         "daysAgo": 22
       }
     ]
   },
   {
-    "id": "28",
-    "name": "Cake Masters",
-    "type": "cake",
+    "id": "4",
+    "name": "Elegant Florists",
+    "type": "florist",
     "location": "Negombo",
-    "rating": 4.1,
-    "tagline": "Creating edible masterpieces",
+    "rating": 4.7,
+    "logo": "",
+    "socials": {
+      "facebook": "https://facebook.com/elegantflorists",
+      "instagram": "https://instagram.com/elegant_florists",
+      "website": null,
+      "tiktok": null
+    },
+    "tagline": "Bringing your floral dreams to life.",
     "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "222 Negombo Cake Avenue, Negombo",
-    "startingPrice": 1200,
-    "description": "Baking delicious and artistic wedding cakes.",
+    "images": [
+      "/assets/images/vendor_1.jpg",
+      "/assets/images/vendor_2.jpg"
+    ],
+    "address": "321 Flower Street, Negombo",
+    "startingPrice": 500,
+    "description": "Specializing in wedding and event floral arrangements.",
     "feedbacks": [
       {
-        "comment": "The cake was not only beautiful but also incredibly delicious! Our guests loved it.",
-        "clientName": "Lauren Phillips",
-        "daysAgo": 9
+        "comment": "Stunning arrangements that exceeded our expectations.",
+        "clientName": "Liam Johnson",
+        "daysAgo": 3
+      },
+      {
+        "comment": "Beautiful flowers and great customer service.",
+        "clientName": "Olivia White",
+        "daysAgo": 12
       }
     ]
   },
   {
-    "id": "29",
-    "name": "Lenscape Videography",
-    "type": "videographer",
-    "location": "Kandy",
-    "rating": 4.4,
-    "tagline": "Your wedding film, beautifully crafted",
-    "quickResponder": false,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "333 Kandy Video Studio, Kandy",
-    "startingPrice": 2700,
-    "description": "Capturing the essence of your wedding day in a cinematic film.",
-    "feedbacks": [
-      {
-        "comment": "We are so happy with our wedding video! It's a beautiful memory that we will cherish forever.",
-        "clientName": "Patrick Collins",
-        "daysAgo": 15
-      }
-    ]
-  },
-  {
-    "id": "30",
-    "name": "Bar None",
-    "type": "bar",
-    "location": "Galle",
-    "rating": 4.6,
-    "tagline": "The perfect pour for your celebration",
+    "id": "5",
+    "name": "Dream Wedding Planners",
+    "type": "planner",
+    "location": "Jaffna",
+    "rating": 4.9,
+    "logo": "",
+    "socials": {
+      "facebook": "https://facebook.com/dreamweddingplanners",
+      "instagram": "https://instagram.com/dream_wedding_planners",
+      "website": "https://dreamweddingplanners.com",
+      "tiktok": null
+    },
+    "tagline": "Your wedding, your way.",
     "quickResponder": true,
-    "images": ["/assets/img/vendor_1.jpg", "/assets/img/vendor_2.jpg"],
-    "address": "444 Galle Bar & Lounge, Galle",
-    "startingPrice": 1800,
-    "description": "Providing a wide selection of drinks and excellent bar service for your wedding.",
+    "images": [
+      "/assets/images/vendor_1.jpg",
+      "/assets/images/vendor_2.jpg"
+    ],
+    "address": "654 Wedding Lane, Jaffna",
+    "startingPrice": 8000,
+    "description": "Expert wedding planning services to make your day perfect.",
     "feedbacks": [
       {
-        "comment": "The bartenders were amazing and the drinks were delicious! Everyone had a great time.",
-        "clientName": "Rachel Stewart",
-        "daysAgo": 11
+        "comment": "They made our wedding day unforgettable!",
+        "clientName": "Noah Taylor",
+        "daysAgo": 1
+      },
+      {
+        "comment": "Incredible attention to detail and very professional.",
+        "clientName": "Ava Harris",
+        "daysAgo": 30
       }
     ]
   }

@@ -5,12 +5,12 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { Vendor } from "../../../types/vendor";
 import VendorProfile from "@/app/components/features/Vendors/VendorProfile";
 import TTKGallery from "@/app/components/common/TTKGallery";
 import TTKVideoPlayer from "@/app/components/common/TTKVideoPlayer";
 import VendorRating from "@/app/components/features/Vendors/VendorRating";
 import { FaLocationDot } from "react-icons/fa6";
+import { Vendor } from "@/app/types/vendor";
 
 const VendorPage: React.FC = () => {
   const { vendorId } = useParams();
@@ -43,19 +43,19 @@ const VendorPage: React.FC = () => {
       rating: 4.5,
       tagline: "Your dream wedding starts here",
       quickResponder: true,
-      logo: "/assets/img/vendor_avatar.png",
+      logo: "/assets/images/vendor_avatar.png",
       address: "123 Main Street, Colombo",
       startingPrice: 5000,
       description:
         "Hi! Courtney here (that's me on the left!). Shutter and Sound is the brainchild of renowned wedding videographer Ryan Geldermann. Ryan began his wedding videography career in 2010 in Los Angeles and quickly became recognized as one of the top videographers in the U.S.. After relocating to DC and still receiving countless inquiries from all corners of the country, Ryan decided to recruit and train a few talented friends so he could continue offering the quality wedding videography he’s known for in SoCal and eventually over 10 cities. Shutter and Sound is a very small group of filmmakers dedicated to turning your big day into a work of art.Unlike similar companies, we do not book every couple that inquires, then scramble to hire random contractors to film those weddings. While that may result in more revenue for those companies, it also ultimately results in unpredictable and inconsistent quality. Instead, our team consists of a very select few photographers and videographers that shoot all the weddings. They are trained in our style so you (and we) can be confident that what you see on our website is what you will receive. We are a tight-knit family obsessed with quality control and customer service.A spacious and elegant venue for your dream wedding.",
       images: [
-        "/assets/img/vendor_1.jpg",
-        "/assets/img/vendor_2.jpg",
-        "/assets/img/vendor_1.jpg",
-        "/assets/img/vendor_portrait.jpg",
-        "/assets/img/vendor_2.jpg",
-        "/assets/img/vendor_1.jpg",
-        "/assets/img/vendor_2.jpg",
+        "/assets/images/vendor_1.jpg",
+        "/assets/images/vendor_2.jpg",
+        "/assets/images/vendor_1.jpg",
+        "/assets/images/vendor_portrait.jpg",
+        "/assets/images/vendor_2.jpg",
+        "/assets/images/vendor_1.jpg",
+        "/assets/images/vendor_2.jpg",
       ],
       feedbacks: [
         {
