@@ -11,6 +11,7 @@ import eyeGif from "../../../public/assets/gifs/eye.gif";
 import flameGif from "../../../public/assets/gifs/flame.gif";
 import delivertGif from "../../../public/assets/gifs/delivery.gif";
 import vehicleGif from "../../../public/assets/gifs/vehicle.gif";
+import hangerGif from "../../../public/assets/gifs/hanger.gif";
 
 export const categories = [
   {
@@ -82,8 +83,8 @@ export const categories = [
     label: "Designer",
     value: "designer",
     staticIcon:
-      "https://img.icons8.com/?size=100&id=vmqv135kp5Ty&format=png&color=000000",
-    animatedIcon: eyeGif.src,
+      "https://img.icons8.com/?size=100&id=5pe7e3Q7l5XO&format=png&color=ffffff",
+    animatedIcon: hangerGif.src,
   },
   {
     name: "Planners",
