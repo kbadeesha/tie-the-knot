@@ -16,38 +16,24 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
 import {
-  FaCalendarAlt,
   FaCheckCircle,
   FaClipboardList,
-  FaHeart,
   FaHome,
   FaRing,
   FaSearchLocation,
-  FaShoppingCart,
 } from "react-icons/fa";
 import TTKCustomTextField from "../../common/TTKCustomTextField";
+import { IUserRegisterFormData } from "@/types/User/registerUserType";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
-interface FormData {
-  status?: string;
-  firstName?: string;
-  lastName?: string;
-  partnerFirstName?: string;
-  partnerLastName?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-}
-
 function WizardFormCouple() {
   const [activeStep, setActiveStep] = useState(0);
-  const [formData, setFormData] = useState<FormData>({});
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState<IUserRegisterFormData>({});
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
-  const [selectedOptionUserType, setSelectedOptionUserType] =
-    useState<string>("");
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
@@ -82,12 +68,6 @@ function WizardFormCouple() {
   ) => {
     event.preventDefault();
   };
-
-  const userType = [
-    { label: "Bride/Groom", value: "bride_groom", icon: <FaHeart /> },
-    { label: "Vendor", value: "vendor", icon: <FaShoppingCart /> },
-    { label: "Event Planner", value: "planner", icon: <FaCalendarAlt /> },
-  ];
 
   const status = [
     { label: "Not yet engaged", value: "not_engaged", icon: <FaRing /> },

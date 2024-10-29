@@ -127,3 +127,98 @@ export const categories = [
     animatedIcon: dotsGif.src,
   },
 ];
+ 
+export const vendorOptions = [
+  {
+    label: "Venue",
+    value: "venue",
+    icon: "https://img.icons8.com/?size=100&id=eIFSPeynRDyl&format=png&color=000000",
+  },
+  {
+    label: "Photographers",
+    value: "photographers",
+    icon: "https://img.icons8.com/?size=100&id=zA8CKq2IOOWF&format=png&color=000000",
+  },
+  {
+    label: "Videographer",
+    value: "videographer",
+    icon: "https://img.icons8.com/?size=100&id=o7Ls0zwvTkO3&format=png&color=000000",
+  },
+  {
+    label: "Florists",
+    value: "florists",
+    icon: "https://img.icons8.com/?size=100&id=zE9uwXycbCLv&format=png&color=000000",
+  },
+  {
+    label: "Cakes",
+    value: "cakes",
+    icon: "https://img.icons8.com/?size=100&id=wDw9A4PRw9SG&format=png&color=000000",
+  },
+  {
+    label: "Bands/DJs",
+    value: "bands-djs",
+    icon: "https://img.icons8.com/?size=100&id=hcVamhP3QzTD&format=png&color=000000",
+  },
+  {
+    label: "Makeup Artist",
+    value: "makeup_artist",
+    icon: "https://img.icons8.com/?size=100&id=vmqv135kp5Ty&format=png&color=000000",
+  },
+  {
+    label: "Designer",
+    value: "designer",
+    icon: "https://img.icons8.com/?size=100&id=5pe7e3Q7l5XO&format=png&color=000000",
+  },
+  {
+    label: "Planners",
+    value: "planners",
+    icon: "https://img.icons8.com/?size=100&id=txE3iVQ7RBlC&format=png&color=000000",
+  },
+  {
+    label: "Religious",
+    value: "religious",
+    icon: "https://img.icons8.com/?size=100&id=zFMhE88YdSqt&format=png&color=000000",
+  },
+  {
+    label: "Furniture/Rentals",
+    value: "furniture-rentals",
+    icon: "https://img.icons8.com/?size=100&id=mkKY8gAastgc&format=png&color=000000",
+  },
+  {
+    label: "Luxury Cars",
+    value: "luxury-cars",
+    icon: "https://img.icons8.com/?size=100&id=qRo6mXkL8iFE&format=png&color=000000",
+  },
+  {
+    label: "Other",
+    value: "other",
+    icon: "https://img.icons8.com/?size=100&id=KnQ23R20ge4i&format=png&color=000000",
+  },
+];
+
+export const vendorVows = [
+  {
+    heading: "Love and respect",
+    sub: "You support every couple's right to marry",
+  },
+  {
+    heading: "Quality and collaboration",
+    sub: "You'll partner with T.T.K couples to deliver the best possible experience",
+  },
+  {
+    heading: "Transparency and trust",
+    sub: "You'll talk honestly about your services and prices",
+  },
+  {
+    heading: "Tolerance and acceptance",
+    sub: "You'll treat every T.T.K couple and vendor equally, reguardless of sexual orientation, gender identity, race, religion, budget or any other characteristic.",
+  },
+  {
+    heading: "Inclusion and anti-discrimination",
+    sub: "You commit to creating a welcoming environment for all, celebrating diversity in every aspect of your work.",
+  },
+  {
+    heading: "Community and support",
+    sub: "You'll cheer on your fellow T.T.K vendors, united in the shared goal to make couples happy, Lets lift each other up!",
+  },
+];
