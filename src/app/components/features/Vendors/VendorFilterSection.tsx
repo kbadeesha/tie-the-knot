@@ -12,16 +12,16 @@ import TTKPriceFilter from "../../common/TTKPriceFilter";
 import TTKAvailabilityFilter from "../../common/TTKAvailabilityFilter";
 import TTKIncludedFilter from "../../common/TTKIncludedFilter";
 
-// Import other filter components like TTKAvailabilityFilter, etc.
-
 interface VendorFilterSectionProps {
   onFilterChange: (filters: any) => void;
-  vendorType: string; // Decide filters based on vendor type
+  vendorType: string | null;
+  filterCategories: { name: string }[];
 }
 
 const VendorFilterSection: React.FC<VendorFilterSectionProps> = ({
   onFilterChange,
   vendorType,
+  filterCategories,
 }) => {
   const [expandedCategories, setExpandedCategories] = useState<{
     [key: string]: boolean;
@@ -30,9 +30,10 @@ const VendorFilterSection: React.FC<VendorFilterSectionProps> = ({
   const handleCategoryClick = (categoryName: string) => {
     setExpandedCategories((prev) => ({
       ...prev,
-      [categoryName]: !prev[categoryName], // Toggle the specific category
+      [categoryName]: !prev[categoryName],
     }));
   };
+
   const handlePriceFilterChange = (
     minPrice: number | null,
     maxPrice: number | null
@@ -48,74 +49,58 @@ const VendorFilterSection: React.FC<VendorFilterSectionProps> = ({
     onFilterChange({ includedOptions });
   };
 
-  // Function to return filter categories based on vendor type
-  const getFilterCategories = (vendorType: string) => {
+  const getFilterCategories = (vendorType: string | null) => {
     switch (vendorType) {
-      case "Photography":
+      case "photographer":
         return [
           { name: "Price" },
           { name: "Availability" },
           { name: "Rating" },
-          // Add more Photography-specific filters
         ];
-      case "Catering":
+      case "caterer":
         return [
           { name: "Price" },
-          { name: "Cuisine Type" }, // Custom filter for Catering
+          { name: "Cuisine Type" },
           { name: "Availability" },
-          // Add more Catering-specific filters
         ];
-      case "Venue":
+      case "venue":
         return [
           { name: "Price" },
-          { name: "Location" }, // Custom filter for Venue
+          { name: "Location" },
           { name: "Capacity" },
           { name: "Availability" },
-          // Add more Venue-specific filters
         ];
-      // Add more cases for other vendor types
       default:
-        return [{ name: "Price" }, { name: "Availability" } ,{ name: "Included" }]; // Default filter categories
+        return [{ name: "Price" }, { name: "Availability" }];
     }
   };
 
-  // Use vendor-specific filters
-  const filterCategories = getFilterCategories(vendorType);
+  const categories = getFilterCategories(vendorType);
 
-  // Switch-case to render filter component based on category
   const renderFilterComponent = (categoryName: string) => {
     switch (categoryName) {
       case "Price":
         return <TTKPriceFilter onFilterChange={handlePriceFilterChange} />;
       case "Availability":
-        // return <TTKAvailabilityFilter onFilterChange={...} />;
         return (
           <TTKAvailabilityFilter
-            onFilterChange={(selectedDates) => {
-              // Assuming your FilterValues interface has a 'selectedDates' property
-              handleDateFilterChange(selectedDates);
-            }}
+            onFilterChange={(selectedDates) =>
+              handleDateFilterChange(selectedDates)
+            }
           />
-        ); // Placeholder
-
+        );
       case "Included":
         return (
           <TTKIncludedFilter onFilterChange={handleIncludedFilterChange} />
         );
-
       case "Rating":
-        // return <TTKRatingFilter onFilterChange={...} />;
-        return <div>Rating filter goes here</div>; // Placeholder
+        return <div>Rating filter goes here</div>;
       case "Cuisine Type":
-        // return <TTKCuisineTypeFilter onFilterChange={...} />;
-        return <div>Cuisine Type filter goes here</div>; // Placeholder
+        return <div>Cuisine Type filter goes here</div>;
       case "Location":
-        // return <TTKLocationFilter onFilterChange={...} />;
-        return <div>Location filter goes here</div>; // Placeholder
+        return <div>Location filter goes here</div>;
       case "Capacity":
-        // return <TTKCapacityFilter onFilterChange={...} />;
-        return <div>Capacity filter goes here</div>; // Placeholder
-      // Add more cases for other filters
+        return <div>Capacity filter goes here</div>;
       default:
         return null;
     }

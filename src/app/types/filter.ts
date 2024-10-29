@@ -9,8 +9,8 @@ export interface FilterCategory {
 
 
 export interface FilterValues {
-    type: string;
-    location: string;
+    type: string | null;
+    location: string | null;
     price: string; 
     capacity:string
     minPrice: number | null;
