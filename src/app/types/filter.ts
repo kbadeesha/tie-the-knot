@@ -4,7 +4,7 @@ export interface FilterCategory {
   name: string;
   options?: Option[];
   filterKey: string;
-  type: 'dropdown' | 'list' | 'price' | 'availability' | 'capacity' | 'indoor-outdoor' | 'venue-type' | 'included' | 'award-winners' | 'amenities' | 'event-types'; 
+  type: 'dropdown' |'checkbox'| 'list' | 'price' | 'availability' | 'capacity' | 'indoor-outdoor' | 'venue-type' | 'included' | 'award-winners' | 'amenities' | 'event-types' | 'location'; 
 }
 
 
