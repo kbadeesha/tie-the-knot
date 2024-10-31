@@ -186,11 +186,21 @@ function WizardFormVendor() {
                   required
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <TTKCustomTextField
-                  name="name"
-                  label="Full Name"
-                  value={formData.name || ""}
+                  name="firstName"
+                  label="First Name"
+                  value={formData.firstName || ""}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TTKCustomTextField
+                  name="lastName"
+                  label="Last Name"
+                  value={formData.lastName || ""}
                   onChange={handleChange}
                   fullWidth
                   required

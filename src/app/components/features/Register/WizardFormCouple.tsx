@@ -15,30 +15,52 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
-import {
-  FaCheckCircle,
-  FaClipboardList,
-  FaHome,
-  FaRing,
-  FaSearchLocation,
-} from "react-icons/fa";
 import TTKCustomTextField from "../../common/TTKCustomTextField";
 import { IUserRegisterFormData } from "@/types/User/registerUserType";
+import { coupleStatus } from "@/app/data/ListItems";
+import { registerUser } from "@/api/authApi";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
 function WizardFormCouple() {
   const [activeStep, setActiveStep] = useState(0);
-  const [formData, setFormData] = useState<IUserRegisterFormData>({});
+  const [formData, setFormData] = useState<IUserRegisterFormData>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    status: "",
+    partnerFirstName: "",
+    partnerLastName: "",
+    lastName: "",
+  });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeStep === steps.length - 1) {
-      // Log all form data to the console upon submission
-      console.log("Form submitted with data:", formData);
+      try {
+        console.log("Form submitted with data:", formData);
+        const payload = {
+          email: formData.email,
+          password: formData.password,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          role: "user",
+          client: {
+            planStatus: selectedOptionStatus,
+            partnerFirstName: formData.partnerFirstName,
+            partnerLastName: formData.partnerLastName,
+          },
+        };
+        console.log("payload", payload);
+        console.log("formData", formData);
+        await registerUser(payload);
+      } catch (error) {
+        console.error("Registration error:", error);
+      }
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
@@ -69,30 +91,6 @@ function WizardFormCouple() {
     event.preventDefault();
   };
 
-  const status = [
-    { label: "Not yet engaged", value: "not_engaged", icon: <FaRing /> },
-    {
-      label: "Newly engaged and exploring",
-      value: "newly_engaged",
-      icon: <FaSearchLocation />,
-    },
-    {
-      label: "Planning mode but haven't booked a venue yet",
-      value: "no_venue",
-      icon: <FaClipboardList />,
-    },
-    {
-      label: "Planning mode and already booked a venue",
-      value: "venue_booked",
-      icon: <FaHome />,
-    },
-    {
-      label: "Almost done, just the details left",
-      value: "almost_done",
-      icon: <FaCheckCircle />,
-    },
-  ];
-
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
@@ -117,7 +115,7 @@ function WizardFormCouple() {
             </Grid>
             <Grid item xs={12}>
               <TTKCustomSelectionList
-                options={status}
+                options={coupleStatus}
                 selectedValue={selectedOptionStatus}
                 onChange={setSelectedOptionStatus}
                 className="w-full"

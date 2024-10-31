@@ -12,6 +12,13 @@ import flameGif from "../../../public/assets/gifs/flame.gif";
 import delivertGif from "../../../public/assets/gifs/delivery.gif";
 import vehicleGif from "../../../public/assets/gifs/vehicle.gif";
 import hangerGif from "../../../public/assets/gifs/hanger.gif";
+import {
+  FaRing,
+  FaSearchLocation,
+  FaClipboardList,
+  FaHome,
+  FaCheckCircle,
+} from "react-icons/fa";
 
 export const categories = [
   {
@@ -127,7 +134,7 @@ export const categories = [
     animatedIcon: dotsGif.src,
   },
 ];
- 
+
 export const vendorOptions = [
   {
     label: "Venue",
@@ -220,5 +227,28 @@ export const vendorVows = [
   {
     heading: "Community and support",
     sub: "You'll cheer on your fellow T.T.K vendors, united in the shared goal to make couples happy, Lets lift each other up!",
+  },
+];
+export const coupleStatus = [
+  { label: "Not yet engaged", value: "not_engaged", icon: <FaRing /> },
+  {
+    label: "Newly engaged and exploring",
+    value: "newly_engaged",
+    icon: <FaSearchLocation />,
+  },
+  {
+    label: "Planning mode but haven't booked a venue yet",
+    value: "planning",
+    icon: <FaClipboardList />,
+  },
+  {
+    label: "Planning mode and already booked a venue",
+    value: "venue_booked",
+    icon: <FaHome />,
+  },
+  {
+    label: "Almost done, just the details left",
+    value: "almost_done",
+    icon: <FaCheckCircle />,
   },
 ];

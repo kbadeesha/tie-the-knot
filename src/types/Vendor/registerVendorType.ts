@@ -1,5 +1,6 @@
 export interface IVendorRegisterFormData {
-    name?: string;
+    firstName?: string;
+    lastName?: string;
     address?: string;
     city?: string;
     companyName?: string;
