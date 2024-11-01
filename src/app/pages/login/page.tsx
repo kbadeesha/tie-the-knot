@@ -10,9 +10,11 @@ import loginImage from "../../../../public/assets/images/cover14.jpg"; // Replac
 import "../../../styles/pages/register.css"; // Import the CSS module
 import TTKCustomTextField from "../../components/common/TTKCustomTextField";
 import TTKCustomButton from "../../components/common/TTKCustomButton";
+import { loginUser } from "@/api/authApi";
+import { ILoginUserPayload } from "@/types/User/registerUserType";
 
 const page = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ILoginUserPayload>({
     email: "",
     password: "",
   });
@@ -21,10 +23,10 @@ const page = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add registration logic here
-    console.log("Form submitted:", formData);
+    await loginUser(formData);
+    console.log("Login Form submitted:", formData);
   };
   return (
     <div className="register-container" style={{ height: "100vh" }}>
