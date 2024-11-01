@@ -34,6 +34,7 @@
     "tie-the-knot": "file:",
     "yet-another-react-lightbox": "^3.21.6",
     "yup": "^1.4.0",
+    "zukeeper": "^1.0.2",
     "zustand": "^5.0.1"
   },
   "devDependencies": {

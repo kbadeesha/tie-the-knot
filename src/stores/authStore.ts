@@ -1,29 +1,19 @@
-import { IUserRegisterFormData } from "@/types/User/registerUserType";
 import { create } from "zustand";
 
-interface AuthState {
-    user: IUserRegisterFormData | null;
+
+export interface AuthStoreState {
     accessToken: string | null;
     refreshToken: string | null;
-    setAuthData: (user: User, accessToken: string, refreshToken: string) => void;
+    user: any;
+    setAuth: (accessToken: string, refreshToken: string, user: any) => void;
+    clearAuth: () => void;
 }
 
-interface User {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: string;
-}
-
-const useAuthStore = create<AuthState>()((set) => ({
-    user: null,
+export const useAuthStore = create<AuthStoreState>((set) => ({
     accessToken: null,
     refreshToken: null,
-    setAuthData: (user, accessToken, refreshToken) => {
-        set({ user, accessToken, refreshToken });
-        localStorage.setItem('token', accessToken); // Optionally store token
-    },
+    user: null,
+    setAuth: (accessToken, refreshToken, user) => set({ accessToken, refreshToken, user }),
+    clearAuth: () => set({ accessToken: null, refreshToken: null, user: null }),
 }));
 
-export default useAuthStore;
