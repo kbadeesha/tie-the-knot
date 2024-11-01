@@ -19,7 +19,7 @@ import TTKCustomTextField from "../../common/TTKCustomTextField";
 import { IUserRegisterFormData } from "@/types/User/registerUserType";
 import { coupleStatus } from "@/app/data/ListItems";
 import { registerUser } from "@/api/authApi";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 

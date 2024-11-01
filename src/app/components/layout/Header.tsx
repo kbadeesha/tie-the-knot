@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Image from "next/image";
@@ -13,28 +12,36 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useContext, useState } from "react";
-import "../../../styles/components/button.css";
-import { useTranslation } from "next-i18next";
 import ThemeContext from "@/context/ThemeContext";
-
 import TTKCustomButton from "../common/TTKCustomButton";
 import Link from "next/link";
-
+import useAuthStore from "@/stores/authStore";
+import { logoutUser } from "@/api/authApi";
+import { useRouter } from "next/navigation";
 const pages = ["Vendors", "Plan Your Wedding", "Blog"];
 const settings = ["Profile", "Logout"];
 
 const Header = () => {
+  const router = useRouter();
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { theme } = useContext(ThemeContext);
-  const { i18n } = useTranslation();
 
+  const user = useAuthStore((state) => state.user);
+
+  React.useEffect(() => {
+    if (user !== null) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [user]);
   const handleOnClickLogin = () => {
     console.log("login clicked");
   };
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -45,6 +52,10 @@ const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleMenuItems = async (setting: string) => {
+    await logoutUser();
+    await window.location.reload();
   };
 
   return (
@@ -119,61 +130,15 @@ const Header = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography
+                    onClick={() => handleMenuItems(setting)}
+                    textAlign="center"
+                  >
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
-            {/* <IconButton
-              className={`ml-1 ${
-                theme === "dark" ? "text-inherit" : "text-black"
-              }`}
-              onClick={toggleTheme}
-            >
-              {theme === "dark" ? (
-                <LightModeOutlinedIcon />
-              ) : (
-                <DarkModeOutlinedIcon />
-              )}
-            </IconButton> */}
-
-            {/* Responsive Menu Icon (Hamburger on mobile) */}
-            <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon /> {/* Use the hamburger icon */}
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            {/* Login Register Buttons  */}
 
             <Link href="/pages/login" passHref>
               <TTKCustomButton
@@ -195,11 +160,16 @@ const Header = () => {
                 Get Started
               </TTKCustomButton>
             </Link>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            {isActive && (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar
+                    alt={user == null ? "Z" : user.firstName}
+                    src="/static/images/avatar/2.jpg"
+                  />
+                </IconButton>
+              </Tooltip>
+            )}
           </Box>
         </Toolbar>
       </Container>
