@@ -19,10 +19,13 @@ import TTKCustomTextField from "../../common/TTKCustomTextField";
 import { IUserRegisterFormData } from "@/types/User/registerUserType";
 import { coupleStatus } from "@/app/data/ListItems";
 import { registerUser } from "@/api/authApi";
+import { useRouter } from "next/router";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
 function WizardFormCouple() {
+  const router = useRouter();
+
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState<IUserRegisterFormData>({
     email: "",
@@ -58,6 +61,9 @@ function WizardFormCouple() {
         console.log("payload", payload);
         console.log("formData", formData);
         await registerUser(payload);
+
+        // Redirect to home page after successful registration
+        router.push("/");
       } catch (error) {
         console.error("Registration error:", error);
       }

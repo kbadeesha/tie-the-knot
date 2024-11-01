@@ -1,5 +1,5 @@
 
-import { useAuthStore } from '@/stores/authStore';
+import useAuthStore from '@/stores/authStore';
 import axiosInstance from './axiosInstance'; // Adjust the path as necessary
 import { ILoginUserPayload, IUserRegisterPayload } from '@/types/User/registerUserType';
 
@@ -20,7 +20,7 @@ export const loginUser = async (payload:ILoginUserPayload)=>{
     console.log(payload, "ILoginUserPayload")
     try {
         const response = await axiosInstance.post<any>('/auth/login',  payload );
-        const{setAuth} = useAuthStore.getState();
+        const{setAuth} = useAuthStore.getState()
         setAuth(response.data.accessToken, response.data.refreshToken, response.data.user)
         return response.data; 
     } catch (error) {
@@ -29,4 +29,15 @@ export const loginUser = async (payload:ILoginUserPayload)=>{
     }
 }
 
+export const logoutUser = async ()=>{
+    try {
+        const response = await axiosInstance.post<any>('/auth/logout');
+        const{setAuth} = useAuthStore.getState()
+        setAuth(null, null, null)
+        return response.data;
+    } catch (error) {
+        console.error('Logout error:', error);
+        throw error; // Propagate error
+    }
+}
 
