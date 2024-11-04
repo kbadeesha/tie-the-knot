@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const BASE_URL = 'https://tietheknot-api.onrender.com/v1';
+
+
 const axiosInstance = axios.create({
-    baseURL: 'https://tietheknot-api.onrender.com/v1', // Set your base URL
+    baseURL: BASE_URL, // Set your base URL
     // timeout: 10000, // Set a timeout
     headers: {
         'Content-Type': 'application/json',
