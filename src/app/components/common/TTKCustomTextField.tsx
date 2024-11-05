@@ -4,11 +4,15 @@ import {
   TextFieldProps,
   InputAdornment,
   IconButton,
+  useTheme,
+  createTheme,
+  ThemeProvider,
 } from "@mui/material";
 import { SxProps } from "@mui/material";
 import { passwordStrengthValidation } from "../../utils/passwordStrengthValidation";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { grey, red } from "@mui/material/colors";
 
 interface TTKCustomTextFieldProps extends Omit<TextFieldProps, "variant"> {
   label: string;
@@ -22,6 +26,13 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
   sx,
   ...otherProps
 }) => {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: grey[900],
+      },
+    },
+  });
   const [passwordValidation, setPasswordValidation] = React.useState({
     strength: "",
     color: "gray",
@@ -47,51 +58,73 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
     setShowPassword((prev) => !prev);
   };
 
+  const customSx: SxProps = {
+    position: "relative",
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "15px",
+      transition: "border-color 0.4s",
+      "& fieldset": {
+        borderColor: theme.palette.common.black,
+        transition: "border-color 0.4s",
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.common.black,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.common.black,
+        animation: "glow 1s infinite alternate",
+      },
+      "& .MuiInputLabel-outlined": {
+        color: "#2e2e2e",
+        fontWeight: "bold",
+        "&.Mui-focused": {
+          color: "red",
+          fontWeight: "bold",
+        },
+      },
+    },
+    "@keyframes glow": {
+      "100%": {
+        boxShadow: `0 5px 15px rgba(0, 0, 0, 0.8)`,
+      },
+    },
+    ...sx, // Spread additional styles
+  };
+
   return (
     <>
-      <TextField
-        label={label}
-        variant="outlined"
-        // type={showPassword ? "text" : "password"} // password visibility
-        className={`border-gray-300 focus:outline-none ${className}`}
-        sx={{
-          ...sx,
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: passwordValidation.color,
-            },
-            "&:hover fieldset": {
-              borderColor: passwordValidation.color,
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: passwordValidation.color,
-            },
-          },
-        }}
-        InputProps={{
-          endAdornment: otherProps.type === "password" && (
-            <InputAdornment position="end">
-              <IconButton onClick={togglePasswordVisibility} edge="end">
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        {...otherProps}
-        onChange={handleChange}
-      />
-      {otherProps.type === "password" && (
-        <span
-          style={{
-            marginTop: "8px",
-            display: "block",
-            color: passwordValidation.color,
-            fontSize: "12px",
+      <ThemeProvider theme={theme}>
+        <TextField
+          label={label}
+          variant="outlined"
+          className={`border-gray-300 focus:outline-none ${className}`}
+          sx={customSx}
+          InputProps={{
+            endAdornment: otherProps.type === "password" && (
+              <InputAdornment position="end">
+                <IconButton onClick={togglePasswordVisibility} edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
-        >
-          {otherProps.value != "" && passwordValidation.strength + " Password"}
-        </span>
-      )}
+          {...otherProps}
+          onChange={handleChange}
+        />
+        {otherProps.type === "password" && (
+          <span
+            style={{
+              marginTop: "8px",
+              display: "block",
+              color: passwordValidation.color,
+              fontSize: "12px",
+            }}
+          >
+            {otherProps.value !== "" &&
+              passwordValidation.strength + " Password"}
+          </span>
+        )}
+      </ThemeProvider>
     </>
   );
 };
