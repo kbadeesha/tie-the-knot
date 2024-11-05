@@ -18,6 +18,7 @@ import { loginUser } from "@/api/authApi";
 import { ILoginUserPayload } from "@/types/User/registerUserType";
 import { useRouter } from "next/navigation";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
+import TTKServiceMultiSelect from "@/app/components/common/TTKServiceMultiSelect";
 
 const Page = () => {
   const router = useRouter(); // Initialize router
@@ -26,7 +27,15 @@ const Page = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
+  const services = [
+    "Web Development",
+    "Mobile App Development",
+    "SEO Optimization",
+    "Cloud Hosting",
+    "UI/UX Design",
+    "Digital Marketing",
+    "Content Writing",
+  ];
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -100,6 +109,7 @@ const Page = () => {
               required
               sx={{ mt: 2, mb: 2 }}
             />
+            <TTKServiceMultiSelect options={services} />
             <TTKCustomTextField
               name="password"
               label="Password"

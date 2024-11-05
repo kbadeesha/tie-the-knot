@@ -20,6 +20,7 @@ import { IUserRegisterFormData } from "@/types/User/registerUserType";
 import { coupleStatus } from "@/app/data/ListItems";
 import { registerUser } from "@/api/authApi";
 import { useRouter } from "next/navigation";
+import TTKServiceMultiSelect from "../../common/TTKServiceMultiSelect";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
@@ -41,7 +42,7 @@ function WizardFormCouple() {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
-
+ 
   const handleNext = async () => {
     if (activeStep === steps.length - 1) {
       try {
@@ -252,6 +253,7 @@ function WizardFormCouple() {
                 }}
               />
             </Grid>
+
             <Grid item xs={12}>
               <TTKCustomTextField
                 label="Confirm Password"
