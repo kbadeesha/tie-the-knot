@@ -3,7 +3,10 @@ import { Typography, Box, Button } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 
 interface TTKServiceMultiSelectProps {
-  options: string[]; // List of services or options
+  options: {
+    value: string;
+    label: string;
+  }[];
 }
 
 const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
@@ -33,23 +36,25 @@ const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {options.map((service) => (
           <Button
-            key={service}
-            onClick={() => handleSelect(service)} // Handle toggle on click
+            key={service.value}
+            onClick={() => handleSelect(service.value)} // Handle toggle on click
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               padding: "5px 15px", // Smaller padding for a more compact look
-              backgroundColor: selectedServices.includes(service)
+              backgroundColor: selectedServices.includes(service.value)
                 ? "#000000" // black background when selected
                 : "#ffffff", // Light background when not selected
-              color: selectedServices.includes(service) ? "white" : "black",
+              color: selectedServices.includes(service.value)
+                ? "white"
+                : "black",
               border: "1px solid #d1d1d1", // Lighter border color
-              boxShadow: selectedServices.includes(service)
+              boxShadow: selectedServices.includes(service.value)
                 ? "0 4px 10px rgba(63, 81, 181, 0.2)" // Shadow when selected
                 : "none",
               "&:hover": {
-                backgroundColor: selectedServices.includes(service)
+                backgroundColor: selectedServices.includes(service.value)
                   ? "gray" //selected hover
                   : "#e0e0e0", // Hover effect
               },
@@ -60,8 +65,8 @@ const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
               margin: "5px", // Spacing between each button for better alignment
             }}
           >
-            <span>{service}</span>
-            {selectedServices.includes(service) && (
+            <span>{service.label}</span>
+            {selectedServices.includes(service.value) && (
               <CheckIcon sx={{ marginLeft: 1, fontSize: "18px" }} />
             )}
           </Button>
