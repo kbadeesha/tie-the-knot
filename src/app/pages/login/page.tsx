@@ -26,6 +26,7 @@ const Page = () => {
   const [formData, setFormData] = useState<ILoginUserPayload>({
     email: "",
     password: "",
+    selectedServices: [], // Initialize with an empty array
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const services = [
@@ -62,6 +63,12 @@ const Page = () => {
       console.error("Login error:", error);
     }
   };
+  // const handleServiceChange = (selectedServices: string[]) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     selectedServices, // Update the selected services in form data
+  //   }));
+  // };
 
   return (
     <div style={{ height: "100vh" }}>
@@ -110,7 +117,12 @@ const Page = () => {
               required
               sx={{ mt: 2, mb: 2 }}
             />
-            {/* <TTKServiceMultiSelect options={services}  /> */}
+            {/* <TTKServiceMultiSelect
+              options={services}
+              label="Select Your Services"
+              description="Description goes here"
+              onChange={handleServiceChange}
+            /> */}
             <TTKCustomTextField
               name="password"
               label="Password"

@@ -3,6 +3,9 @@ import { Typography, Box, Button } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 
 interface TTKServiceMultiSelectProps {
+  label: string;
+  description?: string;
+  onChange: (selectedServices: string[]) => void;
   options: {
     value: string;
     label: string;
@@ -11,17 +14,20 @@ interface TTKServiceMultiSelectProps {
 
 const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
   options,
+  label,
+  description,
+  onChange,
 }) => {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   // Handle button click for selecting/deselecting items
   const handleSelect = (service: string) => {
-    setSelectedServices(
-      (prevSelected) =>
-        prevSelected.includes(service)
-          ? prevSelected.filter((item) => item !== service) // Deselect if already selected
-          : [...prevSelected, service] // Select if not already selected
-    );
+    const updatedSelectedServices = selectedServices.includes(service)
+      ? selectedServices.filter((item) => item !== service)
+      : [...selectedServices, service];
+
+    setSelectedServices(updatedSelectedServices);
+    onChange(updatedSelectedServices);
   };
 
   if (!options || options.length === 0) {
@@ -30,9 +36,11 @@ const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
 
   return (
     <Box>
-      <Typography variant="h6" sx={{ marginBottom: 2 }}>
-        Select Your Services
-      </Typography>
+      <div className="mb-5">
+        <Typography variant="h6">{label}</Typography>
+        <p>{description}</p>
+      </div>
+
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {options.map((service) => (
           <Button
@@ -42,27 +50,29 @@ const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              padding: "5px 15px", // Smaller padding for a more compact look
+              padding: "5px 15px",
               backgroundColor: selectedServices.includes(service.value)
-                ? "#000000" // black background when selected
-                : "#ffffff", // Light background when not selected
+                ? "#ffffff" // selected background
+                : "#ffffff", // default background
               color: selectedServices.includes(service.value)
-                ? "white"
-                : "black",
-              border: "1px solid #d1d1d1", // Lighter border color
+                ? "black" //selected text color
+                : "black", // default text color
+              border: selectedServices.includes(service.value)
+                ? "3px solid #000000" //selected border color
+                : "1px solid #d1d1d1", // default border color
               boxShadow: selectedServices.includes(service.value)
-                ? "0 4px 10px rgba(63, 81, 181, 0.2)" // Shadow when selected
+                ? "0 5px 15px rgba(63, 81, 181, 0.2)"
                 : "none",
               "&:hover": {
                 backgroundColor: selectedServices.includes(service.value)
-                  ? "gray" //selected hover
-                  : "#e0e0e0", // Hover effect
+                  ? "#e0e0e0" //selected hover
+                  : "#e0e0e0", // default hover effect
               },
               transition: "background-color 0.3s, box-shadow 0.3s",
-              borderRadius: "20px", // A lower border-radius for subtle rounding
-              minWidth: "auto", // Allow buttons to be more flexible in width
-              height: "36px", // Consistent height similar to LinkedIn's style
-              margin: "5px", // Spacing between each button for better alignment
+              borderRadius: "20px",
+              minWidth: "auto",
+              height: "36px",
+              margin: "5px",
             }}
           >
             <span>{service.label}</span>
