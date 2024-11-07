@@ -333,7 +333,37 @@ function WizardFormVendor() {
   };
   return (
     <div className="container mx-auto p-4">
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        sx={{
+          // Target all steps (active, completed, inactive)
+          "& .MuiStepIcon-root": {
+            backgroundColor: "white", // Black background for all steps
+            color: "black", // Black text color for step numbers
+          },
+          // Style for active step
+          "& .MuiStepIcon-active": {
+            backgroundColor: "white", // Black background for active step
+            color: "black", // Black number for active step
+          },
+          // Style for completed steps
+          "& .MuiStepIcon-completed": {
+            backgroundColor: "white", // Black background for completed step
+            color: "black", // Black number for completed step
+          },
+          // Specific override for active step color to ensure it doesn't stay blue
+          "& .Mui-active .MuiStepIcon-root": {
+            backgroundColor: "white", // Black background for active step
+            color: "black", // Black number for active step
+          },
+          // Optional: Override text color for completed steps
+          "& .Mui-completed .MuiStepIcon-root": {
+            backgroundColor: "white", // Black background for completed steps
+            color: "black", // Black number for completed step
+          },
+        }}
+      >
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

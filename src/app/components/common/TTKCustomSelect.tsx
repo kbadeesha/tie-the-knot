@@ -1,7 +1,9 @@
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, InputAdornment, IconButton } from "@mui/material";
 import { SxProps } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
 
 interface TTKCustomSelectProps {
   name: string;
@@ -28,54 +30,96 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
   sx = {},
   ...otherProps
 }) => {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: grey[900],
+      },
+    },
+  });
+
+  const customSx: SxProps = {
+    position: "relative",
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "15px", // Make the border rounded
+      transition: "border-color 0.4s",
+      "& fieldset": {
+        borderColor: theme.palette.common.black, // Black border
+        transition: "border-color 0.4s",
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.common.black, // Border color on hover
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.common.black, // Focused state border color
+        animation: "glow 1s infinite alternate", // Glow effect on focus
+      },
+      "& .MuiInputLabel-outlined": {
+        color: "#2e2e2e", // Label color
+        fontWeight: "bold",
+        "&.Mui-focused": {
+          color: "red", // Focused label color
+        },
+      },
+    },
+    "@keyframes glow": {
+      "100%": {
+        boxShadow: `0 5px 15px rgba(0, 0, 0, 0.8)`,
+      },
+    },
+    ...sx, // Spread additional styles passed from parent
+  };
+
   return (
-    <FormControl
-      className={className}
-      fullWidth={fullWidth}
-      sx={sx}
-      variant="outlined"
-    >
-      <InputLabel>{label}</InputLabel>
-      <Select
-        {...otherProps}
-        name={name}
-        value={value}
-        onChange={(event) => onChange(event as SelectChangeEvent<string>)}
-        disabled={disabled}
-        label={label}
-        className="border-gray-300 focus:outline-none focus:ring-2 focus:ring-black-500"
-        renderValue={(selectedValue) => {
-          const selectedOption = options.find(
-            (option) => option.value === selectedValue
-          );
-          return selectedOption ? (
-            <div style={{ display: "flex", alignItems: "center" }}>
+    <ThemeProvider theme={theme}>
+      <FormControl
+        fullWidth={fullWidth}
+        sx={customSx}
+        variant="outlined"
+        className={className}
+      >
+        <InputLabel>{label}</InputLabel>
+        <Select
+          {...otherProps}
+          name={name}
+          value={value}
+          onChange={(event) => onChange(event as SelectChangeEvent<string>)}
+          label={label}
+          disabled={disabled}
+          className="border-gray-300 focus:outline-none"
+          renderValue={(selectedValue) => {
+            const selectedOption = options.find(
+              (option) => option.value === selectedValue
+            );
+            return selectedOption ? (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <img
+                  src={selectedOption.icon}
+                  alt={`${selectedOption.label} icon`}
+                  style={{ width: 20, height: 20, marginRight: 8 }}
+                />
+                {selectedOption.label}
+              </div>
+            ) : null;
+          }}
+        >
+          {options.map((option) => (
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              className="flex items-center"
+            >
               <img
-                src={selectedOption.icon}
-                alt={`${selectedOption.label} icon`}
+                src={option.icon}
+                alt={`${option.label} icon`}
                 style={{ width: 20, height: 20, marginRight: 8 }}
               />
-              {selectedOption.label}
-            </div>
-          ) : null;
-        }}
-      >
-        {options.map((option) => (
-          <MenuItem
-            key={option.value}
-            value={option.value}
-            className="flex items-center"
-          >
-            <img
-              src={option.icon}
-              alt={`${option.label} icon`}
-              style={{ width: 20, height: 20, marginRight: 8 }}
-            />
-            {option.label}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </ThemeProvider>
   );
 };
 
