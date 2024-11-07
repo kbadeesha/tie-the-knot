@@ -82,7 +82,7 @@ function WizardFormVendor() {
     switch (step) {
       case 0:
         return (
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems="stretch">
             <Grid item xs={12}>
               <Typography
                 variant="h4"

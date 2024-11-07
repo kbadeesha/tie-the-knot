@@ -8,22 +8,22 @@ import RolePick from "@/app/components/features/Register/RolePick";
 const RegisterPage = () => {
   return (
     <div className="register-container" style={{ height: "100vh" }}>
-      <Grid container style={{ height: "100%" }}>
-        <Grid item xs={5} className="register-imageContainer">
-          <Image
-            src={loginImage}
-            alt="Login"
-            layout="fill"
-            objectFit="cover"
-            className="register-image"
-          />
-        </Grid>
-        <Grid item xs={7} className="register-formContainer">
-          <RolePick />
-          {/* <WizardForm /> */}
-        </Grid>
+    <Grid container style={{ height: "100%" }}>
+      <Grid item xs={5} className="register-imageContainer">
+        <Image
+          src={loginImage}
+          alt="Login"
+          layout="fill"
+          objectFit="cover"
+          className="register-image"
+        />
       </Grid>
-    </div>
+      <Grid item xs={7} className="register-formContainer">
+        <RolePick />
+      </Grid>
+    </Grid>
+  </div>
+  
   );
 };
 
