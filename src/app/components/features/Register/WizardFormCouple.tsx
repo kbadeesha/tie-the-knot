@@ -21,6 +21,7 @@ import { coupleStatus } from "@/app/data/ListItems";
 import { registerUser } from "@/api/authApi";
 import { useRouter } from "next/navigation";
 import TTKServiceMultiSelect from "../../common/TTKServiceMultiSelect";
+import "../../../../styles/pages/register.css";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
@@ -42,7 +43,7 @@ function WizardFormCouple() {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
- 
+
   const handleNext = async () => {
     if (activeStep === steps.length - 1) {
       try {
@@ -292,7 +293,7 @@ function WizardFormCouple() {
 
   return (
     <div className="container mx-auto p-4">
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper activeStep={activeStep} alternativeLabel className="stepper">
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -312,19 +313,19 @@ function WizardFormCouple() {
       >
         {getStepContent(activeStep)}
 
-        <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex justify-end gap-2">
           <Button
             disabled={activeStep === 0}
             onClick={handleBack}
-            className="mt-6 py-3"
+            className="register-button"
           >
             Back
           </Button>
           <Button
-            variant="contained"
-            color="primary"
             onClick={handleNext}
-            className="bg-black text-white mt-6 py-3"
+            className={`submit-button ${
+              activeStep === 0 ? "" : "register-button"
+            }`}
           >
             {activeStep === steps.length - 1 ? "Submit" : "Next"}
           </Button>

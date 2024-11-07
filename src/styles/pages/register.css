@@ -5,7 +5,7 @@
 
 .register-imageContainer {
   position: relative;
-  overflow: hidden; /* Prevent overflow */
+  overflow: hidden;
 }
 
 .register-image {
@@ -23,15 +23,73 @@
 
 .form-box {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  border-radius: 8px; /* Rounded corners */
-  padding: 20px; /* Padding for content */
-
-  width: 80%; /* Responsive width */
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 20px;
+  width: 80%;
 }
 
 @media (max-width: 600px) {
   .form-box {
-      width: 90%; /* More width on smaller screens */
+    width: 90%;
   }
+}
+
+/* Stepper Styles */
+.stepper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stepper .MuiStepIcon-root {
+  background-color: white; /* Black background for all steps */
+  color: black; /* Black text color for step numbers */
+}
+
+.stepper .MuiStepIcon-active {
+  background-color: white; /* Black background for active step */
+  color: black; /* Black number for active step */
+}
+
+.stepper .MuiStepIcon-completed {
+  background-color: white; /* Black background for completed step */
+  color: black; /* Black number for completed step */
+}
+
+.stepper .Mui-active .MuiStepIcon-root {
+  background-color: white;
+  color: black;
+}
+
+.stepper .Mui-completed .MuiStepIcon-root {
+  background-color: white;
+  color: black;
+}
+
+/* Button Styles */
+.register-button {
+  border: 2px solid black;
+  color: black;
+  padding: 12px 24px; /* Adjust padding for consistent button size */
+}
+
+.register-button:hover {
+  border-color: black;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.register-button-disabled {
+  color: gray;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.submit-button {
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+}
+
+.submit-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }

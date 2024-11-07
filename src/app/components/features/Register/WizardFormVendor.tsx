@@ -22,7 +22,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { IVendorRegisterFormData } from "@/types/Vendor/registerVendorType";
 import { vendorOptions, vendorVows } from "@/app/data/ListItems";
-
+import "../../../../styles/pages/register.css";
 const steps = ["Vendor Vows", "Basic Information", "Account Details"];
 
 function WizardFormVendor() {
@@ -333,37 +333,7 @@ function WizardFormVendor() {
   };
   return (
     <div className="container mx-auto p-4">
-      <Stepper
-        activeStep={activeStep}
-        alternativeLabel
-        sx={{
-          // Target all steps (active, completed, inactive)
-          "& .MuiStepIcon-root": {
-            backgroundColor: "white", // Black background for all steps
-            color: "black", // Black text color for step numbers
-          },
-          // Style for active step
-          "& .MuiStepIcon-active": {
-            backgroundColor: "white", // Black background for active step
-            color: "black", // Black number for active step
-          },
-          // Style for completed steps
-          "& .MuiStepIcon-completed": {
-            backgroundColor: "white", // Black background for completed step
-            color: "black", // Black number for completed step
-          },
-          // Specific override for active step color to ensure it doesn't stay blue
-          "& .Mui-active .MuiStepIcon-root": {
-            backgroundColor: "white", // Black background for active step
-            color: "black", // Black number for active step
-          },
-          // Optional: Override text color for completed steps
-          "& .Mui-completed .MuiStepIcon-root": {
-            backgroundColor: "white", // Black background for completed steps
-            color: "black", // Black number for completed step
-          },
-        }}
-      >
+      <Stepper activeStep={activeStep} alternativeLabel className="stepper">
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -387,29 +357,17 @@ function WizardFormVendor() {
           {" "}
           {/* Using gap-2 to add space */}
           <Button
-            sx={{
-              border: "2px solid black", // Black border
-              color: "black", // Black text color
-              "&:hover": {
-                borderColor: "black", // Keep the border black on hover
-                backgroundColor: "rgba(0, 0, 0, 0.1)", // Optional: slight black background on hover
-              },
-              "&:disabled": {
-                color: "gray", // Optional: change text color to gray when disabled
-                borderColor: "rgba(0, 0, 0, 0.1)", // Optional: change border to gray when disabled
-              },
-            }}
             disabled={activeStep === 0}
             onClick={handleBack}
-            className="mt-6 py-3"
+            className="register-button"
           >
             Back
           </Button>
           <Button
-            variant="contained"
-            color="primary"
             onClick={handleNext}
-            className="bg-black text-white mt-6 py-3"
+            className={`submit-button ${
+              activeStep === 0 ? "" : "register-button"
+            }`}
           >
             {activeStep === 0
               ? "I do"
