@@ -383,8 +383,22 @@ function WizardFormVendor() {
       >
         {getStepContent(activeStep)}
 
-        <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex justify-end gap-2">
+          {" "}
+          {/* Using gap-2 to add space */}
           <Button
+            sx={{
+              border: "2px solid black", // Black border
+              color: "black", // Black text color
+              "&:hover": {
+                borderColor: "black", // Keep the border black on hover
+                backgroundColor: "rgba(0, 0, 0, 0.1)", // Optional: slight black background on hover
+              },
+              "&:disabled": {
+                color: "gray", // Optional: change text color to gray when disabled
+                borderColor: "rgba(0, 0, 0, 0.1)", // Optional: change border to gray when disabled
+              },
+            }}
             disabled={activeStep === 0}
             onClick={handleBack}
             className="mt-6 py-3"
