@@ -70,6 +70,7 @@
 /* Button Styles */
 .register-button {
   border: 2px solid black;
+  border-radius: 20px;
   color: black;
   padding: 12px 24px; /* Adjust padding for consistent button size */
 }
@@ -79,15 +80,16 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.register-button-disabled {
+.register-button:disabled {
   color: gray;
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(80, 79, 79, 0.068);
 }
 
 .submit-button {
   background-color: black;
   color: white;
   padding: 12px 24px;
+  border-radius: 20px;
 }
 
 .submit-button:hover {
