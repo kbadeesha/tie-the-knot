@@ -230,10 +230,10 @@ export const vendorVows = [
   },
 ];
 export const coupleStatus = [
-  { label: "Not yet engaged", value: "not_engaged", icon: <FaRing /> },
+  { label: "Not yet engaged", value: "not-engaged", icon: <FaRing /> },
   {
     label: "Newly engaged and exploring",
-    value: "newly_engaged",
+    value: "newly-engaged",
     icon: <FaSearchLocation />,
   },
   {
@@ -243,12 +243,12 @@ export const coupleStatus = [
   },
   {
     label: "Planning mode and already booked a venue",
-    value: "venue_booked",
+    value: "planning-booked",
     icon: <FaHome />,
   },
   {
     label: "Almost done, just the details left",
-    value: "almost_done",
+    value: "post-wedding",
     icon: <FaCheckCircle />,
   },
 ];
