@@ -72,7 +72,7 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
       },
       "&.Mui-focused fieldset": {
         borderColor: theme.palette.common.black,
-        animation: "glow 1s infinite alternate",
+        animation: "fadeIn 0.6s ease-in",
       },
       "& .MuiInputLabel-outlined": {
         color: "#2e2e2e",
@@ -83,9 +83,12 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
         },
       },
     },
-    "@keyframes glow": {
+    "@keyframes fadeIn": {
+      "0%": {
+        opacity: `0`,
+      },
       "100%": {
-        boxShadow: `0 5px 15px rgba(0, 0, 0, 0.8)`,
+        opacity: `1`,
       },
     },
     ...sx, // Spread additional styles

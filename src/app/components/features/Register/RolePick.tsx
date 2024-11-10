@@ -53,19 +53,20 @@ const RolePick = () => {
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
       <Box
         sx={{
-          p: 4,
-          mt: 4,
+        
           height: "100%",
           borderRadius: 2,
           boxShadow: "md",
           bgcolor: "background.paper",
         }}
-        className="border border-gray-200 dark:border-gray-700"
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h4" align="center" className="font-bold mb-4">
-              Welcome! Who Are You in the Wedding Planning Journey?
+            <Typography variant="h4" align="center" className="font-bold">
+              Welcome! 
+            </Typography>
+            <Typography variant="h4" align="center" className="font-bold mb-12">
+               Who Are You in the Wedding Planning Journey?
             </Typography>
             <Typography
               variant="body1"
