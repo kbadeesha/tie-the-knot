@@ -22,6 +22,8 @@ export const loginUser = async (payload:ILoginUserPayload)=>{
         const response = await axiosInstance.post<any>('/auth/login',  payload );
         const{setAuth} = useAuthStore.getState()
         setAuth(response.data.accessToken, response.data.refreshToken, response.data.user)
+        localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('refreshToken', response.data.refreshToken);
         return response.data; 
     } catch (error) {
         console.error('Login error:', error);
@@ -34,6 +36,8 @@ export const logoutUser = async ()=>{
         const response = await axiosInstance.post<any>('/auth/logout');
         const{setAuth} = useAuthStore.getState()
         setAuth(null, null, null)
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
         return response.data;
     } catch (error) {
         console.error('Logout error:', error);
