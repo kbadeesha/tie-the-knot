@@ -9,7 +9,7 @@ import {
   IconButton,
 } from "@mui/material";
 import Image from "next/image";
-import loginImage from "../../../../public/assets/images/cover14.jpg"; // Replace with your image path
+import loginImage from "../../../../public/assets/images/cover5.jpg"; // Replace with your image path
 
 import "../../../styles/pages/register.css"; // Import the CSS module
 import TTKCustomTextField from "../../components/common/TTKCustomTextField";
@@ -82,12 +82,13 @@ const Page = () => {
             className="register-image"
           />
         </Grid>
-        <Grid item xs={7} className="register-formContainer">
+        <Grid item xs={7} className="register-formContainer" >
           <Box
             component="form"
             onSubmit={handleSubmit}
             noValidate
             className="form-box"
+            style={{ width: "65%" }}
           >
             <Box
               sx={{
@@ -95,6 +96,7 @@ const Page = () => {
                 display: "flex",
                 justifyContent: "center",
                 mb: 5,
+          
               }}
             >
               <Image
@@ -113,7 +115,6 @@ const Page = () => {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              fullWidth
               required
               sx={{ mt: 2, mb: 2 }}
             />
@@ -128,7 +129,6 @@ const Page = () => {
               label="Password"
               value={formData.password || ""}
               onChange={handleChange}
-              fullWidth
               required
               type={showPassword ? "text" : "password"}
               InputProps={{

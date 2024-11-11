@@ -60,6 +60,9 @@
 .stepper .Mui-active .MuiStepIcon-root {
   background-color: white;
   color: black;
+  border: 2px solid white;
+  border-radius: 60%;
+  box-shadow: 0 0 0 1px black; 
 }
 
 .stepper .Mui-completed .MuiStepIcon-root {

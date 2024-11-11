@@ -18,13 +18,37 @@ import Link from "next/link";
 import useAuthStore from "@/stores/authStore";
 import { logoutUser } from "@/api/authApi";
 import { useRouter } from "next/navigation";
-const pages = ["Vendors", "Plan Your Wedding", "Blog"];
+import { makeStyles } from "@mui/styles";
 const settings = ["Profile", "Logout"];
 
-const Header = () => {
-  const router = useRouter();
+const useStyles: any = makeStyles({
+  appBar: {
+    position: "absolute", // Keep the header on top of the hero section
+    top: "4%",
+    left: 0,
+    right: 0,
+    backgroundColor: "transparent", // Transparent background
+    boxShadow: "none", // Remove shadow for seamless look
+    zIndex: 10, // Ensure it's on top of the video
+  },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  title: {
+    color: "white", // White text for visibility over the hero section
+    fontWeight: "bold",
+  },
+  button: {
+    color: "white", // Button text color for visibility
+    backgroundColor: "transparent", // Transparent background
+    boxShadow: "none", // Remove shadow for seamless look
+  },
+});
 
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+const Header: React.FC = () => {
+  const classes = useStyles();
   const [isActive, setIsActive] = useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { theme } = useContext(ThemeContext);
@@ -46,10 +70,6 @@ const Header = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -59,43 +79,19 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" className="bg-white dark:bg-gray-800">
+    <AppBar className={classes.appBar} elevation={0}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* Navigation Links (left) */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "flex-start", // Align to the left
-            }}
-          >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-                className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300"
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
+        <Toolbar className={classes.toolbar}>
           {/* Centered Logo */}
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              className="text-gray-900 dark:text-white"
-            >
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "start" }}>
+            <Typography variant="h6" className={classes.title}>
               <Image
-                src={
-                  theme === "dark"
-                    ? "/assets/logo_lite.svg"
-                    : "/assets/logo.svg"
-                }
+                src={"/assets/logo_lite.svg"}
+                // src={
+                //   theme === "dark"
+                //     ? "/assets/logo_lite.svg"
+                //     : "/assets/logo.svg"
+                // }
                 alt="TieTheKnot"
                 width={120}
                 height={20}
@@ -142,6 +138,7 @@ const Header = () => {
 
             <Link href="/pages/login" passHref>
               <TTKCustomButton
+                className={classes.button}
                 type="submit"
                 variant="contained"
                 color="primary"
@@ -153,6 +150,7 @@ const Header = () => {
             <Link href="/pages/register" passHref>
               {/* Use Link component */}
               <TTKCustomButton
+                className={classes.button}
                 type="submit"
                 variant="contained"
                 color="primary"
