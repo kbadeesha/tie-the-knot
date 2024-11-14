@@ -20,7 +20,6 @@ import { IUserRegisterFormData } from "@/types/User/registerUserType";
 import { coupleStatus } from "@/app/data/ListItems";
 import { registerUser } from "@/api/authApi";
 import { useRouter } from "next/navigation";
-import TTKServiceMultiSelect from "../../common/TTKServiceMultiSelect";
 import "../../../../styles/pages/register.css";
 
 const steps = ["Status", "Basic Information", "Account Details"];

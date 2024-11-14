@@ -25,10 +25,12 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response) => response, // If everything is fine, return the response
     async (error) => {
+        console.log(error)
         const originalRequest = error.config;
 
         // If error is 401 (Unauthorized) and hasn't been retried yet
-        if (error.response.status === 401 && !originalRequest._retry) {
+        if (error.response?.status === 401 && !originalRequest._retry) {
+          
             originalRequest._retry = true;
 
             try {

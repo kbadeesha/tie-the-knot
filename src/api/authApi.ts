@@ -45,3 +45,12 @@ export const logoutUser = async ()=>{
     }
 }
 
+export const googleLogin = async () => {
+    try {
+        const response = await axiosInstance.get<any>('/auth/google-login');
+        return response.data;
+    } catch (error) {
+        console.error('Google login error:', error);
+        throw error; // Propagate error
+    }
+};

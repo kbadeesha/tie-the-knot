@@ -147,7 +147,7 @@ const Header: React.FC = () => {
                 Login
               </TTKCustomButton>
             </Link>
-            <Link href="/pages/register" passHref>
+            <Link href="/pages/register/register_type" passHref>
               {/* Use Link component */}
               <TTKCustomButton
                 className={classes.button}
