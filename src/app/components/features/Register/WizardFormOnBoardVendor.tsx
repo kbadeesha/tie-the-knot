@@ -8,24 +8,34 @@ import {
   Typography,
   Box,
   Grid,
-  Tooltip,
+  InputAdornment,
+  SelectChangeEvent,
 } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TTKCustomTextField from "../../common/TTKCustomTextField";
-import { FaInfoCircle } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { IVendorRegisterFormData } from "@/types/Vendor/registerVendorType";
-import { vendorVows } from "@/app/data/ListItems";
 import "../../../../styles/pages/register.css";
-const steps = ["Vendor Vows", "Basic Information", "Account Details"];
+import VendorVows from "./VendorVows";
+import TTKServiceMultiSelect from "../../common/TTKServiceMultiSelect";
+import { VENUE_FILTERS } from "@/app/data/filterData";
+import TTKCustomSelect from "../../common/TTKCustomSelect";
+import { vendorOptions } from "@/app/data/ListItems";
+
+const steps = [
+  "Vendor Vows",
+  "Basic Information",
+  "Location",
+  "Services",
+  "Pricing",
+  "Summary,",
+];
 
 function WizardFormOnboardVendor() {
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState<IVendorRegisterFormData>({});
   const [isPlannerPage, setIsPlannerPage] = useState(false);
   const pathname = usePathname();
-
+  const venueFilters = VENUE_FILTERS;
   useEffect(() => {
     if (pathname) {
       setIsPlannerPage(pathname.includes("planner"));
@@ -41,7 +51,13 @@ function WizardFormOnboardVendor() {
   };
 
   const handleBack = () => setActiveStep((prev) => prev - 1);
-
+  const handleChangeSelect = (event: SelectChangeEvent<string>) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -49,154 +65,22 @@ function WizardFormOnboardVendor() {
     });
   };
 
-  //   const handleChangeSelect = (event: SelectChangeEvent<string>) => {
-  //     const { name, value } = event.target;
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: value,
-  //     }));
-  //   };
+  const handleServiceChange = (selectedServices: string[]) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedServices, // Update the selected services in form data
+    }));
+  };
 
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
         return (
           <Grid container spacing={2} alignItems="stretch">
-            <Grid item xs={12}>
-              <Typography
-                variant="h4"
-                align="center"
-                className="font-bold mb-4"
-              >
-                Before we start, meet our Vendor Vows
-              </Typography>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  variant="body1"
-                  className="text-gray-500 mb-4"
-                  style={{ marginRight: "8px", marginTop: "13px" }} // Space between text and icon
-                >
-                  As a T.T.K vendor, you pledge to uphold these values:
-                </Typography>
-                <Tooltip
-                  title="T.T.K is committed to celebrating love in all of its forms every day, and requires vendors to embrace our same core values of tolerance, acceptance, and respect. The best parties are those where everyone feels welcome!"
-                  arrow
-                >
-                  <span
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <FaInfoCircle />
-                  </span>
-                </Tooltip>
-              </div>
-            </Grid>
-            {vendorVows.map((vow, index) => (
-              <Grid item xs={12} key={index}>
-                <Typography
-                  variant="body1"
-                  align="left"
-                  className="font-bold mb-1"
-                >
-                  {vow.heading}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  align="left"
-                  className="text-gray-500 mb-2"
-                >
-                  {vow.sub}
-                </Typography>
-              </Grid>
-            ))}
+            <VendorVows />
           </Grid>
         );
       case 1:
-        return (
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography
-                  variant="h4"
-                  align="center"
-                  className="font-bold mb-4"
-                >
-                  Tell Us About Yourself
-                </Typography>
-                <Typography
-                  variant="body1"
-                  align="center"
-                  className="text-gray-500 mb-4"
-                >
-                  Please provide your personal details so we can create a
-                  personalized experience tailored to your wedding vendor.
-                  journey. Your insights will help us understand your unique
-                  offerings and how we can best support your business.
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="companyName"
-                  label="Company Name"
-                  value={formData.companyName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TTKCustomTextField
-                  name="firstName"
-                  label="First Name"
-                  value={formData.firstName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TTKCustomTextField
-                  name="lastName"
-                  label="Last Name"
-                  value={formData.lastName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="address"
-                  label="Address"
-                  value={formData.address || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="city"
-                  label="City"
-                  value={formData.city || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-            </Grid>
-          </LocalizationProvider>
-        );
-      case 2:
         return (
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -205,24 +89,55 @@ function WizardFormOnboardVendor() {
                 align="center"
                 className="font-bold mb-4"
               >
-                Create Your Account
+                Tell Us About Yourself
               </Typography>
               <Typography
                 variant="body1"
                 align="center"
                 className="text-gray-500 mb-4"
               >
-                Set up your account to stay connected with us throughout your
-                planning process. Your email and password will ensure you can
-                access your information anytime. We value your privacy and will
-                keep your details safe.
+                Please provide your personal details so we can create a
+                personalized experience tailored to your wedding vendor.
+                journey. Your insights will help us understand your unique
+                offerings and how we can best support your business.
               </Typography>
             </Grid>
             <Grid item xs={12}>
+              <TTKCustomSelect
+                name="vendorType"
+                label="Vendor Type"
+                value={formData.vendorType || ""} // Fallback to empty string
+                onChange={handleChangeSelect}
+                options={vendorOptions}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
               <TTKCustomTextField
-                name="email"
-                label="Email"
-                value={formData.email || ""}
+                name="companyName"
+                label="Company Name"
+                value={formData.companyName || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TTKCustomTextField
+                name="firstName"
+                label="First Name"
+                value={formData.firstName || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
+
+            <Grid item xs={6}>
+              <TTKCustomTextField
+                name="lastName"
+                label="Last Name"
+                value={formData.lastName || ""}
                 onChange={handleChange}
                 fullWidth
                 required
@@ -236,8 +151,134 @@ function WizardFormOnboardVendor() {
                 onChange={handleChange}
                 fullWidth
                 required
+                placeholder="7XXXXXXX"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">(+94)</InputAdornment>
+                  ),
+                }}
               />
             </Grid>
+          </Grid>
+        );
+      case 2:
+        return (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Where are you based?
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                className="text-gray-500 mb-4"
+              >
+                Please provide your personal details so we can create a
+                personalized experience tailored to your wedding vendor.
+                journey. Your insights will help us understand your unique
+                offerings and how we can best support your business.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="address"
+                label="Address"
+                value={formData.address || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="city"
+                label="City"
+                value={formData.city || ""}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
+          </Grid>
+        );
+      case 3:
+        return (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Services Provided
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                className="text-gray-500 mb-4"
+              >
+                What are the services that you provide?
+              </Typography>
+            </Grid>
+            {venueFilters.map((filter) => (
+              <Grid item xs={12}>
+                <TTKServiceMultiSelect
+                  options={filter.data}
+                  label={filter.heading}
+                  description={filter.description}
+                  onChange={handleServiceChange}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        );
+      case 4:
+        return (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Let's Talk about Pricing
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                className="text-gray-500 mb-4"
+              >
+                Prices to get an idea for the clients.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}></Grid>
+          </Grid>
+        );
+      case 5:
+        return (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                align="center"
+                className="font-bold mb-4"
+              >
+                Summary
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                className="text-gray-500 mb-4"
+              >
+                Here's Your Profile summary! Dont worry you can change this
+                later.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}></Grid>
           </Grid>
         );
       default:

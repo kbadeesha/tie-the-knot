@@ -1,5 +1,10 @@
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem, InputAdornment, IconButton } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { SxProps } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -52,7 +57,7 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
       },
       "&.Mui-focused fieldset": {
         borderColor: theme.palette.common.black, // Focused state border color
-        animation: "glow 1s infinite alternate", // Glow effect on focus
+        animation: "fadeIn 0.6s ease-in", // Glow effect on focus
       },
       "& .MuiInputLabel-outlined": {
         color: "#2e2e2e", // Label color
@@ -62,12 +67,15 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
         },
       },
     },
-    "@keyframes glow": {
+    "@keyframes fadeIn": {
+      "0%": {
+        opacity: `0`,
+      },
       "100%": {
-        boxShadow: `0 5px 15px rgba(0, 0, 0, 0.8)`,
+        opacity: `1`,
       },
     },
-    ...sx, // Spread additional styles passed from parent
+    ...sx, // Spread additional styles
   };
 
   return (

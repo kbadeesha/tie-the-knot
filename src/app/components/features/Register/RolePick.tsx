@@ -39,11 +39,11 @@ const RolePick = () => {
     console.log(value);
 
     if (value === "planner") {
-      window.location.href = "/pages/register/planner";
+      window.location.href = "/pages/onboarding/planner";
     } else if (value === "vendor") {
-      window.location.href = "/pages/register/vendor";
+      window.location.href = "/pages/onboarding/vendor";
     } else {
-      window.location.href = "/pages/register/bride_groom";
+      window.location.href = "/pages/onboarding/couple";
     }
   };
   const [selectedOptionUserType, setSelectedOptionUserType] =
@@ -53,7 +53,6 @@ const RolePick = () => {
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
       <Box
         sx={{
-        
           height: "100%",
           borderRadius: 2,
           boxShadow: "md",
@@ -63,10 +62,10 @@ const RolePick = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography variant="h4" align="center" className="font-bold">
-              Welcome! 
+              Welcome!
             </Typography>
             <Typography variant="h4" align="center" className="font-bold mb-12">
-               Who Are You in the Wedding Planning Journey?
+              Who Are You in the Wedding Planning Journey?
             </Typography>
             <Typography
               variant="body1"
