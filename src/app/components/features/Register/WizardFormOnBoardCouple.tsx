@@ -24,7 +24,7 @@ import "../../../../styles/pages/register.css";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
-function WizardFormCouple() {
+function WizardFormOnBoardCouple() {
   const router = useRouter();
 
   const [activeStep, setActiveStep] = useState(0);
@@ -334,4 +334,4 @@ function WizardFormCouple() {
   );
 }
 
-export default WizardFormCouple;
+export default WizardFormOnBoardCouple;

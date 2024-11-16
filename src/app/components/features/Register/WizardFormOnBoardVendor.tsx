@@ -102,16 +102,19 @@ function WizardFormOnboardVendor() {
                 offerings and how we can best support your business.
               </Typography>
             </Grid>
+
             <Grid item xs={12}>
               <TTKCustomSelect
                 name="vendorType"
                 label="Vendor Type"
-                value={formData.vendorType || ""} // Fallback to empty string
+                value={formData.vendorType || (isPlannerPage ? "planner" : "")} // Set "planners" if on the planner page Fallback to empty string
                 onChange={handleChangeSelect}
                 options={vendorOptions}
+                disabled={isPlannerPage}
                 fullWidth
               />
             </Grid>
+
             <Grid item xs={12}>
               <TTKCustomTextField
                 name="companyName"

@@ -1,4 +1,4 @@
-import WizardFormCouple from "@/app/components/features/Register/WizardFormCouple";
+import WizardFormCouple from "@/app/components/features/Register/WizardFormOnBoardCouple";
 import { Grid } from "@mui/material";
 import Image from "next/image"; // Import the Image component from Next.js
 import React from "react";

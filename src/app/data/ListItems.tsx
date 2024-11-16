@@ -20,9 +20,8 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 
-export const categories = [
+export const vendorOptions = [
   {
-    name: "Venues",
     label: "Venue",
     value: "venue",
     staticIcon:
@@ -30,15 +29,13 @@ export const categories = [
     animatedIcon: locationGif.src,
   },
   {
-    name: "Photographers",
-    label: "Photographers",
-    value: "photographers",
+    label: "Photographer",
+    value: "photographer",
     staticIcon:
       "https://img.icons8.com/?size=100&id=zA8CKq2IOOWF&format=png&color=000000",
     animatedIcon: cameraGif.src,
   },
   {
-    name: "Videographer",
     label: "Videographer",
     value: "videographer",
     staticIcon:
@@ -46,15 +43,13 @@ export const categories = [
     animatedIcon: videoGif.src,
   },
   {
-    name: "Florists",
-    label: "Florists",
-    value: "florists",
+    label: "Florist",
+    value: "florist",
     staticIcon:
       "https://img.icons8.com/?size=100&id=zE9uwXycbCLv&format=png&color=000000",
     animatedIcon: flowerGif.src,
   },
   // {
-  //   name: "Catering",
   //   label: "Catering",
   //   value: "catering",
   //   staticIcon:
@@ -62,7 +57,6 @@ export const categories = [
   //   animatedIcon: foodGif.src,
   // },
   {
-    name: "Cakes",
     label: "Cakes",
     value: "cakes",
     staticIcon:
@@ -70,15 +64,13 @@ export const categories = [
     animatedIcon: cakeGif.src,
   },
   {
-    name: "Bands/DJs",
-    label: "Bands/DJs",
-    value: "bands-djs",
+    label: "Bands/DJ",
+    value: "bands-dj",
     staticIcon:
       "https://img.icons8.com/?size=100&id=hcVamhP3QzTD&format=png&color=000000",
     animatedIcon: musicGif.src,
   },
   {
-    name: "Makeup Artist",
     label: "Makeup Artist",
     value: "makeup_artist",
     staticIcon:
@@ -86,7 +78,6 @@ export const categories = [
     animatedIcon: eyeGif.src,
   },
   {
-    name: "Designer",
     label: "Designer",
     value: "designer",
     staticIcon:
@@ -94,15 +85,13 @@ export const categories = [
     animatedIcon: hangerGif.src,
   },
   {
-    name: "Planners",
-    label: "Planners",
-    value: "planners",
+    label: "Planner",
+    value: "planner",
     staticIcon:
       "https://img.icons8.com/?size=100&id=txE3iVQ7RBlC&format=png&color=000000", // Static image for Vendor
     animatedIcon: plannerGif.src,
   },
   {
-    name: "Religious",
     label: "Religious",
     value: "religious",
     staticIcon:
@@ -110,96 +99,18 @@ export const categories = [
     animatedIcon: flameGif.src,
   },
   {
-    name: "Furniture/Rentals",
-    label: "Furniture/Rentals",
-    value: "furniture-rentals",
+    label: "Furniture/Rental",
+    value: "furniture-rental",
     staticIcon:
       "https://img.icons8.com/?size=100&id=mkKY8gAastgc&format=png&color=000000",
     animatedIcon: delivertGif.src,
   },
   {
-    name: "Luxury Cars",
     label: "Luxury Cars",
     value: "luxury-cars",
     staticIcon:
       "https://img.icons8.com/?size=100&id=qRo6mXkL8iFE&format=png&color=000000",
     animatedIcon: vehicleGif.src,
-  },
-  {
-    name: "Other",
-    label: "Other",
-    value: "other",
-    staticIcon:
-      "https://img.icons8.com/?size=100&id=KnQ23R20ge4i&format=png&color=000000",
-    animatedIcon: dotsGif.src,
-  },
-];
-
-export const vendorOptions = [
-  {
-    label: "Venue",
-    value: "venue",
-    icon: "https://img.icons8.com/?size=100&id=eIFSPeynRDyl&format=png&color=000000",
-  },
-  {
-    label: "Photographers",
-    value: "photographers",
-    icon: "https://img.icons8.com/?size=100&id=zA8CKq2IOOWF&format=png&color=000000",
-  },
-  {
-    label: "Videographer",
-    value: "videographer",
-    icon: "https://img.icons8.com/?size=100&id=o7Ls0zwvTkO3&format=png&color=000000",
-  },
-  {
-    label: "Florists",
-    value: "florists",
-    icon: "https://img.icons8.com/?size=100&id=zE9uwXycbCLv&format=png&color=000000",
-  },
-  {
-    label: "Cakes",
-    value: "cakes",
-    icon: "https://img.icons8.com/?size=100&id=wDw9A4PRw9SG&format=png&color=000000",
-  },
-  {
-    label: "Bands/DJs",
-    value: "bands-djs",
-    icon: "https://img.icons8.com/?size=100&id=hcVamhP3QzTD&format=png&color=000000",
-  },
-  {
-    label: "Makeup Artist",
-    value: "makeup_artist",
-    icon: "https://img.icons8.com/?size=100&id=vmqv135kp5Ty&format=png&color=000000",
-  },
-  {
-    label: "Designer",
-    value: "designer",
-    icon: "https://img.icons8.com/?size=100&id=5pe7e3Q7l5XO&format=png&color=000000",
-  },
-  {
-    label: "Planners",
-    value: "planners",
-    icon: "https://img.icons8.com/?size=100&id=txE3iVQ7RBlC&format=png&color=000000",
-  },
-  {
-    label: "Religious",
-    value: "religious",
-    icon: "https://img.icons8.com/?size=100&id=zFMhE88YdSqt&format=png&color=000000",
-  },
-  {
-    label: "Furniture/Rentals",
-    value: "furniture-rentals",
-    icon: "https://img.icons8.com/?size=100&id=mkKY8gAastgc&format=png&color=000000",
-  },
-  {
-    label: "Luxury Cars",
-    value: "luxury-cars",
-    icon: "https://img.icons8.com/?size=100&id=qRo6mXkL8iFE&format=png&color=000000",
-  },
-  {
-    label: "Other",
-    value: "other",
-    icon: "https://img.icons8.com/?size=100&id=KnQ23R20ge4i&format=png&color=000000",
   },
 ];
 

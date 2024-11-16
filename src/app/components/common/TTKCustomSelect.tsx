@@ -15,7 +15,7 @@ interface TTKCustomSelectProps {
   label: string;
   value: string;
   onChange: (event: SelectChangeEvent<string>) => void;
-  options: { label: string; value: string; icon: string }[];
+  options: { label: string; value: string; staticIcon: string }[];
   disabled?: boolean;
   className?: string;
   fullWidth?: boolean;
@@ -102,8 +102,8 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
             return selectedOption ? (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <img
-                  src={selectedOption.icon}
-                  alt={`${selectedOption.label} icon`}
+                  src={selectedOption.staticIcon}
+                  alt={`${selectedOption.label} staticIcon`}
                   style={{ width: 20, height: 20, marginRight: 8 }}
                 />
                 {selectedOption.label}
@@ -118,8 +118,8 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
               className="flex items-center"
             >
               <img
-                src={option.icon}
-                alt={`${option.label} icon`}
+                src={option.staticIcon}
+                alt={`${option.label} staticIcon`}
                 style={{ width: 20, height: 20, marginRight: 8 }}
               />
               {option.label}

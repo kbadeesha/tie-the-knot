@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { categories } from "../../../data/ListItems"; // Ensure this path is correct
+import { vendorOptions } from "../../../data/ListItems"; // Ensure this path is correct
 import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
 
 const TTKWeddingCategories: React.FC = () => {
@@ -59,7 +59,7 @@ const TTKWeddingCategories: React.FC = () => {
       const { clientWidth, scrollWidth } = scrollRef.current;
       setShowRightArrow(scrollWidth > clientWidth); // Show right arrow if there's more content
     }
-  }, [categories]); // Run when categories change
+  }, [vendorOptions]); // Run when categories change
 
   return (
     <Box sx={{ textAlign: "center", mt: 4, position: "relative" }}>
@@ -109,7 +109,7 @@ const TTKWeddingCategories: React.FC = () => {
         }}
       >
         <TTKCustomSelectionList
-          options={categories}
+          options={vendorOptions}
           selectedValue={selectedCategory}
           onChange={handleOnChange}
           type="gif_icon"
