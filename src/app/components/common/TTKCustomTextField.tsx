@@ -9,7 +9,6 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { SxProps } from "@mui/material";
-import { passwordStrengthValidation } from "../../utils/passwordStrengthValidation";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { grey, red } from "@mui/material/colors";
@@ -40,19 +39,19 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
 
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    if (otherProps.type === "password") {
-      const validation = passwordStrengthValidation(value);
-      setPasswordValidation({
-        strength: validation.strength,
-        color: value ? validation.color : "gray",
-      });
-    }
-    if (otherProps.onChange) {
-      otherProps.onChange(event);
-    }
-  };
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = event.target.value;
+  //   if (otherProps.type === "password") {
+  //     const validation = passwordStrengthValidation(value);
+  //     setPasswordValidation({
+  //       strength: validation.strength,
+  //       color: value ? validation.color : "gray",
+  //     });
+  //   }
+  //   if (otherProps.onChange) {
+  //     otherProps.onChange(event);
+  //   }
+  // };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -112,7 +111,7 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
             ),
           }}
           {...otherProps}
-          onChange={handleChange}
+          // onChange={handleChange}
         />
         {otherProps.type === "password" && (
           <span

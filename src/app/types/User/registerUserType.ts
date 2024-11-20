@@ -22,8 +22,3 @@ export interface IUserRegisterFormData {
     }
   }
 
-  export interface ILoginUserPayload {
-    email: string;
-    password: string;
-    selectedServices: any, // Initialize with an empty array
-  }

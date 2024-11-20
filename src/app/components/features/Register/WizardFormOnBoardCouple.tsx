@@ -16,7 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
 import TTKCustomTextField from "../../common/TTKCustomTextField";
-import { IUserRegisterFormData } from "@/types/User/registerUserType";
+import { IUserRegisterFormData } from "@/app/types/User/registerUserType";
 import { coupleStatus } from "@/app/data/ListItems";
 import { registerUser } from "@/api/authApi";
 import { useRouter } from "next/navigation";

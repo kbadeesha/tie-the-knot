@@ -9,3 +9,4 @@ export interface RegisterForm {
     password?: string;
     status?:string
   }
+

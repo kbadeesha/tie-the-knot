@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import TTKCustomTextField from "../../common/TTKCustomTextField";
 import { usePathname } from "next/navigation";
-import { IVendorRegisterFormData } from "@/types/Vendor/registerVendorType";
+import { IVendorRegisterFormData } from "@/app/types/Vendor/registerVendorType";
 import "../../../../styles/pages/register.css";
 import VendorVows from "./VendorVows";
 import TTKServiceMultiSelect from "../../common/TTKServiceMultiSelect";

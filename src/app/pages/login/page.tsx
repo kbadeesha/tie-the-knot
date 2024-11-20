@@ -1,74 +1,41 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Grid,
-  Typography,
-  Box,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+import { Grid, Box, InputAdornment, IconButton } from "@mui/material";
 import Image from "next/image";
 import loginImage from "../../../../public/assets/images/cover5.jpg"; // Replace with your image path
-
 import "../../../styles/pages/register.css"; // Import the CSS module
 import TTKCustomTextField from "../../components/common/TTKCustomTextField";
 import TTKCustomButton from "../../components/common/TTKCustomButton";
 import { loginUser } from "@/api/authApi";
-import { ILoginUserPayload } from "@/types/User/registerUserType";
 import { useRouter } from "next/navigation";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import TTKServiceMultiSelect from "@/app/components/common/TTKServiceMultiSelect";
-import { label } from "yet-another-react-lightbox";
+import TTKCustomTextField2 from "@/app/components/common/TTKCustomTextField2";
+import { useForm } from "react-hook-form";
+import { SLoginForm } from "@/app/schemas/loginSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ILoginForm } from "@/app/types/login";
 
 const Page = () => {
   const router = useRouter(); // Initialize router
-  const [formData, setFormData] = useState<ILoginUserPayload>({
+
+  const methods = useForm<ILoginForm>({
+    resolver: yupResolver(SLoginForm),
+  });
+  const { handleSubmit, control } = methods;
+  const [password, setPassword] = useState<"password" | "text">("password");
+  const [formData, setFormData] = useState<ILoginForm>({
     email: "",
     password: "",
-    selectedServices: [], // Initialize with an empty array
   });
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const services = [
-    { value: "web", label: "Web Development" },
-    { value: "mobile", label: "Mobile App Development" },
-    { value: "seo", label: "SEO Optimization" },
-    { value: "cloud", label: "Cloud Hosting" },
-    { value: "ui", label: "UI/UX Design" },
-    { value: "digitalMarketing", label: "Digital Marketing" },
-    { value: "contentWriting", label: "Content Writing" },
-  ];
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const togglePasswordVisibility = () => {
+    setPassword((prev) => (prev === "password" ? "text" : "password"));
   };
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
+  const onSubmit = async (formData: ILoginForm) => {
+    // await loginUser(formData);
+    console.log("Login Form submitted:", formData);
+    router.push("/");
   };
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      await loginUser(formData);
-      console.log("Login Form submitted:", formData);
-      router.push("/");
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
-  // const handleServiceChange = (selectedServices: string[]) => {
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     selectedServices, // Update the selected services in form data
-  //   }));
-  // };
 
   return (
     <div style={{ height: "100vh" }}>
@@ -82,21 +49,15 @@ const Page = () => {
             className="register-image"
           />
         </Grid>
-        <Grid item xs={7} className="register-formContainer" >
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            className="form-box"
-            style={{ width: "65%" }}
-          >
+
+        <Grid item xs={7} className="register-formContainer">
+          <Box className="form-box" style={{ width: "65%" }}>
             <Box
               sx={{
                 flexGrow: 1,
                 display: "flex",
                 justifyContent: "center",
                 mb: 5,
-          
               }}
             >
               <Image
@@ -109,53 +70,54 @@ const Page = () => {
                 height={20}
               />
             </Box>
-            <TTKCustomTextField
-              label="Email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              sx={{ mt: 2, mb: 2 }}
-            />
-            {/* <TTKServiceMultiSelect
-              options={services}
-              label="Select Your Services"
-              description="Description goes here"
-              onChange={handleServiceChange}
-            /> */}
-            <TTKCustomTextField
-              name="password"
-              label="Password"
-              value={formData.password || ""}
-              onChange={handleChange}
-              required
-              type={showPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TTKCustomButton
-              type="submit"
-              sx={{
-                mt: 3,
-                width: "100%", // Full width
-                maxWidth: "200px", // Max width
-                alignSelf: "center", // Center the button
-              }}
+            <form
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+              style={{ width: "100%", height: "100%" }}
             >
-              Login
-            </TTKCustomButton>
+              <Grid item xs={12}>
+                <TTKCustomTextField2
+                  control={control}
+                  label="Email"
+                  name="email"
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TTKCustomTextField2
+                  control={control}
+                  name="password"
+                  label="Password"
+                  required
+                  type={password === "password" ? "password" : "text"}
+                  endAdornment={
+                    <span
+                      onClick={togglePasswordVisibility}
+                      className="show-hide-icon"
+                    >
+                      {password === "password" ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
+                    </span>
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TTKCustomButton
+                  type="submit"
+                  sx={{
+                    mt: 3,
+                    width: "100%", // Full width
+                    maxWidth: "200px", // Max width
+                    alignSelf: "center", // Center the button
+                  }}
+                >
+                  Login
+                </TTKCustomButton>
+              </Grid>
+            </form>
           </Box>
         </Grid>
       </Grid>

@@ -1,7 +1,7 @@
 
 import useAuthStore from '@/stores/authStore';
 import axiosInstance from './axiosInstance'; // Adjust the path as necessary
-import { ILoginUserPayload, IUserRegisterPayload } from '@/types/User/registerUserType';
+import { ILoginUserPayload, IUserRegisterPayload } from '@/app/types/User/registerUserType';
 
 
 
