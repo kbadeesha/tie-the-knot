@@ -5,12 +5,11 @@ import { Grid, Box, InputAdornment, IconButton } from "@mui/material";
 import Image from "next/image";
 import loginImage from "../../../../public/assets/images/cover5.jpg"; // Replace with your image path
 import "../../../styles/pages/register.css"; // Import the CSS module
-import TTKCustomTextField from "../../components/common/TTKCustomTextField";
 import TTKCustomButton from "../../components/common/TTKCustomButton";
 import { loginUser } from "@/api/authApi";
 import { useRouter } from "next/navigation";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import TTKCustomTextField2 from "@/app/components/common/TTKCustomTextField2";
+import TTKCustomTextField from "@/app/components/common/TTKCustomTextField";
 import { useForm } from "react-hook-form";
 import { SLoginForm } from "@/app/schemas/loginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -24,10 +23,6 @@ const Page = () => {
   });
   const { handleSubmit, control } = methods;
   const [password, setPassword] = useState<"password" | "text">("password");
-  const [formData, setFormData] = useState<ILoginForm>({
-    email: "",
-    password: "",
-  });
   const togglePasswordVisibility = () => {
     setPassword((prev) => (prev === "password" ? "text" : "password"));
   };
@@ -76,7 +71,7 @@ const Page = () => {
               style={{ width: "100%", height: "100%" }}
             >
               <Grid item xs={12}>
-                <TTKCustomTextField2
+                <TTKCustomTextField
                   control={control}
                   label="Email"
                   name="email"
@@ -84,7 +79,7 @@ const Page = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TTKCustomTextField2
+                <TTKCustomTextField
                   control={control}
                   name="password"
                   label="Password"

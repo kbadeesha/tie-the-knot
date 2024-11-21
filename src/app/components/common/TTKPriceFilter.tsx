@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Box, Stack, InputAdornment } from "@mui/material";
-import TTKCustomTextField from "./TTKCustomTextField";
+import TTKCustomTextField from "./TTKCustomTextFieldOld";
 import TTKCustomButton from "./TTKCustomButton";
 
 interface TTKPriceFilterProps {
@@ -35,8 +35,7 @@ const TTKPriceFilter: React.FC<TTKPriceFilterProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <Box sx={{ mt: 2 ,p:2 }}>
-    
+    <Box sx={{ mt: 2, p: 2 }}>
       <Stack spacing={2}>
         <TTKCustomTextField
           label="Minimum"
@@ -49,7 +48,7 @@ const TTKPriceFilter: React.FC<TTKPriceFilterProps> = ({ onFilterChange }) => {
         />
         <TTKCustomTextField
           variant="outlined"
-           placeholder="enter maximum price"
+          placeholder="enter maximum price"
           label="Maximum"
           type="number"
           value={maxPrice === null ? "" : maxPrice}
@@ -58,8 +57,16 @@ const TTKPriceFilter: React.FC<TTKPriceFilterProps> = ({ onFilterChange }) => {
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
         />
-       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}> {/* Align buttons to the right */}
-          <TTKCustomButton variant="text" onClick={handleClear} sx={{ color: 'gray' }}> {/* Gray color for "Clear" button */}
+        <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+          {" "}
+          {/* Align buttons to the right */}
+          <TTKCustomButton
+            variant="text"
+            onClick={handleClear}
+            sx={{ color: "gray" }}
+          >
+            {" "}
+            {/* Gray color for "Clear" button */}
             Clear
           </TTKCustomButton>
           <TTKCustomButton variant="contained" onClick={handleApply}>

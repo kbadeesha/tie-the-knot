@@ -1,102 +1,107 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Stepper,
   Step,
   StepLabel,
   Button,
-  Typography,
   Box,
-  InputAdornment,
-  IconButton,
   Grid,
+  Typography,
+  IconButton,
 } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
-import TTKCustomTextField from "../../common/TTKCustomTextField";
-import { IUserRegisterFormData } from "@/app/types/User/registerUserType";
-import { coupleStatus } from "@/app/data/ListItems";
-import { registerUser } from "@/api/authApi";
 import { useRouter } from "next/navigation";
-import "../../../../styles/pages/register.css";
+import TTKCustomTextField from "../../common/TTKCustomTextField"; // Adjust path if necessary
+import {
+  step1Schema,
+  step2Schema,
+  step3Schema,
+} from "@/app/schemas/wizardFormCoupleOnboardSchema"; // Adjust path if necessary
+import { IUserOnBoardFormData } from "@/app/types/User/onBoardUserTyp"; // Adjust path if necessary
+import { coupleStatus } from "@/app/data/ListItems";
+import { TTKCustomSelectionListWrapper } from "../../common/TTKCustomSelectionList";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
 function WizardFormOnBoardCouple() {
   const router = useRouter();
-
   const [activeStep, setActiveStep] = useState(0);
-  const [formData, setFormData] = useState<IUserRegisterFormData>({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    firstName: "",
-    status: "",
-    partnerFirstName: "",
-    partnerLastName: "",
-    lastName: "",
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [schema, setSchema] = useState<any>({});
+
+  const methods = useForm<IUserOnBoardFormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      // Initialize default values for all fields
+      status: "",
+      firstName: "",
+      lastName: "",
+      partnerFirstName: "",
+      partnerLastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-  const [selectedOptionStatus, setSelectedOptionStatus] = useState<string>("");
 
-  const handleNext = async () => {
+  const { handleSubmit, control, reset, setValue, watch, getValues } = methods;
+
+  // Handle moving to the next step
+  const handleNext = async (data: any) => {
     if (activeStep === steps.length - 1) {
-      try {
-        console.log("Form submitted with data:", formData);
-        const payload = {
-          email: formData.email,
-          password: formData.password,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          role: "user",
-          client: {
-            planStatus: selectedOptionStatus,
-            partnerFirstName: formData.partnerFirstName,
-            partnerLastName: formData.partnerLastName,
-          },
-        };
-        console.log("payload", payload);
-        console.log("formData", formData);
-        await registerUser(payload);
-
-        // Redirect to home page after successful registration
-        router.push("/");
-      } catch (error) {
-        console.error("Registration error:", error);
-      }
+      // Perform the form submission if on the last step
+      console.log("Form data submitted:", data);
+      router.push("/"); // Navigate to another page after submission
     } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setActiveStep((prevStep) => prevStep + 1);
     }
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((prevStep) => prevStep - 1);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
+  // Set validation schema based on active step
+  useEffect(() => {
+    if (activeStep === 0) {
+      setSchema(step1Schema);
+    } else if (activeStep === 1) {
+      setSchema(step2Schema);
+    } else if (activeStep === 2) {
+      setSchema(step3Schema);
+    }
+  }, [activeStep]);
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  // Preserve field values when going back to a previous step
+  useEffect(() => {
+    if (activeStep === 0) {
+      // Ensure the values from previous steps are preserved when navigating back
+      const { status } = getValues();
+      setValue("status", status || "");
+    }
 
-  const handleClickShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+    if (activeStep === 1) {
+      // Ensure values for basic information are retained when going back
+      const { firstName, lastName, partnerFirstName, partnerLastName } =
+        getValues();
+      setValue("firstName", firstName || "");
+      setValue("lastName", lastName || "");
+      setValue("partnerFirstName", partnerFirstName || "");
+      setValue("partnerLastName", partnerLastName || "");
+    }
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+    if (activeStep === 2) {
+      // Ensure account-related fields are retained when going back
+      const { email, password, confirmPassword } = getValues();
+      setValue("email", email || "");
+      setValue("password", password || "");
+      setValue("confirmPassword", confirmPassword || "");
+    }
+  }, [activeStep, setValue, getValues]);
 
   const getStepContent = (step: number) => {
     switch (step) {
@@ -104,126 +109,92 @@ function WizardFormOnBoardCouple() {
         return (
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography
-                variant="h4"
-                align="center"
-                className="font-bold mb-4"
-              >
+              <Typography variant="h4" align="center">
                 Where are you in the planning process?
-              </Typography>
-              <Typography
-                variant="body1"
-                align="center"
-                className="text-gray-500 mb-4"
-              >
-                Whether you're just starting to look around or in the final
-                countdown, we've got you.
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <TTKCustomSelectionList
-                options={coupleStatus}
-                selectedValue={selectedOptionStatus}
-                onChange={setSelectedOptionStatus}
-                className="w-full"
+              <TTKCustomTextField
+                name="status"
+                label="Status"
+                control={control}
+                fullWidth
+                required
+              />
+              <Controller
+                name="status"
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                  <TTKCustomSelectionListWrapper
+                    options={coupleStatus}
+                    selectedValue={field.value || ""}
+                    name="status"
+                    control={control}
+                    type="gif_icon" label={""}                  />
+                )}
               />
             </Grid>
           </Grid>
         );
       case 1:
         return (
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography
-                  variant="h4"
-                  align="center"
-                  className="font-bold mb-4"
-                >
-                  Tell Us About You and Your Partner
-                </Typography>
-                <Typography
-                  variant="body1"
-                  align="center"
-                  className="text-gray-500 mb-4"
-                >
-                  Please provide your personal details so we can create a
-                  personalized experience tailored to your wedding planning
-                  journey. This information helps us understand your unique
-                  story.
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="firstName"
-                  label="First Name"
-                  value={formData.firstName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="lastName"
-                  label="Last Name"
-                  value={formData.lastName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="partnerFirstName"
-                  label="Partner's First Name"
-                  value={formData.partnerFirstName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TTKCustomTextField
-                  name="partnerLastName"
-                  label="Partner's Last Name"
-                  value={formData.partnerLastName || ""}
-                  onChange={handleChange}
-                  fullWidth
-                  required
-                />
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h4" align="center">
+                Tell Us About You and Your Partner
+              </Typography>
             </Grid>
-          </LocalizationProvider>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="firstName"
+                label="First Name"
+                control={control}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="lastName"
+                label="Last Name"
+                control={control}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="partnerFirstName"
+                label="Partner's First Name"
+                control={control}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="partnerLastName"
+                label="Partner's Last Name"
+                control={control}
+                fullWidth
+                required
+              />
+            </Grid>
+          </Grid>
         );
       case 2:
         return (
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography
-                variant="h4"
-                align="center"
-                className="font-bold mb-4"
-              >
+              <Typography variant="h4" align="center">
                 Create Your Account
-              </Typography>
-              <Typography
-                variant="body1"
-                align="center"
-                className="text-gray-500 mb-4"
-              >
-                Set up your account to stay connected with us throughout your
-                planning process. Your email and password will ensure you can
-                access your information anytime. We value your privacy and will
-                keep your details safe.
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <TTKCustomTextField
                 name="email"
                 label="Email"
-                value={formData.email || ""}
-                onChange={handleChange}
+                control={control}
                 fullWidth
                 required
               />
@@ -232,105 +203,66 @@ function WizardFormOnBoardCouple() {
               <TTKCustomTextField
                 name="password"
                 label="Password"
-                value={formData.password || ""}
-                onChange={handleChange}
+                control={control}
+                type={showPassword ? "text" : "password"}
                 fullWidth
                 required
-                type={showPassword ? "text" : "password"}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
+                endAdornment={
+                  <IconButton onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                }
               />
             </Grid>
-
             <Grid item xs={12}>
               <TTKCustomTextField
-                label="Confirm Password"
-                type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
-                value={formData.confirmPassword || ""}
-                onChange={handleChange}
+                label="Confirm Password"
+                control={control}
+                type={showConfirmPassword ? "text" : "password"}
                 fullWidth
                 required
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle confirm password visibility"
-                        onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showConfirmPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
+                endAdornment={
+                  <IconButton
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                }
               />
             </Grid>
           </Grid>
         );
       default:
-        throw new Error("Unknown step");
+        return <div>Unknown step</div>;
     }
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <Stepper activeStep={activeStep} alternativeLabel className="stepper">
+    <Box>
+      <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-
-      <Box
-        sx={{
-          p: 4,
-          mt: 4,
-          borderRadius: 2,
-          boxShadow: "md",
-          bgcolor: "background.paper",
-        }}
-        className="border border-gray-200 dark:border-gray-700"
-      >
-        {getStepContent(activeStep)}
-
-        <div className="mt-6 flex justify-end gap-2">
-          <Button
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            className="register-button"
+      <Box sx={{ p: 4 }}>
+        <form noValidate onSubmit={handleSubmit(handleNext)}>
+          {getStepContent(activeStep)}
+          <Box
+            sx={{ display: "flex", justifyContent: "flex-end", gap: 2, mt: 4 }}
           >
-            Back
-          </Button>
-          <Button
-            onClick={handleNext}
-            className={`submit-button ${
-              activeStep === 0 ? "" : "register-button"
-            }`}
-          >
-            {activeStep === steps.length - 1 ? "Submit" : "Next"}
-          </Button>
-        </div>
+            <Button onClick={handleBack} disabled={activeStep === 0}>
+              Back
+            </Button>
+            <Button type="submit">
+              {activeStep === steps.length - 1 ? "Submit" : "Next"}
+            </Button>
+          </Box>
+        </form>
       </Box>
-    </div>
+    </Box>
   );
 }
 

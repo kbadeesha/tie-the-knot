@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { vendorOptions } from "../../../data/ListItems"; // Ensure this path is correct
-import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
+import { TTKCustomSelectionList } from "../../common/TTKCustomSelectionList";
 
 const TTKWeddingCategories: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -34,7 +34,7 @@ const TTKWeddingCategories: React.FC = () => {
 
       // Show left arrow if scrolled right
       setShowLeftArrow(scrollLeft > 0);
-      
+
       // Show right arrow if scrolled left and there are more items to scroll
       setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 1);
     }
@@ -94,7 +94,7 @@ const TTKWeddingCategories: React.FC = () => {
           <ArrowBackIosIcon />
         </IconButton>
       )}
-      
+
       <Box
         ref={scrollRef}
         sx={{
@@ -113,6 +113,7 @@ const TTKWeddingCategories: React.FC = () => {
           selectedValue={selectedCategory}
           onChange={handleOnChange}
           type="gif_icon"
+          name={"vendorOptions"}
         />
       </Box>
 

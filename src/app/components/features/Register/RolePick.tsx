@@ -1,11 +1,12 @@
 "use client";
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
-import TTKCustomSelectionList from "../../common/TTKCustomSelectionList";
+
 import { FaHeart, FaShoppingCart, FaCalendarAlt } from "react-icons/fa";
 import gif_planner from "../../../../../public/assets/gifs/planner.gif";
 import gif_coins from "../../../../../public/assets/gifs/coins.gif";
 import gif_romance from "../../../../../public/assets/gifs/romance.gif";
+import { TTKCustomSelectionList } from "../../common/TTKCustomSelectionList";
 
 const RolePick = () => {
   const userType = [
@@ -82,8 +83,8 @@ const RolePick = () => {
               options={userType}
               selectedValue={selectedOptionUserType}
               onChange={handleOnChange}
-              className="w-full"
-            />
+              className="w-full" 
+              name={"userType"}            />
           </Grid>
         </Grid>
       </Box>

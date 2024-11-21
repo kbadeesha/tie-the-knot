@@ -4,25 +4,34 @@ import {
   TextFieldProps,
   InputAdornment,
   IconButton,
-  useTheme,
   createTheme,
-  ThemeProvider,
 } from "@mui/material";
 import { SxProps } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { grey, red } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
+import { Controller } from "react-hook-form";
 
 interface TTKCustomTextFieldProps extends Omit<TextFieldProps, "variant"> {
   label: string;
+  name: string;
+  control: any;
   className?: string;
   sx?: SxProps;
+  customOnChange?: any;
+  endAdornment?: React.ReactNode;
+  endAdornmentOnclick?: any;
 }
 
 const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
   label,
   className,
   sx,
+  name,
+  control,
+  customOnChange,
+  endAdornment,
+  endAdornmentOnclick,
   ...otherProps
 }) => {
   const theme = createTheme({
@@ -32,32 +41,10 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
       },
     },
   });
-  const [passwordValidation, setPasswordValidation] = React.useState({
-    strength: "",
-    color: "gray",
-  });
-
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = event.target.value;
-  //   if (otherProps.type === "password") {
-  //     const validation = passwordStrengthValidation(value);
-  //     setPasswordValidation({
-  //       strength: validation.strength,
-  //       color: value ? validation.color : "gray",
-  //     });
-  //   }
-  //   if (otherProps.onChange) {
-  //     otherProps.onChange(event);
-  //   }
-  // };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
 
   const customSx: SxProps = {
+    width: "100%",
+    marginBottom: "16px",
     position: "relative",
     "& .MuiOutlinedInput-root": {
       borderRadius: "15px",
@@ -95,38 +82,37 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <TextField
-          label={label}
-          variant="outlined"
-          className={`border-gray-300 focus:outline-none ${className}`}
-          sx={customSx}
-          InputProps={{
-            endAdornment: otherProps.type === "password" && (
-              <InputAdornment position="end">
-                <IconButton onClick={togglePasswordVisibility} edge="end">
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          {...otherProps}
-          // onChange={handleChange}
-        />
-        {otherProps.type === "password" && (
-          <span
-            style={{
-              marginTop: "8px",
-              display: "block",
-              color: passwordValidation.color,
-              fontSize: "12px",
-            }}
-          >
-            {otherProps.value !== "" &&
-              passwordValidation.strength + " Password"}
-          </span>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <>
+            <TextField
+              label={label}
+              value={value || ""}
+              variant="outlined"
+              className={`border-gray-300 focus:outline-none ${className}`}
+              sx={customSx}
+              InputProps={{
+                endAdornment: (
+                  <span onClick={endAdornmentOnclick}>
+                    <InputAdornment position="end">
+                      {endAdornment}
+                    </InputAdornment>
+                  </span>
+                ),
+              }}
+              onChange={(e) => {
+                onChange(e);
+                if (customOnChange) customOnChange(e);
+              }}
+              helperText={error ? error.message : null}
+              error={!!error}
+              {...otherProps}
+            />
+          </>
         )}
-      </ThemeProvider>
+      />
     </>
   );
 };

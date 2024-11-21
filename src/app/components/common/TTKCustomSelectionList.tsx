@@ -1,26 +1,31 @@
 import React, { useState } from "react";
-import { FormControl, FormGroup, SxProps } from "@mui/material";
+import { FormControl, FormGroup, SxProps, FormHelperText } from "@mui/material";
+import { Controller } from "react-hook-form";
+import { grey } from "@mui/material/colors";
 
 interface Option {
   label: string;
   value: string;
-  icon?: JSX.Element; // For regular icon option
-  staticIcon?: any; // URL for static image (for gif_icon type)
-  animatedIcon?: any; // URL for animated GIF (for gif_icon type)
+  icon?: JSX.Element;
+  staticIcon?: any;
+  animatedIcon?: any;
   type?: string;
 }
 
 interface TTKCustomSelectionListProps {
-  options: Option[]; // Array of options with label, value, icon/staticIcon/animatedIcon
-  selectedValue: string; // Currently selected value
-  onChange: (value: string) => void; // Callback for when the selection changes
-  disabled?: boolean; // Optional prop to disable the entire group
-  className?: string; // Optional className for styling
-  sx?: SxProps; // Optional sx prop for MUI styles
-  type?: string; // Type to determine which render logic to use (default or gif_icon)
+  options: Option[];
+  selectedValue: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+  className?: string;
+  sx?: SxProps;
+  type?: string;
+  error?: string; // Error message passed from Controller
+  name: string;
+  control?: any; // Control for form handling
 }
 
-const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
+export const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
   options,
   selectedValue,
   onChange,
@@ -28,8 +33,49 @@ const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
   className,
   sx = {},
   type,
+  error,
+  name,
+  control,
 }) => {
   const [hoveredValue, setHoveredValue] = useState<string | null>(null);
+
+  const theme = {
+    palette: {
+      primary: {
+        main: grey[900],
+      },
+    },
+  };
+
+  const customSx: SxProps = {
+    width: "100%",
+    marginBottom: "16px",
+    position: "relative",
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "15px",
+      transition: "border-color 0.4s",
+      "& fieldset": {
+        borderColor: theme.palette.primary.main,
+        transition: "border-color 0.4s",
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.primary.main,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.primary.main,
+        animation: "fadeIn 0.6s ease-in",
+      },
+    },
+    "@keyframes fadeIn": {
+      "0%": {
+        opacity: `0`,
+      },
+      "100%": {
+        opacity: `1`,
+      },
+    },
+    ...sx, // Spread additional styles
+  };
 
   const handleButtonClick = (value: string) => {
     if (!disabled) {
@@ -38,19 +84,23 @@ const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
   };
 
   return (
-    <FormControl component="fieldset" className={className} sx={sx}>
+    <FormControl
+      component="fieldset"
+      className={className}
+      sx={customSx}
+      error={!!error} // Show error styles when there is an error
+    >
       <FormGroup>
         <div
           style={{
             display: "flex",
-            flexDirection: type === "gif_icon" ? "row" : "column", // Display in row for gif_icon, column otherwise
+            flexDirection: type === "gif_icon" ? "row" : "column",
             justifyContent: type === "gif_icon" ? "center" : "unset",
-            gap: type === "gif_icon" ? "55px" : "0", // Add some space between buttons if it's gif_icon type
+            gap: type === "gif_icon" ? "55px" : "0",
           }}
         >
           {options.map((option) =>
             type === "gif_icon" ? (
-              // Render GIF buttons when type === "gif_icon"
               <div
                 key={option.value}
                 style={{
@@ -61,54 +111,48 @@ const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
                 }}
               >
                 <button
-                  key={option.value}
                   onClick={() => handleButtonClick(option.value)}
                   onMouseEnter={() => setHoveredValue(option.value)}
                   onMouseLeave={() => setHoveredValue(null)}
                   disabled={disabled}
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
                     background:
-                      selectedValue === option.value ? "#ffffff" : "#ffffff", // Black for selected
+                      selectedValue === option.value ? "#ffffff" : "#ffffff",
                     color:
-                      selectedValue === option.value ? "#ffffff" : "#ffffff", // White text for selected
+                      selectedValue === option.value ? "#ffffff" : "#ffffff",
                     borderRadius: "10px",
                     padding: "5px",
                     cursor: disabled ? "not-allowed" : "pointer",
-                    width: "50px", // Square size for gif_icon type
-                    height: "50px", // Square size for gif_icon type
+                    width: "50px",
+                    height: "50px",
                     outline: "none",
                     transition: "background 0.3s, transform 0.3s",
                     transform:
                       selectedValue === option.value
                         ? "scale(1.05)"
-                        : "scale(1)", // Scale when selected
+                        : "scale(1)",
                     overflow: "hidden",
                   }}
                 >
                   <img
                     src={
                       hoveredValue === option.value && option.animatedIcon
-                        ? option.animatedIcon // Show animated GIF on hover
-                        : option.staticIcon // Show static image otherwise
+                        ? option.animatedIcon
+                        : option.staticIcon
                     }
                     alt={option.label}
                     style={{
                       width: "100%",
                       height: "100%",
-                      objectFit: "cover", // Ensure the image covers the button
+                      objectFit: "cover",
                     }}
                   />
                 </button>
                 <div style={{ textAlign: "center", marginTop: "5px" }}>
                   {option.label}
-                </div>{" "}
-                {/* Label below the button */}
+                </div>
               </div>
             ) : (
-              // Render regular buttons when type is not gif_icon
               <button
                 key={option.value}
                 onClick={() => handleButtonClick(option.value)}
@@ -117,8 +161,8 @@ const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
                   display: "flex",
                   alignItems: "center",
                   background:
-                    selectedValue === option.value ? "#000000" : "#ffffff", // Black for selected
-                  color: selectedValue === option.value ? "#ffffff" : "#000000", // White text for selected
+                    selectedValue === option.value ? "#000000" : "#ffffff",
+                  color: selectedValue === option.value ? "#ffffff" : "#000000",
                   border: "1px solid #ccc",
                   borderRadius: "15px",
                   padding: "10px",
@@ -126,9 +170,9 @@ const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
                   marginBottom: "8px",
                   width: "100%",
                   outline: "none",
-                  transition: "background 0.3s, transform 0.3s", // Add transform for scaling
+                  transition: "background 0.3s, transform 0.3s",
                   transform:
-                    selectedValue === option.value ? "scale(1.02)" : "scale(1)", // Scale when selected
+                    selectedValue === option.value ? "scale(1.02)" : "scale(1)",
                 }}
               >
                 {option.icon}
@@ -137,9 +181,50 @@ const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
             )
           )}
         </div>
+        {error && <FormHelperText>{error}</FormHelperText>}{" "}
+        {/* Show error message */}
       </FormGroup>
     </FormControl>
   );
 };
 
-export default TTKCustomSelectionList;
+// Wrap this component inside Controller for form handling
+
+interface TTKCustomSelectionListWrapperProps {
+  name: string;
+  control: any; // You can replace 'any' with the type of the 'control' prop, e.g., 'Control<FormData>'
+  options: { label: string; value: string; [key: string]: any }[]; // Type for options, assuming each option has a label and value
+  label: string;
+  type?: string;
+  selectedValue: string;
+  
+}
+
+export const TTKCustomSelectionListWrapper: React.FC<
+  TTKCustomSelectionListWrapperProps
+> = ({
+  name,
+  control,
+  options,
+  label,
+  type = "default", // Default type if not provided
+  selectedValue, // Destructure selectedValue here
+}) => {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field: { onChange, value }, fieldState: { error } }) => (
+        <TTKCustomSelectionList
+          options={options}
+          selectedValue={value || selectedValue} // Pass selectedValue here
+          onChange={onChange}
+          error={error?.message}
+          name={name}
+          control={control}
+          type={type}
+        />
+      )}
+    />
+  );
+};

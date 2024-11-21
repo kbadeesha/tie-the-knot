@@ -11,7 +11,7 @@ import {
   InputAdornment,
   SelectChangeEvent,
 } from "@mui/material";
-import TTKCustomTextField from "../../common/TTKCustomTextField";
+import TTKCustomTextField from "../../common/TTKCustomTextFieldOld";
 import { usePathname } from "next/navigation";
 import { IVendorRegisterFormData } from "@/app/types/Vendor/registerVendorType";
 import "../../../../styles/pages/register.css";
