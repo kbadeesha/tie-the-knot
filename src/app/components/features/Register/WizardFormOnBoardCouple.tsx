@@ -113,14 +113,7 @@ function WizardFormOnBoardCouple() {
                 Where are you in the planning process?
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <TTKCustomTextField
-                name="status"
-                label="Status"
-                control={control}
-                fullWidth
-                required
-              />
+            <Grid item xs={12} >
               <Controller
                 name="status"
                 control={control}
@@ -130,7 +123,8 @@ function WizardFormOnBoardCouple() {
                     selectedValue={field.value || ""}
                     name="status"
                     control={control}
-                    type="gif_icon" label={""}                  />
+                    label={""}
+                  />
                 )}
               />
             </Grid>

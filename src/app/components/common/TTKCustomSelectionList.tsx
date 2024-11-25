@@ -1,8 +1,8 @@
+"use-client";
 import React, { useState } from "react";
+import "../../../styles//components/customselect.css";
 import { FormControl, FormGroup, SxProps, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
-import { grey } from "@mui/material/colors";
-
 interface Option {
   label: string;
   value: string;
@@ -31,51 +31,11 @@ export const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
   onChange,
   disabled = false,
   className,
-  sx = {},
+  sx,
   type,
   error,
-  name,
-  control,
 }) => {
   const [hoveredValue, setHoveredValue] = useState<string | null>(null);
-
-  const theme = {
-    palette: {
-      primary: {
-        main: grey[900],
-      },
-    },
-  };
-
-  const customSx: SxProps = {
-    width: "100%",
-    marginBottom: "16px",
-    position: "relative",
-    "& .MuiOutlinedInput-root": {
-      borderRadius: "15px",
-      transition: "border-color 0.4s",
-      "& fieldset": {
-        borderColor: theme.palette.primary.main,
-        transition: "border-color 0.4s",
-      },
-      "&:hover fieldset": {
-        borderColor: theme.palette.primary.main,
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: theme.palette.primary.main,
-        animation: "fadeIn 0.6s ease-in",
-      },
-    },
-    "@keyframes fadeIn": {
-      "0%": {
-        opacity: `0`,
-      },
-      "100%": {
-        opacity: `1`,
-      },
-    },
-    ...sx, // Spread additional styles
-  };
 
   const handleButtonClick = (value: string) => {
     if (!disabled) {
@@ -87,7 +47,7 @@ export const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
     <FormControl
       component="fieldset"
       className={className}
-      sx={customSx}
+      sx={sx}
       error={!!error} // Show error styles when there is an error
     >
       <FormGroup>
@@ -154,22 +114,15 @@ export const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
               </div>
             ) : (
               <button
+                className="custom-selection-list-no-gif-button"
                 key={option.value}
                 onClick={() => handleButtonClick(option.value)}
                 disabled={disabled}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
                   background:
                     selectedValue === option.value ? "#000000" : "#ffffff",
                   color: selectedValue === option.value ? "#ffffff" : "#000000",
-                  border: "1px solid #ccc",
-                  borderRadius: "15px",
-                  padding: "10px",
                   cursor: disabled ? "not-allowed" : "pointer",
-                  marginBottom: "8px",
-                  width: "100%",
-                  outline: "none",
                   transition: "background 0.3s, transform 0.3s",
                   transform:
                     selectedValue === option.value ? "scale(1.02)" : "scale(1)",
@@ -197,7 +150,6 @@ interface TTKCustomSelectionListWrapperProps {
   label: string;
   type?: string;
   selectedValue: string;
-  
 }
 
 export const TTKCustomSelectionListWrapper: React.FC<

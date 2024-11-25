@@ -12,8 +12,8 @@ const page = () => {
           <Image
             src={loginImage}
             alt="Login"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             className="register-image"
           />
         </Grid>

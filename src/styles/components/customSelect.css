@@ -1,0 +1,16 @@
+.custom-selection-list-no-gif-button:hover {
+    background: #1976d2; /* Change background on hover */
+    color: #ffffff; /* Change text color on hover */
+    transform: scale(1.05); /* Optional: Add scale effect for hover */
+  }
+  .custom-selection-list-no-gif-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px;
+    width: 180%;
+    outline: none;
+    margin-bottom: 8px;
+}
