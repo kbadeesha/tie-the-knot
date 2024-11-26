@@ -23,6 +23,7 @@ import {
 import { IUserOnBoardFormData } from "@/app/types/User/onBoardUserTyp"; // Adjust path if necessary
 import { coupleStatus } from "@/app/data/ListItems";
 import { TTKCustomSelectionListWrapper } from "../../common/TTKCustomSelectionList";
+import "../../../../styles/pages/register.css";
 
 const steps = ["Status", "Basic Information", "Account Details"];
 
@@ -113,7 +114,7 @@ function WizardFormOnBoardCouple() {
                 Where are you in the planning process?
               </Typography>
             </Grid>
-            <Grid item xs={12} >
+            <Grid item xs={12}>
               <Controller
                 name="status"
                 control={control}
@@ -234,7 +235,7 @@ function WizardFormOnBoardCouple() {
 
   return (
     <Box>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper activeStep={activeStep} alternativeLabel className="stepper">
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

@@ -301,10 +301,6 @@ function WizardFormOnboardVendor() {
       <Box
         sx={{
           p: 4,
-          mt: 4,
-          borderRadius: 2,
-          boxShadow: "md",
-          bgcolor: "background.paper",
         }}
         className="border border-gray-200 dark:border-gray-700"
       >
