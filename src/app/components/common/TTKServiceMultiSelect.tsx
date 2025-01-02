@@ -5,11 +5,12 @@ import CheckIcon from "@mui/icons-material/Check";
 interface TTKServiceMultiSelectProps {
   label: string;
   description?: string;
-  onChange: (selectedServices: string[], label: string) => void; 
+  onChange: (selectedServices: string[], label: string) => void;
   options: {
     value: string;
     label: string;
   }[];
+  selectedServices: string[];
 }
 
 const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
@@ -17,8 +18,9 @@ const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
   label,
   description,
   onChange,
+  selectedServices,
 }) => {
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  // const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   // Handle button click for selecting/deselecting items
   const handleSelect = (service: string) => {
@@ -26,8 +28,7 @@ const TTKServiceMultiSelect: React.FC<TTKServiceMultiSelectProps> = ({
       ? selectedServices.filter((item) => item !== service)
       : [...selectedServices, service];
 
-    setSelectedServices(updatedSelectedServices);
-    onChange(updatedSelectedServices, label); // Pass the label to onChange
+    onChange(updatedSelectedServices, label); // Pass the updated selected services to onChange
   };
 
   if (!options || options.length === 0) {

@@ -68,7 +68,7 @@ function WizardFormOnboardVendor() {
   const handleServiceChange = (selectedServices: string[], label: string) => {
     setFormData((prevData) => {
       // 1. Create a copy of the existing services or initialize an empty object
-      const updatedServices = prevData.selectedServices ? { ...prevData.selectedServices } : {}; 
+      const updatedServices = { ...prevData.selectedServices };
   
       // 2. Update services for the specific category (label)
       updatedServices[label] = selectedServices; 
@@ -244,6 +244,7 @@ function WizardFormOnboardVendor() {
                   onChange={(selected) =>
                     handleServiceChange(selected, filter.heading)
                   }
+                  selectedServices={formData.selectedServices?.[filter.heading] || []}
                 />
               </Grid>
             ))}
