@@ -39,7 +39,7 @@ export const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
 
   const handleButtonClick = (value: string) => {
     if (!disabled) {
-      onChange(value); // Notify parent of the selected value
+      onChange(value);
     }
   };
 
@@ -48,7 +48,7 @@ export const TTKCustomSelectionList: React.FC<TTKCustomSelectionListProps> = ({
       component="fieldset"
       className={className}
       sx={sx}
-      error={!!error} // Show error styles when there is an error
+      error={!!error} 
     >
       <FormGroup>
         <div

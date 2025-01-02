@@ -37,7 +37,6 @@ function WizardFormOnBoardCouple() {
   const methods = useForm<IUserOnBoardFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      // Initialize default values for all fields
       status: "",
       firstName: "",
       lastName: "",
@@ -50,13 +49,10 @@ function WizardFormOnBoardCouple() {
   });
 
   const { handleSubmit, control, reset, setValue, watch, getValues } = methods;
-
-  // Handle moving to the next step
   const handleNext = async (data: any) => {
     if (activeStep === steps.length - 1) {
-      // Perform the form submission if on the last step
       console.log("Form data submitted:", data);
-      router.push("/"); // Navigate to another page after submission
+      router.push("/");
     } else {
       setActiveStep((prevStep) => prevStep + 1);
     }
@@ -65,8 +61,6 @@ function WizardFormOnBoardCouple() {
   const handleBack = () => {
     setActiveStep((prevStep) => prevStep - 1);
   };
-
-  // Set validation schema based on active step
   useEffect(() => {
     if (activeStep === 0) {
       setSchema(step1Schema);
@@ -77,16 +71,14 @@ function WizardFormOnBoardCouple() {
     }
   }, [activeStep]);
 
-  // Preserve field values when going back to a previous step
+  
   useEffect(() => {
     if (activeStep === 0) {
-      // Ensure the values from previous steps are preserved when navigating back
       const { status } = getValues();
       setValue("status", status || "");
     }
 
     if (activeStep === 1) {
-      // Ensure values for basic information are retained when going back
       const { firstName, lastName, partnerFirstName, partnerLastName } =
         getValues();
       setValue("firstName", firstName || "");
@@ -96,7 +88,6 @@ function WizardFormOnBoardCouple() {
     }
 
     if (activeStep === 2) {
-      // Ensure account-related fields are retained when going back
       const { email, password, confirmPassword } = getValues();
       setValue("email", email || "");
       setValue("password", password || "");
