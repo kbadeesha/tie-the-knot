@@ -44,7 +44,7 @@ const TTKCustomTextField: React.FC<TTKCustomTextFieldProps> = ({
 
   const customSx: SxProps = {
     width: "100%",
-    marginBottom: "16px",
+    marginBottom: "6px",
     position: "relative",
     "& .MuiOutlinedInput-root": {
       borderRadius: "15px",
