@@ -65,11 +65,19 @@ function WizardFormOnboardVendor() {
     });
   };
 
-  const handleServiceChange = (selectedServices: string[]) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      selectedServices, // Update the selected services in form data
-    }));
+  const handleServiceChange = (selectedServices: string[], label: string) => {
+    setFormData((prevData) => {
+      // 1. Create a copy of the existing services or initialize an empty object
+      const updatedServices = prevData.selectedServices ? { ...prevData.selectedServices } : {}; 
+  
+      // 2. Update services for the specific category (label)
+      updatedServices[label] = selectedServices; 
+  
+      return {
+        ...prevData,
+        selectedServices: updatedServices, 
+      };
+    });
   };
 
   const getStepContent = (step: number) => {
@@ -227,13 +235,15 @@ function WizardFormOnboardVendor() {
                 What are the services that you provide?
               </Typography>
             </Grid>
-            {venueFilters.map((filter) => (
-              <Grid item xs={12}>
+            {venueFilters.map((filter, index) => (
+              <Grid item xs={12} key={index}>
                 <TTKServiceMultiSelect
                   options={filter.data}
                   label={filter.heading}
                   description={filter.description}
-                  onChange={handleServiceChange}
+                  onChange={(selected) =>
+                    handleServiceChange(selected, filter.heading)
+                  }
                 />
               </Grid>
             ))}

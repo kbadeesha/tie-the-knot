@@ -9,4 +9,5 @@ export interface IVendorRegisterFormData {
     confirmPassword?: string;
     phoneNumber?: string;
     vendorType?: string;
+    selectedServices?: { [key: string]: string[] };
   }
