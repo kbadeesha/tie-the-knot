@@ -66,7 +66,7 @@ function WizardFormOnboardVendor() {
       city: "",
       companyName: "",
       vendorType: "",
-      selectedServices: {},
+      vendorServices: {},
       minPrice: 0,
       maxPrice: 0,
       avgMinPrice: 0,
@@ -78,7 +78,7 @@ function WizardFormOnboardVendor() {
 
   const handleNext = async (data: any) => {
     if (activeStep === steps.length - 1) {
-      data.selectedServices = vendorServices;
+      data.vendorServices = vendorServices;
       console.log("Vendor form submitted with data:", vendorServices);
       console.log("Vendor form Data:", data);
     } else {
