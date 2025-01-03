@@ -10,8 +10,9 @@ import {
   Grid,
   InputAdornment,
   SelectChangeEvent,
+  IconButton,
 } from "@mui/material";
-import TTKCustomTextField from "../../common/TTKCustomTextFieldOld";
+import TTKCustomTextField from "../../common/TTKCustomTextField";
 import { usePathname } from "next/navigation";
 import { IVendorRegisterFormData } from "@/app/types/Vendor/registerVendorType";
 import "../../../../styles/pages/register.css";
@@ -20,6 +21,13 @@ import TTKServiceMultiSelect from "../../common/TTKServiceMultiSelect";
 import { VENUE_FILTERS } from "@/app/data/filterData";
 import TTKCustomSelect from "../../common/TTKCustomSelect";
 import { vendorOptions } from "@/app/data/ListItems";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  step1Schema,
+  step2Schema,
+  step3Schema,
+} from "@/app/schemas/wizardFormVendorOnboardSchema";
 
 const steps = [
   "Vendor Vows",
@@ -35,6 +43,8 @@ function WizardFormOnboardVendor() {
   const [formData, setFormData] = useState<IVendorRegisterFormData>({});
   const [isPlannerPage, setIsPlannerPage] = useState(false);
   const pathname = usePathname();
+  const [schema, setSchema] = useState<any>({});
+
   const venueFilters = VENUE_FILTERS;
   useEffect(() => {
     if (pathname) {
@@ -42,15 +52,71 @@ function WizardFormOnboardVendor() {
     }
   }, [pathname]);
 
-  const handleNext = () => {
+  const methods = useForm<IVendorRegisterFormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phoneNumber: "",
+      address: "",
+      city: "",
+      companyName: "",
+      vendorType: "",
+      selectedServices: {},
+      minPrice: 0,
+      maxPrice: 0,
+      avgMinPrice: 0,
+      avgMaxPrice: 0,
+    },
+  });
+  const { handleSubmit, control, reset, setValue, watch, getValues } = methods;
+
+  const handleNext = async (data: any) => {
     if (activeStep === steps.length - 1) {
       console.log("Vendor form submitted with data:", formData);
+      console.log("Vendor form Data:", data);
     } else {
       setActiveStep((prev) => prev + 1);
     }
   };
 
   const handleBack = () => setActiveStep((prev) => prev - 1);
+  useEffect(() => {
+    if (activeStep === 1) {
+      setSchema(step1Schema);
+    } else if (activeStep === 2) {
+      setSchema(step2Schema);
+    } else if (activeStep === 3) {
+      setSchema(step3Schema);
+    }
+  }, [activeStep]);
+
+  useEffect(() => {
+    if (activeStep === 1) {
+      const { vendorType, companyName, firstName, lastName, phoneNumber } =
+        getValues();
+      setValue("companyName", companyName || "");
+      setValue("firstName", firstName || "");
+      setValue("lastName", lastName || "");
+      setValue("phoneNumber", phoneNumber || "");
+    }
+
+    if (activeStep === 2) {
+      const { address, city } = getValues();
+      setValue("address", address || "");
+      setValue("city", city || "");
+    }
+
+    if (activeStep === 3) {
+      // const { email, password, confirmPassword } = getValues();
+      // setValue("email", email || "");
+      // setValue("password", password || "");
+      // setValue("confirmPassword", confirmPassword || "");
+    }
+  }, [activeStep, setValue, getValues]);
   const handleChangeSelect = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -58,24 +124,14 @@ function WizardFormOnboardVendor() {
       [name]: value,
     }));
   };
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
 
   const handleServiceChange = (selectedServices: string[], label: string) => {
     setFormData((prevData) => {
-      // 1. Create a copy of the existing services or initialize an empty object
       const updatedServices = { ...prevData.selectedServices };
-  
-      // 2. Update services for the specific category (label)
-      updatedServices[label] = selectedServices; 
-  
+      updatedServices[label] = selectedServices;
       return {
         ...prevData,
-        selectedServices: updatedServices, 
+        selectedServices: updatedServices,
       };
     });
   };
@@ -127,20 +183,18 @@ function WizardFormOnboardVendor() {
               <TTKCustomTextField
                 name="companyName"
                 label="Company Name"
-                value={formData.companyName || ""}
-                onChange={handleChange}
                 fullWidth
                 required
+                control={control}
               />
             </Grid>
             <Grid item xs={6}>
               <TTKCustomTextField
                 name="firstName"
                 label="First Name"
-                value={formData.firstName || ""}
-                onChange={handleChange}
                 fullWidth
                 required
+                control={control}
               />
             </Grid>
 
@@ -148,18 +202,15 @@ function WizardFormOnboardVendor() {
               <TTKCustomTextField
                 name="lastName"
                 label="Last Name"
-                value={formData.lastName || ""}
-                onChange={handleChange}
                 fullWidth
                 required
+                control={control}
               />
             </Grid>
             <Grid item xs={12}>
               <TTKCustomTextField
                 name="phoneNumber"
                 label="Business Phone Number"
-                value={formData.phoneNumber || ""}
-                onChange={handleChange}
                 fullWidth
                 required
                 placeholder="7XXXXXXX"
@@ -168,6 +219,7 @@ function WizardFormOnboardVendor() {
                     <InputAdornment position="start">(+94)</InputAdornment>
                   ),
                 }}
+                control={control}
               />
             </Grid>
           </Grid>
@@ -198,20 +250,18 @@ function WizardFormOnboardVendor() {
               <TTKCustomTextField
                 name="address"
                 label="Address"
-                value={formData.address || ""}
-                onChange={handleChange}
                 fullWidth
                 required
+                control={control}
               />
             </Grid>
             <Grid item xs={12}>
               <TTKCustomTextField
                 name="city"
                 label="City"
-                value={formData.city || ""}
-                onChange={handleChange}
                 fullWidth
                 required
+                control={control}
               />
             </Grid>
           </Grid>
@@ -244,7 +294,9 @@ function WizardFormOnboardVendor() {
                   onChange={(selected) =>
                     handleServiceChange(selected, filter.heading)
                   }
-                  selectedServices={formData.selectedServices?.[filter.heading] || []}
+                  selectedServices={
+                    formData.selectedServices?.[filter.heading] || []
+                  }
                 />
               </Grid>
             ))}
@@ -254,22 +306,69 @@ function WizardFormOnboardVendor() {
         return (
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography
-                variant="h4"
-                align="center"
-                className="font-bold mb-4"
-              >
+              <Typography variant="h4" align="center" className="font-bold">
                 Let's Talk about Pricing
               </Typography>
-              <Typography
-                variant="body1"
-                align="center"
-                className="text-gray-500 mb-4"
-              >
-                Prices to get an idea for the clients.
-              </Typography>
             </Grid>
-            <Grid item xs={12}></Grid>
+            <Typography
+              variant="body1"
+              align="center"
+              className="text-gray-500 mb-4"
+            >
+              What’s the absolute minimum couples can spend with you? The
+              maximum, if they choose all your services?
+            </Typography>
+            <Grid item xs={6}>
+              <TTKCustomTextField
+                name="minPrice"
+                label="From"
+                type="number"
+                fullWidth
+                required
+                control={control}
+                endAdornment={"LKR"}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TTKCustomTextField
+                name="maxPrice"
+                label="To"
+                type="number"
+                fullWidth
+                required
+                control={control}
+                endAdornment={"LKR"}
+              />
+            </Grid>
+            <Typography
+              variant="body1"
+              align="center"
+              className="text-gray-500 mt-5"
+            >
+              On average, how much do most couples typically spend with you?
+            </Typography>
+            <Grid item xs={6}>
+              <TTKCustomTextField
+                name="avgMinPrice"
+                label="From"
+                type="number"
+                fullWidth
+                required
+                control={control}
+                endAdornment={"LKR"}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TTKCustomTextField
+                name="avgMaxPrice"
+                label="To"
+                type="number"
+                fullWidth
+                required
+                endAdornment={"LKR"}
+                control={control}
+              />
+            </Grid>
           </Grid>
         );
       case 5:
@@ -315,31 +414,33 @@ function WizardFormOnboardVendor() {
         }}
         className="border border-gray-200 dark:border-gray-700"
       >
-        {getStepContent(activeStep)}
-
-        <div className="mt-6 flex justify-end gap-2">
-          {" "}
-          {/* Using gap-2 to add space */}
-          <Button
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            className="register-button"
-          >
-            Back
-          </Button>
-          <Button
-            onClick={handleNext}
-            className={`submit-button ${
-              activeStep === 0 ? "" : "register-button"
-            }`}
-          >
-            {activeStep === 0
-              ? "I do"
-              : activeStep === steps.length - 1
-              ? "Submit"
-              : "Next"}
-          </Button>
-        </div>
+        <form noValidate onSubmit={handleSubmit(handleNext)}>
+          {getStepContent(activeStep)}
+          <div className="mt-6 flex justify-end gap-2">
+            {" "}
+            {/* Using gap-2 to add space */}
+            <Button
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              className="register-button"
+            >
+              Back
+            </Button>
+            <Button
+              type={activeStep === 0 ? "button" : "submit"}
+              onClick={activeStep === 0 ? () => handleNext({}) : undefined}
+              className={`submit-button ${
+                activeStep === 0 ? "" : "register-button"
+              }`}
+            >
+              {activeStep === 0
+                ? "I do"
+                : activeStep === steps.length - 1
+                ? "Submit"
+                : "Next"}
+            </Button>
+          </div>
+        </form>
       </Box>
     </div>
   );

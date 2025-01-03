@@ -10,4 +10,8 @@ export interface IVendorRegisterFormData {
     phoneNumber?: string;
     vendorType?: string;
     selectedServices?: { [key: string]: string[] };
+    minPrice?: number;
+    maxPrice?: number;
+    avgMinPrice?: number;
+    avgMaxPrice?: number;
   }
