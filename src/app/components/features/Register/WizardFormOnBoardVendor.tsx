@@ -28,6 +28,7 @@ import {
   step2Schema,
   step3Schema,
 } from "@/app/schemas/wizardFormVendorOnboardSchema";
+import TTKCustomCheckbox from "../../common/TTKCustomCheckbox";
 
 const steps = [
   "Vendor Vows",
@@ -70,6 +71,7 @@ function WizardFormOnboardVendor() {
       maxPrice: 0,
       avgMinPrice: 0,
       avgMaxPrice: 0,
+      // vows: false,
     },
   });
   const { handleSubmit, control, reset, setValue, watch, getValues } = methods;
@@ -95,6 +97,10 @@ function WizardFormOnboardVendor() {
   }, [activeStep]);
 
   useEffect(() => {
+    // if (activeStep === 0) {
+    //   const { vows } = getValues();
+    //   setValue("vows", vows || false);
+    // }
     if (activeStep === 1) {
       const { vendorType, companyName, firstName, lastName, phoneNumber } =
         getValues();
@@ -142,6 +148,12 @@ function WizardFormOnboardVendor() {
         return (
           <Grid container spacing={2} alignItems="stretch">
             <VendorVows />
+            {/* <TTKCustomCheckbox
+              label={"vows"}
+              name={"vows"}
+              checked={false}
+              control={control}
+            /> */}
           </Grid>
         );
       case 1:
@@ -171,11 +183,9 @@ function WizardFormOnboardVendor() {
               <TTKCustomSelect
                 name="vendorType"
                 label="Vendor Type"
-                value={formData.vendorType || (isPlannerPage ? "planner" : "")} // Set "planners" if on the planner page Fallback to empty string
-                onChange={handleChangeSelect}
                 options={vendorOptions}
-                disabled={isPlannerPage}
                 fullWidth
+                control={control}
               />
             </Grid>
 

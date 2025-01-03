@@ -2,6 +2,7 @@ import * as yup from "yup";
 
 // Step 1: Status Selection Validation
 export const step1Schema = yup.object({
+  vendorType: yup.string().required("Please select your vendor type."),
   companyName: yup.string().required("Please select your company name."),
   firstName: yup.string().required("First name is required."),
   lastName: yup.string().required("Last name is required."),

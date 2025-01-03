@@ -4,35 +4,37 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  FormHelperText,
+  createTheme,
+  ThemeProvider,
+  SxProps,
 } from "@mui/material";
-import { SxProps } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Controller } from "react-hook-form";
 import { grey } from "@mui/material/colors";
 
 interface TTKCustomSelectProps {
   name: string;
   label: string;
-  value: string;
-  onChange: (event: SelectChangeEvent<string>) => void;
+  control: any; // Passed by react-hook-form
   options: { label: string; value: string; staticIcon: string }[];
-  disabled?: boolean;
   className?: string;
-  fullWidth?: boolean;
   sx?: SxProps;
   required?: boolean;
+  fullWidth?: boolean;
+  customOnChange?: (event: SelectChangeEvent<string>) => void;
 }
 
 const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
   name,
   label,
-  value,
-  onChange,
+  control,
   options,
-  disabled = false,
   className,
-  fullWidth = false,
   sx = {},
+  required = false,
+  fullWidth = false,
+  customOnChange,
   ...otherProps
 }) => {
   const theme = createTheme({
@@ -80,53 +82,47 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <FormControl
-        fullWidth={fullWidth}
-        sx={customSx}
-        variant="outlined"
-        className={className}
-      >
-        <InputLabel>{label}</InputLabel>
-        <Select
-          {...otherProps}
-          name={name}
-          value={value}
-          onChange={(event) => onChange(event as SelectChangeEvent<string>)}
-          label={label}
-          disabled={disabled}
-          className="border-gray-300 focus:outline-none"
-          renderValue={(selectedValue) => {
-            const selectedOption = options.find(
-              (option) => option.value === selectedValue
-            );
-            return selectedOption ? (
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <img
-                  src={selectedOption.staticIcon}
-                  alt={`${selectedOption.label} staticIcon`}
-                  style={{ width: 20, height: 20, marginRight: 8 }}
-                />
-                {selectedOption.label}
-              </div>
-            ) : null;
-          }}
-        >
-          {options.map((option) => (
-            <MenuItem
-              key={option.value}
-              value={option.value}
-              className="flex items-center"
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <FormControl
+            fullWidth={fullWidth}
+            sx={customSx}
+            variant="outlined"
+            className={className}
+            error={!!error}
+            required={required}
+          >
+            <InputLabel>{label}</InputLabel>
+            <Select
+              {...otherProps}
+              value={value || ""}
+              onChange={(e) => {
+                onChange(e);
+                if (customOnChange) customOnChange(e); // Call the custom onChange handler
+              }}
+              label={label}
             >
-              <img
-                src={option.staticIcon}
-                alt={`${option.label} staticIcon`}
-                style={{ width: 20, height: 20, marginRight: 8 }}
-              />
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+              {options.map((option) => (
+                <MenuItem
+                  key={option.value}
+                  value={option.value}
+                  className="flex items-center"
+                >
+                  <img
+                    src={option.staticIcon}
+                    alt={`${option.label} staticIcon`}
+                    style={{ width: 20, height: 20, marginRight: 8 }}
+                  />
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+            {error && <FormHelperText>{error.message}</FormHelperText>}
+          </FormControl>
+        )}
+      />
     </ThemeProvider>
   );
 };
