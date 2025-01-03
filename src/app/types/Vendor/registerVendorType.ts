@@ -14,5 +14,5 @@ export interface IVendorRegisterFormData {
     maxPrice?: number;
     avgMinPrice?: number;
     avgMaxPrice?: number;
-    // vows:boolean;
+    vows:boolean;
   }

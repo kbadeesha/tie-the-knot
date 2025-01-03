@@ -1,5 +1,7 @@
 import * as yup from "yup";
-
+export const step0Schema = yup.object({
+  vows: yup.bool().oneOf([true],"Please accept the vendor vows."),
+});
 // Step 1: Status Selection Validation
 export const step1Schema = yup.object({
   vendorType: yup.string().required("Please select your vendor type."),

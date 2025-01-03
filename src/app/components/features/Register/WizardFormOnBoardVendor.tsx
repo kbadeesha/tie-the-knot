@@ -24,6 +24,7 @@ import { vendorOptions } from "@/app/data/ListItems";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
+  step0Schema,
   step1Schema,
   step2Schema,
   step3Schema,
@@ -71,7 +72,7 @@ function WizardFormOnboardVendor() {
       maxPrice: 0,
       avgMinPrice: 0,
       avgMaxPrice: 0,
-      // vows: false,
+      vows: false,
     },
   });
   const { handleSubmit, control, reset, setValue, watch, getValues } = methods;
@@ -88,7 +89,9 @@ function WizardFormOnboardVendor() {
 
   const handleBack = () => setActiveStep((prev) => prev - 1);
   useEffect(() => {
-    if (activeStep === 1) {
+    if (activeStep === 0) {
+      setSchema(step0Schema);
+    } else if (activeStep === 1) {
       setSchema(step1Schema);
     } else if (activeStep === 2) {
       setSchema(step2Schema);
@@ -98,10 +101,10 @@ function WizardFormOnboardVendor() {
   }, [activeStep]);
 
   useEffect(() => {
-    // if (activeStep === 0) {
-    //   const { vows } = getValues();
-    //   setValue("vows", vows || false);
-    // }
+    if (activeStep === 0) {
+      const { vows } = getValues();
+      setValue("vows", vows || false);
+    }
     if (activeStep === 1) {
       const { vendorType, companyName, firstName, lastName, phoneNumber } =
         getValues();
@@ -142,12 +145,12 @@ function WizardFormOnboardVendor() {
         return (
           <Grid container spacing={2} alignItems="stretch">
             <VendorVows />
-            {/* <TTKCustomCheckbox
-              label={"vows"}
+            <TTKCustomCheckbox
+              label={"I Accept the Vendor Vows"}
               name={"vows"}
               checked={false}
               control={control}
-            /> */}
+            />
           </Grid>
         );
       case 1:
@@ -431,8 +434,7 @@ function WizardFormOnboardVendor() {
               Back
             </Button>
             <Button
-              type={activeStep === 0 ? "button" : "submit"}
-              onClick={activeStep === 0 ? () => handleNext({}) : undefined}
+              type={"submit"}
               className={`submit-button ${
                 activeStep === 0 ? "" : "register-button"
               }`}

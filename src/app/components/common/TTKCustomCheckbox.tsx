@@ -4,6 +4,7 @@ import {
   FormControlLabel,
   FormControl,
   FormGroup,
+  FormHelperText,
 } from "@mui/material";
 import { SxProps } from "@mui/material";
 import { Controller } from "react-hook-form";
@@ -39,7 +40,7 @@ const TTKCustomCheckbox: React.FC<TTKCustomCheckboxProps> = ({
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={checked}
+                  checked={value}
                   onChange={(e) => {
                     onChange(e);
                     if (customOnChange) customOnChange(e);
@@ -51,6 +52,15 @@ const TTKCustomCheckbox: React.FC<TTKCustomCheckboxProps> = ({
               label={label}
             />
           </FormGroup>
+          {error && (
+            <FormHelperText
+              sx={{
+                color: "red",
+              }}
+            >
+              {error.message}
+            </FormHelperText>
+          )}
         </FormControl>
       )}
     />
