@@ -51,6 +51,9 @@ function WizardFormOnboardVendor() {
   useEffect(() => {
     if (pathname) {
       setIsPlannerPage(pathname.includes("planner"));
+      if (pathname.includes("planner")) {
+        setValue("vendorType", "planner");
+      }
     }
   }, [pathname]);
 
@@ -108,6 +111,7 @@ function WizardFormOnboardVendor() {
     if (activeStep === 1) {
       const { vendorType, companyName, firstName, lastName, phoneNumber } =
         getValues();
+      setValue("vendorType", vendorType || "");
       setValue("companyName", companyName || "");
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
@@ -183,6 +187,7 @@ function WizardFormOnboardVendor() {
                 options={vendorOptions}
                 fullWidth
                 control={control}
+                disabled={isPlannerPage}
               />
             </Grid>
 

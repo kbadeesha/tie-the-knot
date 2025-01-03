@@ -22,6 +22,7 @@ interface TTKCustomSelectProps {
   sx?: SxProps;
   required?: boolean;
   fullWidth?: boolean;
+  disabled?: boolean;
   customOnChange?: (event: SelectChangeEvent<string>) => void;
 }
 
@@ -34,6 +35,7 @@ const TTKCustomSelect: React.FC<TTKCustomSelectProps> = ({
   sx = {},
   required = false,
   fullWidth = false,
+  disabled = false,
   customOnChange,
   ...otherProps
 }) => {
