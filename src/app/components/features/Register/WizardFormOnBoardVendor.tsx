@@ -41,7 +41,7 @@ const steps = [
 
 function WizardFormOnboardVendor() {
   const [activeStep, setActiveStep] = useState(0);
-  const [formData, setFormData] = useState<IVendorRegisterFormData>({});
+  const [vendorServices, setVendorServices] = useState<any>({});
   const [isPlannerPage, setIsPlannerPage] = useState(false);
   const pathname = usePathname();
   const [schema, setSchema] = useState<any>({});
@@ -78,7 +78,8 @@ function WizardFormOnboardVendor() {
 
   const handleNext = async (data: any) => {
     if (activeStep === steps.length - 1) {
-      console.log("Vendor form submitted with data:", formData);
+      data.selectedServices = vendorServices;
+      console.log("Vendor form submitted with data:", vendorServices);
       console.log("Vendor form Data:", data);
     } else {
       setActiveStep((prev) => prev + 1);
@@ -123,16 +124,9 @@ function WizardFormOnboardVendor() {
       // setValue("confirmPassword", confirmPassword || "");
     }
   }, [activeStep, setValue, getValues]);
-  const handleChangeSelect = (event: SelectChangeEvent<string>) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
   const handleServiceChange = (selectedServices: string[], label: string) => {
-    setFormData((prevData) => {
+    setVendorServices((prevData: { selectedServices: any }) => {
       const updatedServices = { ...prevData.selectedServices };
       updatedServices[label] = selectedServices;
       return {
@@ -305,7 +299,7 @@ function WizardFormOnboardVendor() {
                     handleServiceChange(selected, filter.heading)
                   }
                   selectedServices={
-                    formData.selectedServices?.[filter.heading] || []
+                    vendorServices.selectedServices?.[filter.heading] || []
                   }
                 />
               </Grid>
