@@ -60,11 +60,6 @@ function WizardFormOnboardVendor() {
   const methods = useForm<IVendorRegisterFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
       phoneNumber: "",
       address: "",
       city: "",
@@ -109,12 +104,10 @@ function WizardFormOnboardVendor() {
       setValue("vows", vows || false);
     }
     if (activeStep === 1) {
-      const { vendorType, companyName, firstName, lastName, phoneNumber } =
+      const { vendorType, companyName, phoneNumber } =
         getValues();
       setValue("vendorType", vendorType || "");
       setValue("companyName", companyName || "");
-      setValue("firstName", firstName || "");
-      setValue("lastName", lastName || "");
       setValue("phoneNumber", phoneNumber || "");
     }
 
@@ -195,25 +188,6 @@ function WizardFormOnboardVendor() {
               <TTKCustomTextField
                 name="companyName"
                 label="Company Name"
-                fullWidth
-                required
-                control={control}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TTKCustomTextField
-                name="firstName"
-                label="First Name"
-                fullWidth
-                required
-                control={control}
-              />
-            </Grid>
-
-            <Grid item xs={6}>
-              <TTKCustomTextField
-                name="lastName"
-                label="Last Name"
                 fullWidth
                 required
                 control={control}
