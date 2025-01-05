@@ -42,9 +42,6 @@ function WizardFormOnBoardCouple() {
       lastName: "",
       partnerFirstName: "",
       partnerLastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
     },
   });
 
@@ -71,7 +68,6 @@ function WizardFormOnBoardCouple() {
     }
   }, [activeStep]);
 
-  
   useEffect(() => {
     if (activeStep === 0) {
       const { status } = getValues();
@@ -173,13 +169,22 @@ function WizardFormOnBoardCouple() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Typography variant="h4" align="center">
-                Create Your Account
+                Where is the ceremony based?
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <TTKCustomTextField
-                name="email"
-                label="Email"
+                name="address"
+                label="Address"
+                control={control}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TTKCustomTextField
+                name="city"
+                label="City"
                 control={control}
                 fullWidth
                 required
