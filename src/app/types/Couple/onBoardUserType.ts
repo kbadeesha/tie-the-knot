@@ -1,18 +1,17 @@
-export interface IUserOnBoardFormData {
-    email: string;
-    password: string;
-    confirmPassword: string;
+export interface ICoupleOnBoardFormData {
     firstName: string;
     lastName: string;
     status: string;
     partnerFirstName: string;
     partnerLastName: string;
+    address: string;
+    city: string;
     }
   
-    export interface IUserOnBoardPayload {
+    export interface ICoupleOnBoardPayload {
       role: string;
-      email: string;
-      password: string;
+      address: string;
+    city: string;
       firstName: string;
       lastName: string;
       client:{

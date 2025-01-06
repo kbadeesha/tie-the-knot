@@ -3,7 +3,7 @@ import Image from "next/image"; // Import the Image component from Next.js
 import React from "react";
 import loginImage from "../../../../../public/assets/images/cover15.jpg"; // Ensure this is correct
 import "../../../../styles/pages/register.css";
-import WizardFormOnboardVendor from "@/app/components/features/Register/WizardFormOnBoardVendor";
+import WizardFormOnboardVendor from "@/app/components/features/Onboard/WizardFormOnBoardVendor";
 const page = () => {
   return (
     <div className="register-container" style={{ height: "100vh" }}>
@@ -13,7 +13,7 @@ const page = () => {
             src={loginImage}
             alt="Login"
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
             className="register-image"
           />
         </Grid>

@@ -5,7 +5,7 @@ import { Box, Grid } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import loginImage from "../../../../../public/assets/images/cover5.jpg";
+import loginImage from "../../../../../public/assets/images/cover11.jpg"; // Ensure this is correct
 import "../../../../styles/pages/register.css";
 
 const page = () => {
@@ -30,7 +30,7 @@ const page = () => {
             src={loginImage}
             alt="Login"
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
             className="register-image"
           />
         </Grid>
@@ -65,7 +65,7 @@ const page = () => {
                 </TTKCustomButton>
               </Link>
               <span className="or-text">Or</span>
-              <Link href="/pages/register" passHref>
+              <Link href="/pages/register/register_email" passHref>
                 <TTKCustomButton type="button">
                   Signup using Email
                 </TTKCustomButton>

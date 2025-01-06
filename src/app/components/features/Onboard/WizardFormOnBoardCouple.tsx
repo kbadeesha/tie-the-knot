@@ -20,7 +20,7 @@ import {
   step2Schema,
   step3Schema,
 } from "@/app/schemas/wizardFormCoupleOnboardSchema"; // Adjust path if necessary
-import { IUserOnBoardFormData } from "@/app/types/User/onBoardUserTyp"; // Adjust path if necessary
+import { ICoupleOnBoardFormData } from "@/app/types/Couple/onBoardUserType"; // Adjust path if necessary
 import { coupleStatus } from "@/app/data/ListItems";
 import { TTKCustomSelectionListWrapper } from "../../common/TTKCustomSelectionList";
 import "../../../../styles/pages/register.css";
@@ -34,7 +34,7 @@ function WizardFormOnBoardCouple() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [schema, setSchema] = useState<any>({});
 
-  const methods = useForm<IUserOnBoardFormData>({
+  const methods = useForm<ICoupleOnBoardFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       status: "",
@@ -84,10 +84,9 @@ function WizardFormOnBoardCouple() {
     }
 
     if (activeStep === 2) {
-      const { email, password, confirmPassword } = getValues();
-      setValue("email", email || "");
-      setValue("password", password || "");
-      setValue("confirmPassword", confirmPassword || "");
+      const { address, city } = getValues();
+      setValue("address", address || "");
+      setValue("city", city || "");
     }
   }, [activeStep, setValue, getValues]);
 
@@ -188,38 +187,6 @@ function WizardFormOnBoardCouple() {
                 control={control}
                 fullWidth
                 required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TTKCustomTextField
-                name="password"
-                label="Password"
-                control={control}
-                type={showPassword ? "text" : "password"}
-                fullWidth
-                required
-                endAdornment={
-                  <IconButton onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                }
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TTKCustomTextField
-                name="confirmPassword"
-                label="Confirm Password"
-                control={control}
-                type={showConfirmPassword ? "text" : "password"}
-                fullWidth
-                required
-                endAdornment={
-                  <IconButton
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                }
               />
             </Grid>
           </Grid>

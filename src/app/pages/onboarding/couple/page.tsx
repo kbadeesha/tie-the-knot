@@ -1,4 +1,4 @@
-import WizardFormCouple from "@/app/components/features/Register/WizardFormOnBoardCouple";
+import WizardFormCouple from "@/app/components/features/Onboard/WizardFormOnBoardCouple";
 import { Grid } from "@mui/material";
 import Image from "next/image"; // Import the Image component from Next.js
 import React from "react";
@@ -13,7 +13,7 @@ const page = () => {
             src={loginImage}
             alt="Login"
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
             className="register-image"
           />
         </Grid>

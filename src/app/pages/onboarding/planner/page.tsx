@@ -3,7 +3,7 @@ import Image from "next/image"; // Import the Image component from Next.js
 import React from "react";
 import loginImage from "../../../../../public/assets/images/cover13.jpg"; // Ensure this is correct
 import "../../../../styles/pages/register.css";
-import WizardFormOnboardVendor from "@/app/components/features/Register/WizardFormOnBoardVendor";
+import WizardFormOnboardVendor from "@/app/components/features/Onboard/WizardFormOnBoardVendor";
 
 const page = () => {
   return (
