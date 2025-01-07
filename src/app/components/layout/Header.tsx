@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -48,6 +50,8 @@ const useStyles: any = makeStyles({
 });
 
 const Header: React.FC = () => {
+  const router = useRouter();
+
   const classes = useStyles();
   const [isActive, setIsActive] = useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -74,8 +78,13 @@ const Header: React.FC = () => {
     setAnchorElUser(null);
   };
   const handleMenuItems = async (setting: string) => {
-    await logoutUser();
-    await window.location.reload();
+    if (setting === "Profile") {
+      router.push("/pages/profile");
+      console.log("profile Clicked");
+    } else {
+      await logoutUser();
+      await window.location.reload();
+    }
   };
 
   return (
@@ -158,16 +167,18 @@ const Header: React.FC = () => {
                 Get Started
               </TTKCustomButton>
             </Link>
-            {isActive && (
+
+            {
+              // isActive &&
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
                     alt={user == null ? "Z" : user.firstName}
-                    src="/static/images/avatar/2.jpg"
+                    // src="/static/images/avatar/2.jpg"
                   />
                 </IconButton>
               </Tooltip>
-            )}
+            }
           </Box>
         </Toolbar>
       </Container>
