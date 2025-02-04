@@ -25,11 +25,7 @@ export default function Home() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <div>
-        <Header /> {/* Include the Header component */}
         <Hero />
-        {/* Rest of your page content will go here */}
-        <LinkFooter />
-        <Footer />
       </div>
     </ThemeProvider>
   );

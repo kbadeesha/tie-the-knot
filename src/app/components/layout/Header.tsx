@@ -19,19 +19,28 @@ import TTKCustomButton from "../common/TTKCustomButton";
 import Link from "next/link";
 import useAuthStore from "@/stores/authStore";
 import { logoutUser } from "@/api/authApi";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { makeStyles } from "@mui/styles";
 const settings = ["Profile", "Logout"];
 
 const useStyles: any = makeStyles({
   appBar: {
-    position: "absolute", // Keep the header on top of the hero section
+    position: "absolute",
     top: "4%",
     left: 0,
     right: 0,
-    backgroundColor: "transparent", // Transparent background
-    boxShadow: "none", // Remove shadow for seamless look
-    zIndex: 10, // Ensure it's on top of the video
+    backgroundColor: "transparent",
+    boxShadow: "none",
+    zIndex: 10,
+  },
+  appBarSolid: {
+    position: "relative",
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#333",
+    boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.2)",
+    zIndex: 10,
   },
   toolbar: {
     display: "flex",
@@ -39,13 +48,13 @@ const useStyles: any = makeStyles({
     alignItems: "center",
   },
   title: {
-    color: "white", // White text for visibility over the hero section
+    color: "white",
     fontWeight: "bold",
   },
   button: {
-    color: "white", // Button text color for visibility
-    backgroundColor: "transparent", // Transparent background
-    boxShadow: "none", // Remove shadow for seamless look
+    color: "white",
+    backgroundColor: "transparent",
+    boxShadow: "none",
   },
 });
 
@@ -69,7 +78,13 @@ const Header: React.FC = () => {
   const handleOnClickLogin = () => {
     console.log("login clicked");
   };
-
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const isLoginOrRegisterPage =
+    pathname.includes("login") || pathname.includes("register");
+    if (isLoginOrRegisterPage) {
+      return null;
+    }
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -88,7 +103,10 @@ const Header: React.FC = () => {
   };
 
   return (
-    <AppBar className={classes.appBar} elevation={0}>
+    <AppBar
+      className={isHomePage ? classes.appBar : classes.appBarSolid}
+      elevation={0}
+    >
       <Container maxWidth="xl">
         <Toolbar className={classes.toolbar}>
           {/* Centered Logo */}
