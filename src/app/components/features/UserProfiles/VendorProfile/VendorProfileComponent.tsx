@@ -2,7 +2,7 @@ import React from 'react'
 
 const VendorProfileComponent = () => {
   return (
-    <div>VendorProfileComponent</div>
+    <div>Vendor Profile Component</div>
   )
 }
 
