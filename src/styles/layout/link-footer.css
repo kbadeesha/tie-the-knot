@@ -1,47 +1,49 @@
 .link-footer {
-    background-color: #333; /* Dark background */
-    color: white;
-    padding: 60px 20px;
-  }
-  
-  .link-footer-sec {
-    display: grid; /* Using Grid Layout */
-    grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
-    gap: 40px; /* Add some space between the columns */
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .footer-link-button-link h5 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  .footer-link-button-link ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .footer-link-button-link ul li {
-    margin-bottom: 10px;
-  }
-  
-  .footer-link-button-link ul li a {
-    color: #bbb;
-    text-decoration: none;
-  }
-  
-  .footer-link-button-link ul li a:hover {
-    text-decoration: underline;
-  }
-  .coming-soon {
-    font-size: 0.6em; /* Smaller font size */
-    color: #f7f7f7; /* Badge color */
-    margin-left: 4px; /* Space between text and badge */
-    vertical-align: super; /* Align the text as superscript */
-    background-color: #8b8a87; /* Background color for visibility */
-    padding: 2px 4px; /* Padding to make it look like a badge */
-    border-radius: 4px; /* Rounded corners for the badge */
-    border: 1px solid #000000; /* Border to define the badge */
-  }
+  background-color: #333; /* Dark background */
+  color: white;
+  padding: 60px 20px;
+}
+
+.link-footer-sec {
+  display: grid; /* Using Grid Layout */
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
+  gap: 40px; /* Add some space between the columns */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-link-button-link h5 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.footer-link-button-link ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-link-button-link ul li {
+  margin-bottom: 10px;
+}
+
+.footer-link-button-link ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-link-button-link .coming-soon {
+  display: none;
+  text-decoration: none;
+}
+.footer-link-button-link a:hover .coming-soon {
+  display: inline; /* You can also use 'block' or 'flex' depending on your layout needs */
+  font-size: 0.8em; /* Smaller font size */
+  color: #f7f7f7; /* Badge color */
+  margin-left: 4px; /* Space between text and badge */
+  background-color: #8b8a87; /* Background color for visibility */
+  padding: 2px 4px; /* Padding to make it look like a badge */
+  border-radius: 4px; /* Rounded corners for the badge */
+  border: 1px solid #000000; /* Border to define the badge */
+  font-weight: bold; /* Optional: Customize text style */
+}

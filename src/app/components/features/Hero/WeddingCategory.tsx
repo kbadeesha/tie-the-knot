@@ -98,6 +98,7 @@ const TTKWeddingCategories: React.FC = () => {
       <Box
         ref={scrollRef}
         sx={{
+          justifySelf: "center",
           padding: "20px",
           display: "flex",
           overflowX: "auto",
@@ -106,6 +107,7 @@ const TTKWeddingCategories: React.FC = () => {
           "&::-webkit-scrollbar": {
             display: "none",
           },
+          maxWidth: "100%",
         }}
       >
         <TTKCustomSelectionList
