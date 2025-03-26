@@ -108,99 +108,97 @@ const Header: React.FC = () => {
       className={isHomePage ? classes.appBar : classes.appBarSolid}
       elevation={0}
     >
-      <Container className="appbar-container">
-        <Toolbar className={classes.toolbar}>
-          {/* Centered Logo */}
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "start" }}>
-            <Typography variant="h6" className={classes.title}>
-              <Image
-                src={"/assets/logo_lite.svg"}
-                // src={
-                //   theme === "dark"
-                //     ? "/assets/logo_lite.svg"
-                //     : "/assets/logo.svg"
-                // }
-                alt="TieTheKnot"
-                width={120}
-                height={20}
-              />
-            </Typography>
-          </Box>
+      <Toolbar className={classes.toolbar}>
+        {/* Centered Logo */}
+        <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "start" }}>
+          <Typography variant="h6" className={classes.title}>
+            <Image
+              src={"/assets/logo_lite.svg"}
+              // src={
+              //   theme === "dark"
+              //     ? "/assets/logo_lite.svg"
+              //     : "/assets/logo.svg"
+              // }
+              alt="TieTheKnot"
+              width={120}
+              height={20}
+            />
+          </Typography>
+        </Box>
 
-          {/* User Settings, Theme Toggle, and Language (right) */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: "flex",
-              justifyContent: "flex-end", // Align to the right
-              alignItems: "center",
+        {/* User Settings, Theme Toggle, and Language (right) */}
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            justifyContent: "flex-end", // Align to the right
+            alignItems: "center",
+          }}
+        >
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
             }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
           >
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <Typography
+                  onClick={() => handleMenuItems(setting)}
+                  textAlign="center"
+                >
+                  {setting}
+                </Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+
+          <Link href="/pages/login" passHref>
+            <TTKCustomButton
+              className={classes.button}
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleOnClickLogin}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography
-                    onClick={() => handleMenuItems(setting)}
-                    textAlign="center"
-                  >
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              Login
+            </TTKCustomButton>
+          </Link>
+          <Link href="/pages/register/register_type" passHref>
+            {/* Use Link component */}
+            <TTKCustomButton
+              className={classes.button}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Get Started
+            </TTKCustomButton>
+          </Link>
 
-            <Link href="/pages/login" passHref>
-              <TTKCustomButton
-                className={classes.button}
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={handleOnClickLogin}
-              >
-                Login
-              </TTKCustomButton>
-            </Link>
-            <Link href="/pages/register/register_type" passHref>
-              {/* Use Link component */}
-              <TTKCustomButton
-                className={classes.button}
-                type="submit"
-                variant="contained"
-                color="primary"
-              >
-                Get Started
-              </TTKCustomButton>
-            </Link>
-
-            {
-              // isActive &&
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt={user == null ? "Z" : user.firstName}
-                    // src="/static/images/avatar/2.jpg"
-                  />
-                </IconButton>
-              </Tooltip>
-            }
-          </Box>
-        </Toolbar>
-      </Container>
+          {
+            // isActive &&
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar
+                  alt={user == null ? "Z" : user.firstName}
+                  // src="/static/images/avatar/2.jpg"
+                />
+              </IconButton>
+            </Tooltip>
+          }
+        </Box>
+      </Toolbar>
     </AppBar>
   );
 };
