@@ -82,9 +82,9 @@ const Header: React.FC = () => {
   const isHomePage = pathname === "/";
   const isLoginOrRegisterPage =
     pathname.includes("login") || pathname.includes("register");
-    if (isLoginOrRegisterPage) {
-      return null;
-    }
+  if (isLoginOrRegisterPage) {
+    return null;
+  }
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -104,10 +104,11 @@ const Header: React.FC = () => {
 
   return (
     <AppBar
+      sx={{ bgcolor: "transparent" }}
       className={isHomePage ? classes.appBar : classes.appBarSolid}
       elevation={0}
     >
-      <Container maxWidth="xl">
+      <Container className="appbar-container">
         <Toolbar className={classes.toolbar}>
           {/* Centered Logo */}
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "start" }}>
