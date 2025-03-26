@@ -112,3 +112,12 @@
   align-items: center;
   margin-top: 20px;
 }
+
+.form-div{
+  margin-top: 50px;
+  justify-self: center;
+}
+.sologon{
+  margin-top: 10px;
+  align-self: center;
+}
